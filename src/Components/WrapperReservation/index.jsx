@@ -84,9 +84,9 @@ const WrapperReservation = () => {
   const validationSchema = (tour) =>
     yup.object().shape({
       roomNumber: yup
-        .number()
+        .string()
         .required("Please enter your room number")
-        .min(1, "Room number must be positive"),
+        .min(1, "Please enter your room number"),
       numberOfPassengers: yup
         .number()
         .required("Please enter a number of passengers")
@@ -111,11 +111,11 @@ const WrapperReservation = () => {
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
 
-      phoneNumber: yup
-        .string()
-        .matches(phoneRegExp, "Phone number is not valid")
-        .min(8, "too short")
-        .max(10, "too long"),
+      // phoneNumber: yup
+      //   .string()
+      //   .matches(phoneRegExp, "Phone number is not valid")
+      //   .min(8, "too short")
+      //   .max(10, "too long"),
     });
   const handleSubmit = (values, { resetForm }) => {
     const tour = selectedTour;
@@ -236,7 +236,7 @@ const WrapperReservation = () => {
             <Form className="res-form">
               <section>
                 <h4>
-                  Enter number of passengers: <span>*</span>
+                  Adults: <span>*</span>
                 </h4>
                 <Field
                   type="number"
@@ -260,7 +260,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
-                <h6>Kids 7-12 50% of </h6>
+                <h6>Kids 7-12 years (50% off) </h6>
                 <Field type="number" name="preteens" />
                 <div className="plus-minus">
                   <button
@@ -279,7 +279,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
-                <h6>Kids 0-7 years free:</h6>
+                <h6>Kids 0-7 years (free):</h6>
                 <Field
                   type="number"
                   name="children"
@@ -303,7 +303,7 @@ const WrapperReservation = () => {
                   <ErrorMessage name="children" />
                 </p>
                 <h4>
-                  Enter your room number <span>*</span>
+                  Room number or name<span>*</span>
                 </h4>
                 <Field
                   type="text"
@@ -314,21 +314,15 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
                 </p>
-                <h4>Phone number</h4>
-                <label className="joke">
+                {/* <h4>Phone number</h4>
+                  <label className="joke">
                   <Field
                     type="number"
                     name="phoneNumber"
                     placeholder="Your phone number"
                   />
-                  <Field
-                    type="range"
-                    name="phoneNumber"
-                    min="1"
-                    max="9999999999"
-                    steps="1"
-                  />
-                </label>
+              
+                </label> */}
                 <p className="error-handle">
                   <ErrorMessage name="phoneNumber" />
                 </p>
