@@ -7,12 +7,33 @@
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
-    div{
-        width: 60%;
-        background-color: rgb(4, 187, 4);
+    width: 60%;
+    .modal-content{
+        background-color: rgb(150, 174, 253);
         border-radius: 10px;
-        padding: 10px;
+        padding: 20px;
         font-weight: 600;
-        color: blue;
+        color: rgb(17, 32, 117);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        p {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        a {
+            color: black;
+        }
+        button {
+            margin-top: 15px;
+            padding: 5px;
+            cursor: pointer;
+            color: darkblue;
+            background-color: white;
+            border: 1px solid darkblue;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
     }
 }

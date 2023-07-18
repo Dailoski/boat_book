@@ -15,13 +15,15 @@ import dayjs from "dayjs";
 // import Roboto from "typeface-roboto"
 
 const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
-  console.log(ticketInfo);
+  
   // setTimeout (() => {console.log(selectedRide)}, 1000)
   
   //   Font.register({family:'Roboto', format:'truetype', src: Roboto
   // })
-  const tourDate = dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm");
+  // const tourDate = dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm");
+  const tourDate = new Date(ticketInfo.date)
   const meetingTime = dayjs(new Date(tourDate - 1800000)).format("HH:mm");
+  
   const styles = StyleSheet.create({
     page: {
       width: "88%",
@@ -115,7 +117,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
             <View style={styles.halfp}>
               <Text style={styles.tourText}>{"Tour: " + selectedRide?.data.name}</Text>
               <Text style={styles.tourText}>{"Room or name: " + ticketInfo.roomNumber}</Text>
-              <Text style={styles.tourText}>{"Day/Date/departure time: " + tourDate}</Text>
+              <Text style={styles.tourText}>{"Day/Date/departure time: " + ticketInfo.date}</Text>
             </View>
             
           </View>
@@ -148,12 +150,11 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
         <BlobProvider document={Tiketino}>
           {({ blob, url, loading, error }) => {
             return (
-              <div>
-                <p>bravo majmune!</p>
+              <div className="modal-content">
+                <p>Thank you for making a reservation!</p>
                 <a href={url} download="ticket">
-                  download
+                  download ticket
                 </a>
-                <br />
                 <button onClick={() => window.open(url, "_blank")}>
                   open in new tab
                 </button>

@@ -33,7 +33,7 @@ const WrapperReservation = () => {
   const [availableDates, setAvailableDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRide, setSelectedRide] = useState(null);
-  console.log(selectedDate);
+  
   const today = new Date();
   const weekFromNow = new Date();
   weekFromNow.setDate(today.getDate() + 7);
