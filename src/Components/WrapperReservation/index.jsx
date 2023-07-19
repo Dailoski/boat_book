@@ -9,6 +9,11 @@ import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
 import moment from "moment";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
+import { Counter } from "./Counter";
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
 
@@ -238,67 +243,61 @@ const WrapperReservation = () => {
                 <h4>
                   Adults: <span>*</span>
                 </h4>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
                 <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="numberOfPassengers"
-                  placeholder="Total passengers"
+                  disabled
                 />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusPassengerCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusPassengerCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+                <Fab onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
                 <p className="error-handle">
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
+              
                 <h6>Kids 7-12 years (50% off) </h6>
-                <Field type="number" name="preteens" />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusPreteenCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusPreteenCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
+                <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
+                  type="number"
+                  name="preteens"
+                  disabled
+                />
+                <Fab onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
                 <h6>Kids 0-7 years (free):</h6>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
                 <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="children"
-                  placeholder="Any children?"
+                  disabled
                 />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusChildrenCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusChildrenCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+                <Fab onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
+
                 <p className="error-handle">
                   <ErrorMessage name="children" />
                 </p>
