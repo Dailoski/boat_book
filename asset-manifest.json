@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/boat_book/static/css/main.d661e3e5.css",
+    "main.js": "/boat_book/static/js/main.c300eb3a.js",
+    "static/media/open-bus.jpg": "/boat_book/static/media/open-bus.16b0408a38d2d97f9313.jpg",
+    "static/media/kej.jpeg": "/boat_book/static/media/kej.8502bf7fdab0d22c2b36.jpeg",
+    "static/media/turtle.jpeg": "/boat_book/static/media/turtle.2596736402e3a886234c.jpeg",
+    "static/media/tesla.jpeg": "/boat_book/static/media/tesla.48969abb1df67b63baed.jpeg",
+    "static/media/ticket.jpg": "/boat_book/static/media/ticket.4a6eb4422d6b3e15041d.jpg",
+    "index.html": "/boat_book/index.html",
+    "main.d661e3e5.css.map": "/boat_book/static/css/main.d661e3e5.css.map",
+    "main.c300eb3a.js.map": "/boat_book/static/js/main.c300eb3a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d661e3e5.css",
+    "static/js/main.c300eb3a.js"
+  ]
+}
