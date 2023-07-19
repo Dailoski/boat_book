@@ -9,6 +9,11 @@ import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
 import moment from "moment";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
+import { Counter } from "./Counter";
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
 
@@ -85,9 +90,9 @@ const WrapperReservation = () => {
   const validationSchema = (tour) =>
     yup.object().shape({
       roomNumber: yup
-        .number()
+        .string()
         .required("Please enter your room number")
-        .min(1, "Room number must be positive"),
+        .min(1, "Please enter your room number"),
       numberOfPassengers: yup
         .number()
         .required("Please enter a number of passengers")
@@ -112,11 +117,11 @@ const WrapperReservation = () => {
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
 
-      phoneNumber: yup
-        .string()
-        .matches(phoneRegExp, "Phone number is not valid")
-        .min(8, "too short")
-        .max(10, "too long"),
+      // phoneNumber: yup
+      //   .string()
+      //   .matches(phoneRegExp, "Phone number is not valid")
+      //   .min(8, "too short")
+      //   .max(10, "too long"),
     });
   const handleSubmit = (values, { resetForm }) => {
     const tour = selectedTour;
@@ -237,74 +242,68 @@ const WrapperReservation = () => {
             <Form className="res-form">
               <section>
                 <h4>
-                  Enter number of passengers: <span>*</span>
+                  Adults: <span>*</span>
                 </h4>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
                 <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="numberOfPassengers"
-                  placeholder="Total passengers"
+                  disabled
                 />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusPassengerCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusPassengerCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+                <Fab onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
                 <p className="error-handle">
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
-                <h6>Kids 7-12 50% of </h6>
-                <Field type="number" name="preteens" />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusPreteenCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusPreteenCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+              
+                <h6>Kids 7-12 years (50% off) </h6>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
+                <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
+                  type="number"
+                  name="preteens"
+                  disabled
+                />
+                <Fab onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
-                <h6>Kids 0-7 years free:</h6>
+                <h6>Kids 0-7 years (free):</h6>
+                <div style={{display: "flex",     justifyContent: "space-evenly"}}>
+                <Fab onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <RemoveIcon />
+                </Fab>
                 <Field
+                style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="children"
-                  placeholder="Any children?"
+                  disabled
                 />
-                <div className="plus-minus">
-                  <button
-                    type="button"
-                    onClick={() => plusChildrenCount(setFieldValue, values)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => minusChildrenCount(setFieldValue, values)}
-                  >
-                    -
-                  </button>
+                <Fab onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                  <AddIcon />
+                </Fab>
                 </div>
+
+
                 <p className="error-handle">
                   <ErrorMessage name="children" />
                 </p>
                 <h4>
-                  Enter your room number <span>*</span>
+                  Room number or name<span>*</span>
                 </h4>
                 <Field
                   type="text"
@@ -315,21 +314,15 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
                 </p>
-                <h4>Phone number</h4>
-                <label className="joke">
+                {/* <h4>Phone number</h4>
+                  <label className="joke">
                   <Field
                     type="number"
                     name="phoneNumber"
                     placeholder="Your phone number"
                   />
-                  <Field
-                    type="range"
-                    name="phoneNumber"
-                    min="1"
-                    max="9999999999"
-                    steps="1"
-                  />
-                </label>
+              
+                </label> */}
                 <p className="error-handle">
                   <ErrorMessage name="phoneNumber" />
                 </p>
