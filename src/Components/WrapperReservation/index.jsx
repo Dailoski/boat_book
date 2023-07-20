@@ -13,7 +13,6 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-import { Counter } from "./Counter";
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
 
@@ -22,12 +21,12 @@ const WrapperReservation = () => {
     useContext(applicationContext);
   const reservationInfo = {
     id: "",
-    roomNumber: 0,
+    roomNumber: "",
     numberOfPassengers: 0,
     children: 0,
     preteens: 0,
     phoneNumber: "",
-    isPaid: true,
+    isPaid: false,
   };
   const [ticketInfo, setTicketInfo] = useState({
     boat: "",
@@ -49,8 +48,8 @@ const WrapperReservation = () => {
         .filter((date, index, dates) => dates.indexOf(date) === index)
     : [];
   const [success, setSuccess] = useState(false);
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  // const phoneRegExp =
+    // /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const selectedBoat = allDocs?.filter(
     (e) => e.data.boat === selectedRide?.data.name
   );
@@ -263,7 +262,7 @@ const WrapperReservation = () => {
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
               
-                <h6>Kids 7-12 years (50% off) </h6>
+                <h4>Kids 7-12 years (50% off) </h4>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Fab onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -282,7 +281,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
-                <h6>Kids 0-7 years (free):</h6>
+                <h4>Kids 0-7 years (free):</h4>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Fab onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -310,6 +309,8 @@ const WrapperReservation = () => {
                   name="roomNumber"
                   placeholder="Number of room"
                   className="form-field"
+                  style={{    height: "44px",
+                    fontSize: "20px"}}
                 />
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
@@ -341,7 +342,7 @@ const WrapperReservation = () => {
                     <input
                       type="radio"
                       id="radioOne"
-                      defaultChecked="radioOne"
+                      
                       name="isPaid"
                       value="true"
                     />
@@ -349,6 +350,7 @@ const WrapperReservation = () => {
                   <label htmlFor="radioTwo">
                     Not Paid
                     <input
+                      defaultChecked="radioOne"
                       type="radio"
                       id="radioTwo"
                       name="isPaid"

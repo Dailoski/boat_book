@@ -23,10 +23,10 @@ const TourModal = ({ handleClose, clickedTour }) => {
     });
     setFreshData(!freshData);
   };
-  const children = selectedTour.data.reservations.reduce(
-    (a, b) => a + b.children,
-    0
-  );
+  // const children = selectedTour.data.reservations.reduce(
+  //   (a, b) => a + b.children,
+  //   0
+  // );
   // console.log(children);
   return (
     <div className="div-modal-tour" onClick={handleOverlayClick}>

@@ -6,11 +6,12 @@ import {useNavigate} from "react-router-dom"
 import { auth } from "../../firebase";
 import * as yup from "yup";
 import "./wrapper-login.scss";
-
+import { db } from "../../firebase";
+import { getDoc, doc } from "firebase/firestore";
 const WrapperLogin = () => {
   const navigate = useNavigate();
   const adminID = "32HKi0Q7dVQ1zQX4xnhnn1mKNpH3";
-  const { setAccessToken, setIsAdmin,setUser } =
+  const { setAccessToken, setIsAdmin, setUser } =
     useContext(applicationContext);
   const [wrongCredentials, setWrongCredentials] = useState("");
   const defaultLoginValue = {
@@ -29,8 +30,13 @@ const WrapperLogin = () => {
   });
   const signIn = (values) => {
     signInWithEmailAndPassword(auth, values?.email, values?.password)
-      .then((userCredential) => {
+      .then(async(userCredential) => {
         setAccessToken(userCredential.user.accessToken);
+        console.log(userCredential.user.uid)
+        const docRef = doc(db, "users", userCredential.user.uid);
+        const docSnap = await getDoc(docRef);
+        const docsData = docSnap.data()
+        console.log(docsData)
         if (userCredential?.user?.accessToken) {
           localStorage.setItem(
             "accessToken",
