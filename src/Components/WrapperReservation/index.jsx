@@ -12,6 +12,7 @@ import moment from "moment";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Button from '@mui/material/Button';
 
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
@@ -326,7 +327,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="phoneNumber" />
                 </p>
-                <p style={{ fontSize: "0.8em" }}>
+                <p style={{ fontSize: "1.2em" }}>
                   {"Total price: " +
                     parseInt(
                       values.numberOfPassengers * prices.adults +
@@ -357,9 +358,12 @@ const WrapperReservation = () => {
                     />
                   </label>
                 </Field>
-                <button className="submit-btn" type="submit">
+                {/* <button className="submit-btn" type="submit">
                   Book now
-                </button>
+                </button> */}
+                <Button className="submit-btn" type="submit" variant="contained" size="large">
+                  Book now
+                </Button>
               </section>
             </Form>
           )}
