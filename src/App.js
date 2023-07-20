@@ -15,6 +15,8 @@ const App = () => {
     JSON.parse(localStorage.getItem("admin"))
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [userData, setUserData] = useState({})
+  console.log(userData);
   const [accessToken, setAccessToken] = useState(
     JSON.parse(localStorage.getItem("accessToken"))
   );
@@ -65,6 +67,8 @@ const App = () => {
             allDocs,
             user,
             setUser,
+            userData,
+            setUserData,
             setFreshData,
             freshData,
             rides,

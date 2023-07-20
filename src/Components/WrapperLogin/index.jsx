@@ -11,7 +11,7 @@ import { getDoc, doc } from "firebase/firestore";
 const WrapperLogin = () => {
   const navigate = useNavigate();
   const adminID = "32HKi0Q7dVQ1zQX4xnhnn1mKNpH3";
-  const { setAccessToken, setIsAdmin, setUser } =
+  const { setAccessToken, setIsAdmin, setUser, userData, setUserData } =
     useContext(applicationContext);
   const [wrongCredentials, setWrongCredentials] = useState("");
   const defaultLoginValue = {
@@ -42,6 +42,7 @@ const WrapperLogin = () => {
             "accessToken",
             JSON.stringify(userCredential?.user?.accessToken)
           );
+          setUserData(docsData)
           setUser(values.email)
           localStorage.setItem(
             "user",

@@ -1,5 +1,7 @@
 import React from "react";
 import "./successModal.scss";
+import { useContext } from "react";
+import { applicationContext } from "../../context";
 import {
   BlobProvider,
   Page,
@@ -15,13 +17,17 @@ import dayjs from "dayjs";
 // import Roboto from "typeface-roboto"
 
 const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
+
+  const { userData } = useContext(applicationContext);
+  console.log(userData);
   
   // setTimeout (() => {console.log(selectedRide)}, 1000)
   
   //   Font.register({family:'Roboto', format:'truetype', src: Roboto
   // })
+
   // const tourDate = dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm");
-  const tourDate = new Date(ticketInfo.date)
+  const tourDate = new Date(ticketInfo.date);
   const meetingTime = dayjs(new Date(tourDate - 1800000)).format("HH:mm");
   
   const styles = StyleSheet.create({
@@ -54,14 +60,12 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     },
     halfp: {
       width: "100%",
-      // margin: "10px",
     },
     // middle: {
     //   width: "100%"
     // },
     meetTitle: {
       paddingBottom: "10px",
-      fontWeight: "extrabold",
       fontSize: "16px",
       position: "absolute",
       top: 20,
@@ -116,6 +120,8 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
 
             <View style={styles.halfp}>
               <Text style={styles.tourText}>{"Tour: " + selectedRide?.data.name}</Text>
+              <Text style={styles.tourText}>{"Hotel: " + userData?.full_name}</Text>
+              <Text style={styles.tourText}>{"Receptionist: " + userData?.hotel_name}</Text>
               <Text style={styles.tourText}>{"Room or name: " + ticketInfo.roomNumber}</Text>
               <Text style={styles.tourText}>{"Day/Date/departure time: " + ticketInfo.date}</Text>
             </View>
