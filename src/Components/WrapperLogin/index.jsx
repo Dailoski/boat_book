@@ -71,11 +71,11 @@ const WrapperLogin = () => {
         <section>
           <Form>
             <h1>LogIn</h1>
-            <Field type="text" name="email" placeholder="Email" />
+            <Field  type="text" name="email" placeholder="Email" style={{    height: "44px", fontSize: "20px"}} />
             <p className="error-handle">
               <ErrorMessage name="email" />
             </p>
-            <Field type="password" name="password" placeholder="Password" />
+            <Field type="password" name="password" placeholder="Password" style={{    height: "44px", fontSize: "20px"}} />
             <p className="error-handle">
               <ErrorMessage name="password" />
             </p>

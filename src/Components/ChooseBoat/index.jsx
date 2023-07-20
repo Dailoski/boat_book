@@ -24,7 +24,7 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
   };
   return (
     <div className="div-choose-boat">
-      <h4>Click on the boat to make reservation now</h4>
+      <h4>Click on tour photo to make reservation now</h4>
       <div className="choose-boat">
         <img
           onClick={() => handleImageClick("turtle-boat")}
@@ -48,11 +48,9 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
         />
       </div>
 
-      <p>
-        Selected Boat: 
-        <span ref={boatRef}>
-          {selectedRide?.data.name.split('-').join(' ')}
-        </span>
+      <p ref={boatRef}>
+        Selected Tour: {selectedRide?.data.name.split('-').join(' ').toUpperCase()}
+
       </p>
     </div>
   );

@@ -176,7 +176,7 @@ const WrapperReservation = () => {
       />
       {!selectedTour &&
       <h4 className="tour-title">
-      Select a tour to continue <span>*</span>
+      Select exact day/date/time: <span>*</span>
     </h4>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
@@ -262,7 +262,7 @@ const WrapperReservation = () => {
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
               
-                <h4>Kids 7-12 years (50% off) </h4>
+                <h4>Kids 7-12 years</h4>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Fab onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -281,7 +281,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
-                <h4>Kids 0-7 years (free):</h4>
+                <h4>Kids 0-7 years:</h4>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Fab onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -309,8 +309,7 @@ const WrapperReservation = () => {
                   name="roomNumber"
                   placeholder="Number of room"
                   className="form-field"
-                  style={{    height: "44px",
-                    fontSize: "20px"}}
+                  style={{    height: "44px", fontSize: "20px"}}
                 />
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
@@ -347,7 +346,7 @@ const WrapperReservation = () => {
                       value="true"
                     />
                   </label>
-                  <label htmlFor="radioTwo">
+                  <label style={{color: "red"}} htmlFor="radioTwo">
                     Not Paid
                     <input
                       defaultChecked="radioOne"
@@ -359,7 +358,7 @@ const WrapperReservation = () => {
                   </label>
                 </Field>
                 <button className="submit-btn" type="submit">
-                  Reserve
+                  Book now
                 </button>
               </section>
             </Form>
