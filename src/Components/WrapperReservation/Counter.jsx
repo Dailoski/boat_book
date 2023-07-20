@@ -45,9 +45,8 @@ export function Counter() {
       <ButtonGroup>
         <StyledButton
           onClick={() => setCount((prev) => prev - 1)}
-          disabled={count === 0
-          }
-        >
+          disabled={count === 0} >
+
           <RemoveIcon fontSize="small" />
         </StyledButton>
         <StyledInput size="small" onChange={handleChange} value={count} />
