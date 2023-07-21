@@ -73,7 +73,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       color: "blue",
     },
     meetAddress: {
-      fontSize: "13px",
+      fontSize: "14px",
       position: "absolute",
       top: 50,
       left: 0,
@@ -81,11 +81,17 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       textAlign: "center",
       color: "blue",
     },
+    scanqr: {
+      fontSize: "12px",
+      position: "absolute",
+      top: 135,
+      right: 7,
+    },
     meetPointTime: {
       fontSize: "16px",
       textDecoration: "underline",
       position: "absolute",
-      top: 150,
+      top: 165,
       left: 0,
     },
     tourText: {
@@ -116,6 +122,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
           <Text style={styles.meetAddress} wrap>Main entrance of Kalemegdan park from Knez Mihailova street Pariska 15, Belgrade</Text>
           <Text style={styles.meetPointTime}>{"Meeting point time: " + meetingTime}</Text>
           <Image src={qrCode} style={styles.qrCode} />
+          <Text style={styles.scanqr}>Scan QR code for location</Text>
           <View style={styles.fullp}>
 
             <View style={styles.halfp}>
