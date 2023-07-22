@@ -120,8 +120,8 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
 
             <View style={styles.halfp}>
               <Text style={styles.tourText}>{"Tour: " + selectedRide?.data.name}</Text>
-              <Text style={styles.tourText}>{"Hotel: " + userData?.full_name}</Text>
-              <Text style={styles.tourText}>{"Receptionist: " + userData?.hotel_name}</Text>
+              <Text style={styles.tourText}>{"Hotel: " + userData?.hotel_name}</Text>
+              <Text style={styles.tourText}>{"Receptionist: " + userData?.full_name}</Text>
               <Text style={styles.tourText}>{"Room or name: " + ticketInfo.roomNumber}</Text>
               <Text style={styles.tourText}>{"Day/Date/departure time: " + ticketInfo.date}</Text>
             </View>

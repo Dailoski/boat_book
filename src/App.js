@@ -15,7 +15,7 @@ const App = () => {
     JSON.parse(localStorage.getItem("admin"))
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")));
   console.log(userData);
   const [accessToken, setAccessToken] = useState(
     JSON.parse(localStorage.getItem("accessToken"))
@@ -53,6 +53,7 @@ const App = () => {
     setAccessToken("");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("admin");
+    localStorage.removeItem("userData");
     setIsAdmin(false);
   };
 
