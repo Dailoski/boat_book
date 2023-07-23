@@ -42,7 +42,13 @@ const WrapperLogin = () => {
             "accessToken",
             JSON.stringify(userCredential?.user?.accessToken)
           );
+
           setUserData(docsData)
+          localStorage.setItem(
+            "userData",
+            JSON.stringify(docsData)
+          );
+
           setUser(values.email)
           localStorage.setItem(
             "user",
