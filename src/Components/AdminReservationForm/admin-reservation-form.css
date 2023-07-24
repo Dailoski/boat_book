@@ -47,8 +47,10 @@
 }
 
 .error-handle {
-  font-size: 12px;
+  font-size: 18px;
   color: red;
+  height: 18px;
+  padding: 5px;
 }
 
 .submit-btn {

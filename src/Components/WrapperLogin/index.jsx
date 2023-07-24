@@ -8,6 +8,7 @@ import * as yup from "yup";
 import "./wrapper-login.scss";
 import { db } from "../../firebase";
 import { getDoc, doc } from "firebase/firestore";
+import { Button } from "@mui/material";
 const WrapperLogin = () => {
   const navigate = useNavigate();
   const adminID = "32HKi0Q7dVQ1zQX4xnhnn1mKNpH3";
@@ -77,18 +78,18 @@ const WrapperLogin = () => {
       >
         <section>
           <Form>
-            <h1>LogIn</h1>
-            <Field  type="text" name="email" placeholder="Email" style={{    height: "44px", fontSize: "20px"}} />
+            <h1>STA DA PISE OVDE?</h1>
+            <Field  type="text" name="email" placeholder="Email" style={{    height: "44px", fontSize: "20px", width:"100%"}} />
             <p className="error-handle">
               <ErrorMessage name="email" />
             </p>
-            <Field type="password" name="password" placeholder="Password" style={{    height: "44px", fontSize: "20px"}} />
+            <Field type="password" name="password" placeholder="Password" style={{    height: "44px", fontSize: "20px", width:"100%"}} />
             <p className="error-handle">
               <ErrorMessage name="password" />
             </p>
-            <button type="submit" className="submit-btn login">
-              LogIn
-            </button>
+            <Button variant="contained" size="large" type="submit">
+              LOG IN
+            </Button>
             <p className="error-handle">{wrongCredentials}</p>
           </Form>
         </section>

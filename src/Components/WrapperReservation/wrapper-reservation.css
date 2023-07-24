@@ -54,17 +54,19 @@
 }
 
 .error-handle {
-  font-size: 12px;
+  font-size: 18px;
   color: red;
+  height: 10=8px;
+  padding: 5px;
 }
 
-.submit-btn {
+/* .submit-btn {
   margin-top: 10px;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(31, 30, 142) 100%);
   color: #fff;
   padding: 5px;
   cursor: pointer;
-}
+} */
 
 .joke {
   display: flex;

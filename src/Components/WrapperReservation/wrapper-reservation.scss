@@ -29,13 +29,15 @@
     span {
       color: red;
     }
-    h4 {
+    h2 {
       padding: 10px 0;
     }
     h6 {
       padding: 5px 0;
     }
-
+    .radio-group{
+      margin-bottom: 10px;
+    }
     label {
       display: flex;
       justify-content: space-between;
@@ -43,6 +45,7 @@
       color: #000000;
       margin-top: 5px;
       padding: 5px;
+      font-size: x-large;
       cursor: pointer;
       input[type="radio"] {
         accent-color: #03222e;
@@ -54,21 +57,24 @@
   padding: 2px;
 }
 .error-handle {
-  font-size: 12px;
+  font-size: 18px;
   color: red;
-}
-.submit-btn {
-  margin-top: 10px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(31, 30, 142, 1) 100%
-  );
-  color: #fff;
+  height: 10px;
   padding: 5px;
-  cursor: pointer;
+  min-width: 80vw;
 }
+// .submit-btn {
+//   margin-top: 10px;
+//   background: linear-gradient(
+//     90deg,
+//     rgba(0, 0, 0, 1) 0%,
+//     rgba(0, 0, 0, 1) 50%,
+//     rgba(31, 30, 142, 1) 100%
+//   );
+//   color: #fff;
+//   padding: 5px;
+//   cursor: pointer;
+// }
 .joke {
   display: flex;
   flex-direction: column;

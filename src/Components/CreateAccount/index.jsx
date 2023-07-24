@@ -46,13 +46,13 @@ const CreateAccount = () => {
   return (
     <div className="div-create-account">
       <button {...getToggleProps()}>
-        {isExpanded ? 'Collapse, nigga' : 'DO YOU WANT TO CREATE ACCOUNT, NIGGA?'}
+        {isExpanded ? 'Collapse, Vuchko' : 'DO YOU WANT TO CREATE ACCOUNT, VUCHKO?'}
       </button>
-      <section {...getCollapseProps()}>      <Formik
+      <section {...getCollapseProps()}>      
+      <Formik
         initialValues={defaultLoginValue}
         validationSchema={validationSchema}
-        onSubmit={createAccount}
-      >
+        onSubmit={createAccount} >
         <section>
           <Form>
             <h1>Create account</h1>

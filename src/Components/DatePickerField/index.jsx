@@ -2,6 +2,7 @@ import React from 'react'
 import './date-picker-field.scss'
 import DatePicker from "react-multi-date-picker";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import DatePanel from "react-multi-date-picker/plugins/date_panel"
 
 const DatePickerField = ({name, value, onChange}) => {
 
@@ -15,6 +16,7 @@ const DatePickerField = ({name, value, onChange}) => {
         onChange('date', e)}
         plugins={[
           <TimePicker position="bottom" hStep={1} mStep={30} hideSeconds/>,
+          <DatePanel />
         ]}
       
       />

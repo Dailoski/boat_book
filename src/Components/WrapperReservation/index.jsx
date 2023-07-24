@@ -9,7 +9,6 @@ import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
 import moment from "moment";
-import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
@@ -176,9 +175,9 @@ const WrapperReservation = () => {
         setSelectedDate={setSelectedDate}
       />
       {!selectedTour &&
-      <h4 className="tour-title">
+      <h2 className="tour-title">
       Select exact day/date/time: <span>*</span>
-    </h4>}
+    </h2>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
           {(
@@ -241,70 +240,70 @@ const WrapperReservation = () => {
           {({ values, setFieldValue }) => (
             <Form className="res-form">
               <section>
-                <h4>
+                <h2>
                   Adults: <span>*</span>
-                </h4>
+                </h2>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Fab onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
-                </Fab>
+                </Button>
                 <Field
                 style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="numberOfPassengers"
                   disabled
                 />
-                <Fab onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
-                </Fab>
+                </Button>
                 </div>
 
                 <p className="error-handle">
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
               
-                <h4>Kids 7-12 years</h4>
+                <h2>Kids 8-12 years</h2>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Fab onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
-                </Fab>
+                </Button>
                 <Field
                 style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="preteens"
                   disabled
                 />
-                <Fab onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
-                </Fab>
+                </Button>
                 </div>
 
                 <p className="error-handle">
                   <ErrorMessage name="preteens" />
                 </p>
-                <h4>Kids 0-7 years:</h4>
+                <h2>Kids 0-7 years:</h2>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Fab onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
-                </Fab>
+                </Button>
                 <Field
                 style={{width: "30px", fontSize: "30px", color: "white", backgroundColor:"transparent", border: "none"}}
                   type="number"
                   name="children"
                   disabled
                 />
-                <Fab onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
-                </Fab>
+                </Button>
                 </div>
 
 
                 <p className="error-handle">
                   <ErrorMessage name="children" />
                 </p>
-                <h4>
+                <h2>
                   Room number or name<span>*</span>
-                </h4>
+                </h2>
                 <Field
                   type="text"
                   name="roomNumber"
@@ -315,7 +314,7 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
                 </p>
-                {/* <h4>Phone number</h4>
+                {/* <h2>Phone number</h2>
                   <label className="joke">
                   <Field
                     type="number"
@@ -336,7 +335,7 @@ const WrapperReservation = () => {
                     ) +
                     " din."}
                 </p>
-                <Field component="div" name="isPaid">
+                <Field className="radio-group" component="div" name="isPaid">
                   <label htmlFor="radioOne">
                     Paid in cash
                     <input
@@ -358,10 +357,10 @@ const WrapperReservation = () => {
                     />
                   </label>
                 </Field>
-                {/* <button className="submit-btn" type="submit">
+                {/* <Button size="large" variant="contained" variant="contained"  className="submit-btn" type="submit">
                   Book now
                 </button> */}
-                <Button className="submit-btn" type="submit" variant="contained" size="large">
+                <Button variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
               </section>

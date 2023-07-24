@@ -46,8 +46,11 @@
   padding: 2px;
 }
 .error-handle {
-  font-size: 12px;
+  font-size: 18px;
   color: red;
+  height: 18px;
+  padding: 5px;
+  min-width: 80vw;
 }
 .submit-btn {
   margin-top: 10px;
