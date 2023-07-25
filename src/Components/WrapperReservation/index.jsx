@@ -43,9 +43,9 @@ const WrapperReservation = () => {
   weekFromNow.setDate(today.getDate() + 7);
   const filteredDates = availableDates.length
     ? availableDates
-        .sort((a, b) => moment(a, dateFormat) - moment(b, dateFormat))
-        .filter((date) => moment(date, dateFormat) > moment(today, dateFormat))
-        .filter((date, index, dates) => dates.indexOf(date) === index)
+        .sort((a, b) => moment(a.date, dateFormat) - moment(b.date, dateFormat))
+        .filter((item) => moment(item.date, dateFormat) > moment(today, dateFormat))
+        .filter((item, index, dates) => dates.indexOf(item) === index)
     : [];
   const [success, setSuccess] = useState(false);
   // const phoneRegExp =
@@ -184,15 +184,15 @@ const WrapperReservation = () => {
             !selectedRide
               ? null
               : filteredDates.length === 0 ||
-                new Date(filteredDates[0]).getTime() > weekFromNow.getTime()
+                new Date(filteredDates[0].date).getTime() > weekFromNow.getTime()
           ) ? (
             <>
               <p>There are no tours for this</p>
               <p>boat during this week.</p>
             </>
           ) : (
-            filteredDates.map((date, i) => {
-              const hour = new Date(date).getHours();
+            filteredDates.map(({date, type}, i) => {
+
               return (
                 <div
                   className={selectedDate === date ? "tour selected" : "tour"}
@@ -213,11 +213,11 @@ const WrapperReservation = () => {
                   <p
                     style={{
                       backgroundColor:
-                        hour >= 19 && hour < 22
+                        type === "sunset"
                           ? "orange"
-                          : hour >= 22 || hour < 4
-                          ? "purple"
-                          : "yellow",
+                          : type === "daytime"
+                          ? "yellow"
+                          : "purple",
                     }}
                   >
                   {/* <p
