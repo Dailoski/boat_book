@@ -33,7 +33,7 @@ const WrapperReservation = () => {
     date: "",
     passengers: "",
   });
-  const dateFormat = "YYYY-M-D H:m";
+  const dateFormat = "D-M-YYYY H:m";
   const [availableDates, setAvailableDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRide, setSelectedRide] = useState(null);
@@ -200,9 +200,14 @@ const WrapperReservation = () => {
                   ref={formRef}
                   onClick={() => {
                     setSelectedDate(date);
-                    setTimeout(() => {
+                    // setTimeout(() => {
+                      try {
                       formRef.current.scrollIntoView({ behavior: "smooth" });
-                    }, 0);
+                        
+                      } catch (error) {
+                        
+                      }
+                    // }, 0);
                   }}
                 >
                   <p
@@ -262,7 +267,7 @@ const WrapperReservation = () => {
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
               
-                <h2>Kids 8-12 years</h2>
+                <h2>Kids 8-12 years:</h2>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Button size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />

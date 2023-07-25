@@ -78,7 +78,7 @@ const WrapperLogin = () => {
       >
         <section>
           <Form>
-            <h1>STA DA PISE OVDE?</h1>
+            {/* <h1>STA DA PISE OVDE?</h1> */}
             <Field  type="text" name="email" placeholder="Email" style={{    height: "44px", fontSize: "20px", width:"100%"}} />
             <p className="error-handle">
               <ErrorMessage name="email" />

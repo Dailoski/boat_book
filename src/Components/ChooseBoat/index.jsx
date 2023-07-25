@@ -18,9 +18,13 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
     setAvailableDates(dates);
     // setSelectedDate(null)
     setSelectedRide(()=>rides.find((e)=>selectedBoat === e.data.name))
-    setTimeout(() => {
-      boatRef.current.scrollIntoView({ behavior: "smooth" });
-    }, 0);
+    // setTimeout(() => {
+      try{boatRef.current.scrollIntoView({ behavior: "smooth" });} 
+      catch (error) {
+      
+     }
+     // 
+    // }, 0);
   };
   return (
     <div className="div-choose-boat">

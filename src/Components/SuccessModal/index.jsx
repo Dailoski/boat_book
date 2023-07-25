@@ -14,6 +14,7 @@ import {
 } from "@react-pdf/renderer";
 import qrCode from "../../assets/qr-code.jpg";
 import dayjs from "dayjs";
+import { Button } from "@mui/material";
 // import Roboto from "typeface-roboto"
 
 const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
@@ -73,7 +74,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       color: "blue",
     },
     meetAddress: {
-      fontSize: "14px",
+      fontSize: "11px",
       position: "absolute",
       top: 50,
       left: 0,
@@ -128,9 +129,9 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
             <View style={styles.halfp}>
               <Text style={styles.tourText}>{"Tour: " + selectedRide?.data.name}</Text>
               <Text style={styles.tourText}>{"Hotel: " + userData?.hotel_name}</Text>
-              <Text style={styles.tourText}>{"Receptionist: " + userData?.full_name}</Text>
+              <Text style={styles.tourText}>{"Provider: " + userData?.full_name}</Text>
               <Text style={styles.tourText}>{"Room or name: " + ticketInfo.roomNumber}</Text>
-              <Text style={styles.tourText}>{"Day/Date/departure time: " + ticketInfo.date}</Text>
+              <Text style={styles.tourText}>{"Day/Date/departure time: " + dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + "h"}</Text>
             </View>
             
           </View>
@@ -165,12 +166,9 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
             return (
               <div className="modal-content">
                 <p>Thank you for making a reservation!</p>
-                <a href={url} download="ticket">
-                  download ticket
-                </a>
-                <button onClick={() => window.open(url, "_blank")}>
-                  open in new tab
-                </button>
+                <Button variant="contained" onClick={() => window.open(url, "_blank")}>
+                  OPEN TICKET
+                </Button>
               </div>
             );
           }}
