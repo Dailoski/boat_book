@@ -12,6 +12,7 @@ import moment from "moment";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
+import { TourButton } from "../TourButton";
 
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
@@ -180,6 +181,7 @@ const WrapperReservation = () => {
     </h2>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
+          <TourButton text="2023-07-25 16:00" />
           {(
             !selectedRide
               ? null
@@ -192,7 +194,7 @@ const WrapperReservation = () => {
             </>
           ) : (
             filteredDates.map(({date, type}, i) => {
-
+              console.log(date)
               return (
                 <div
                   className={selectedDate === date ? "tour selected" : "tour"}
