@@ -15,9 +15,9 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs?.filter((e) => e.data.boat === selectedBoat)
       .map((e) => ({date: e.data.date, type: e.data.type}));
-      console.log(dates)
+      
     setAvailableDates(dates);
-    // setSelectedDate(null)
+    setSelectedDate(null)
     setSelectedRide(()=>rides.find((e)=>selectedBoat === e.data.name))
     // setTimeout(() => {
       try{boatRef.current.scrollIntoView({ behavior: "smooth" });} 

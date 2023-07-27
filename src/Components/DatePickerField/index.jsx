@@ -12,7 +12,7 @@ const DatePickerField = ({name, value, onChange}) => {
       multiple
       value={value}
       minDate={new Date()}
-      onChange={(e)=> console.log(value) ||
+      onChange={(e)=> 
         onChange('date', e)}
         plugins={[
           <TimePicker position="bottom" hStep={1} mStep={30} hideSeconds/>,
