@@ -16,7 +16,7 @@ const App = () => {
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")));
-  console.log(userData);
+
   const [accessToken, setAccessToken] = useState(
     JSON.parse(localStorage.getItem("accessToken"))
   );

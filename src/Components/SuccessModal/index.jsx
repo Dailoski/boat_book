@@ -20,7 +20,7 @@ import { Button } from "@mui/material";
 const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
 
   const { userData } = useContext(applicationContext);
-  console.log(userData);
+  
   
   // setTimeout (() => {console.log(selectedRide)}, 1000)
   

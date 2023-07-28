@@ -12,13 +12,18 @@ import moment from "moment";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
+import { TourButton } from "../TourButton";
+import { selectClasses } from "@mui/material";
 
 // import { ticketInfoHandler } from "../../store/ticket-context";
 // trebace kontekst ako hocemo da dodajemo gluposti za pdf
 
 const WrapperReservation = () => {
-  const { allDocs, user, freshData, setFreshData } =
-    useContext(applicationContext);
+
+  const [isSelected, setIsSelected] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const { allDocs, user, freshData, setFreshData } = useContext(applicationContext);
   const reservationInfo = {
     id: "",
     roomNumber: "",
@@ -43,9 +48,9 @@ const WrapperReservation = () => {
   weekFromNow.setDate(today.getDate() + 7);
   const filteredDates = availableDates.length
     ? availableDates
-        .sort((a, b) => moment(a, dateFormat) - moment(b, dateFormat))
-        .filter((date) => moment(date, dateFormat) > moment(today, dateFormat))
-        .filter((date, index, dates) => dates.indexOf(date) === index)
+        .sort((a, b) => moment(a.date, dateFormat) - moment(b.date, dateFormat))
+        .filter((item) => moment(item.date, dateFormat) > moment(today, dateFormat))
+        .filter((item, index, dates) => dates.indexOf(item) === index)
     : [];
   const [success, setSuccess] = useState(false);
   // const phoneRegExp =
@@ -165,6 +170,7 @@ const WrapperReservation = () => {
     setSuccess(true);
     setFreshData(!freshData);
     // setSelectedDate(null);
+
   };
   return (
     <div className="div-WrapperReservation">
@@ -180,62 +186,64 @@ const WrapperReservation = () => {
     </h2>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
+          
           {(
             !selectedRide
               ? null
               : filteredDates.length === 0 ||
-                new Date(filteredDates[0]).getTime() > weekFromNow.getTime()
+                new Date(filteredDates[0].date).getTime() > weekFromNow.getTime()
           ) ? (
             <>
               <p>There are no tours for this</p>
               <p>boat during this week.</p>
             </>
           ) : (
-            filteredDates.map((date, i) => {
-              const hour = new Date(date).getHours();
+            filteredDates.map((obj, i) => {
+              
+              const {date, type} = obj
+
+              console.log(selectedTour);
+
               return (
-                <div
-                  className={selectedDate === date ? "tour selected" : "tour"}
-                  key={i}
-                  ref={formRef}
-                  onClick={() => {
-                    setSelectedDate(date);
-                    // setTimeout(() => {
-                      try {
-                      formRef.current.scrollIntoView({ behavior: "smooth" });
+
+                <TourButton onClick={() => {setSelectedIndex(i); setSelectedDate(date)}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
+
+                // <div
+                //   className={selectedDate === date ? "tour selected" : "tour"}
+                //   key={i}
+                //   ref={formRef}
+                //   onClick={() => {
+                //     setSelectedDate(date);
+                    
+                //       try {
+                //       formRef.current.scrollIntoView({ behavior: "smooth" });
                         
-                      } catch (error) {
+                //       } catch (error) {
                         
-                      }
-                    // }, 0);
-                  }}
-                >
-                  <p
-                    style={{
-                      backgroundColor:
-                        hour >= 19 && hour < 22
-                          ? "orange"
-                          : hour >= 22 || hour < 4
-                          ? "purple"
-                          : "yellow",
-                    }}
-                  >
-                  {/* <p
-                    style={{
-                      backgroundColor:
-                       selected.type == "sunset" ? "orange" :  
-                       type == "daytime" ? "yellow" :  "purple"
-            }}
-                  ></p> */}
-                    {/* {console.log(date)} */}
-                    {dayjs(new Date(date)).format("ddd DD-MM HH:mm")}
-                  </p>
-                </div>
+                //       }
+
+                //   }}
+                // >
+                //   <p
+                //     style={{
+                //       backgroundColor:
+                //         type === "sunset"
+                //           ? "orange"
+                //           : type === "daytime"
+                //           ? "yellow"
+                //           : "purple",
+                //     }}
+                //   >
+
+                //   {dayjs(new Date(date)).format("ddd DD-MM HH:mm")}
+                //   </p>
+                //  </div>
               );
             })
           )}
         </div>
       </div>
+
       {selectedTour && (
         <Formik
           initialValues={reservationInfo}

@@ -79,7 +79,7 @@
 .dateWrapper {
   overflow: hidden;
   width: 100%;
-  padding-inline: 20%;
+  padding-inline: 8%;
 }
 .dateWrapper > div {
   margin: 0 auto;
