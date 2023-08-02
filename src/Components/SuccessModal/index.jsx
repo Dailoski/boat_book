@@ -66,6 +66,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     //   width: "100%"
     // },
     meetTitle: {
+      fontFamily: "Helvetica-Bold",
       paddingBottom: "10px",
       fontSize: "16px",
       position: "absolute",
@@ -89,6 +90,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       right: 7,
     },
     meetPointTime: {
+      fontFamily: "Helvetica-Bold",
       fontSize: "16px",
       textDecoration: "underline",
       position: "absolute",
@@ -100,6 +102,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       fontSize: '15px'
     },
     passengersTitle: {
+      fontFamily: "Helvetica-Bold",
       paddingBottom: "10px",
       textTransform: "uppercase",
       fontSize: "13px",
@@ -110,6 +113,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       fontSize: "12px",
     },
     isPaid: {
+      fontFamily: "Helvetica-Bold",
       textTransform: "uppercase",
       fontSize: "14px",
       color: 'red',
@@ -127,11 +131,11 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
           <View style={styles.fullp}>
 
             <View style={styles.halfp}>
-              <Text style={styles.tourText}>{"Tour: " + selectedRide?.data.name}</Text>
-              <Text style={styles.tourText}>{"Hotel: " + userData?.hotel_name}</Text>
-              <Text style={styles.tourText}>{"Provider: " + userData?.full_name}</Text>
-              <Text style={styles.tourText}>{"Room or name: " + ticketInfo.roomNumber}</Text>
-              <Text style={styles.tourText}>{"Day/Date/departure time: " + dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + "h"}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Tour: </Text>{selectedRide?.data.name}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Hotel: </Text>{"Hotel: " + userData?.hotel_name}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Provider: </Text>{userData?.full_name}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Room or name:</Text>{ticketInfo.roomNumber}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Day/Date/departure time: </Text>{dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + "h"}</Text>
             </View>
             
           </View>

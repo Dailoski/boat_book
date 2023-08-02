@@ -37,10 +37,10 @@ export function TourButton({ isSelected, type, onClick, tourDate }) {
           )
         }
       >
+        {type + " tour"}
+        <br/>
         {tourDate}
       </Button>
-      {/* <Button sx={{margin: "2px 0px"}} fullWidth color="secondary" size="small" variant='contained' endIcon={<NightlightIcon />}>NIGHT TOUR <br/>{text}</Button>
-  <Button sx={{margin: "2px 0px"}} fullWidth color="warning" size="small" variant='contained' endIcon={<WbTwilightIcon />}>SUNSET TOUR <br/>{text}</Button> */}
     </>
   );
 }

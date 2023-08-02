@@ -1,4 +1,4 @@
-import { React, useContext, useState, useRef } from "react";
+import { React, useContext, useState } from "react";
 import dayjs from "dayjs";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import ChooseBoat from "../ChooseBoat";
@@ -13,14 +13,10 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
 import { TourButton } from "../TourButton";
-import { selectClasses } from "@mui/material";
 
-// import { ticketInfoHandler } from "../../store/ticket-context";
-// trebace kontekst ako hocemo da dodajemo gluposti za pdf
 
 const WrapperReservation = () => {
 
-  const [isSelected, setIsSelected] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const { allDocs, user, freshData, setFreshData } = useContext(applicationContext);
@@ -65,7 +61,7 @@ const WrapperReservation = () => {
     preteens: selectedRide?.data.prices.preteens,
     children: selectedRide?.data.prices.children,
   };
-  const formRef = useRef(null);
+  // const formRef = useRef(null);
   const plusPassengerCount = (setFieldValue, values) => {
     setFieldValue("numberOfPassengers", values.numberOfPassengers + 1);
   };
