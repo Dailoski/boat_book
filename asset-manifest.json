@@ -1,18 +1,14 @@
 {
   "files": {
     "main.css": "/boat_book/static/css/main.b03a79a3.css",
-    "main.js": "/boat_book/static/js/main.43022ba8.js",
-    "static/media/open-bus.jpg": "/boat_book/static/media/open-bus.16b0408a38d2d97f9313.jpg",
-    "static/media/kej.jpeg": "/boat_book/static/media/kej.8502bf7fdab0d22c2b36.jpeg",
-    "static/media/turtle.jpeg": "/boat_book/static/media/turtle.2596736402e3a886234c.jpeg",
-    "static/media/tesla.jpeg": "/boat_book/static/media/tesla.48969abb1df67b63baed.jpeg",
+    "main.js": "/boat_book/static/js/main.7f5fbfeb.js",
     "static/media/qr-code.jpg": "/boat_book/static/media/qr-code.6a1837c95986d07747a2.jpg",
     "index.html": "/boat_book/index.html",
     "main.b03a79a3.css.map": "/boat_book/static/css/main.b03a79a3.css.map",
-    "main.43022ba8.js.map": "/boat_book/static/js/main.43022ba8.js.map"
+    "main.7f5fbfeb.js.map": "/boat_book/static/js/main.7f5fbfeb.js.map"
   },
   "entrypoints": [
     "static/css/main.b03a79a3.css",
-    "static/js/main.43022ba8.js"
+    "static/js/main.7f5fbfeb.js"
   ]
 }
