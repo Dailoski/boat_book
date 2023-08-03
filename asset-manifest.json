@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/boat_book/static/css/main.e1842c4c.css",
-    "main.js": "/boat_book/static/js/main.062c9a2a.js",
+    "main.js": "/boat_book/static/js/main.bffe5626.js",
     "static/media/qr-code.jpg": "/boat_book/static/media/qr-code.6a1837c95986d07747a2.jpg",
     "index.html": "/boat_book/index.html",
     "main.e1842c4c.css.map": "/boat_book/static/css/main.e1842c4c.css.map",
-    "main.062c9a2a.js.map": "/boat_book/static/js/main.062c9a2a.js.map"
+    "main.bffe5626.js.map": "/boat_book/static/js/main.bffe5626.js.map"
   },
   "entrypoints": [
     "static/css/main.e1842c4c.css",
-    "static/js/main.062c9a2a.js"
+    "static/js/main.bffe5626.js"
   ]
 }
