@@ -22,7 +22,6 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
   const { userData } = useContext(applicationContext);
   
   
-  // setTimeout (() => {console.log(selectedRide)}, 1000)
   
   //   Font.register({family:'Roboto', format:'truetype', src: Roboto
   // })

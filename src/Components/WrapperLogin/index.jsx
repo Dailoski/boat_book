@@ -12,7 +12,7 @@ import { Button } from "@mui/material";
 const WrapperLogin = () => {
   const navigate = useNavigate();
   const adminID = "32HKi0Q7dVQ1zQX4xnhnn1mKNpH3";
-  const { setAccessToken, setIsAdmin, setUser, userData, setUserData } =
+  const { setAccessToken, setIsAdmin, setUser, setUserData } =
     useContext(applicationContext);
   const [wrongCredentials, setWrongCredentials] = useState("");
   const defaultLoginValue = {
@@ -33,11 +33,9 @@ const WrapperLogin = () => {
     signInWithEmailAndPassword(auth, values?.email, values?.password)
       .then(async(userCredential) => {
         setAccessToken(userCredential.user.accessToken);
-        console.log(userCredential.user.uid)
         const docRef = doc(db, "users", userCredential.user.uid);
         const docSnap = await getDoc(docRef);
         const docsData = docSnap.data()
-        console.log(docsData)
         if (userCredential?.user?.accessToken) {
           localStorage.setItem(
             "accessToken",

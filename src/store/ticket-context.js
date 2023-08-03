@@ -43,7 +43,7 @@ export function ticketInfoHandler(tourInfo,ticketInfo) {
             blob:blob,
             url:url
             }
-        return '23console.log(blobecanje)'}
+        return 'console.log(blobecanje)'}
       }
     </BlobProvider>
     return 'object'

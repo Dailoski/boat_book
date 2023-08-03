@@ -1,10 +1,6 @@
 import { React, useContext } from "react";
 import { useRef } from "react";
 import { applicationContext } from "../../context";
-import busImg from "../../assets/open-bus.jpg";
-import keyImg from "../../assets/kej.jpeg";
-import teslaImg from "../../assets/tesla.jpeg";
-import turtleImg from "../../assets/turtle.jpeg";
 
 import "./choose-boat.scss";
 
@@ -27,11 +23,23 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
      // 
     // }, 0);
   };
+  const sortedRides = [...rides].sort((a,b)=> a.data.position - b.data.position)
+  const filteredRItes = sortedRides.filter(a => a.data.isAvailable)
   return (
     <div className="div-choose-boat">
       <h4>Click on tour photo to make reservation now</h4>
       <div className="choose-boat">
-        <img
+      {filteredRItes.map(
+        ride => (
+          <img
+          onClick={() => handleImageClick(ride.data.name)}
+          src={ride.data.image}
+          alt={ride.data.name}
+          key={ride.data.name}
+        />
+        )
+      )}
+        {/* <img
           onClick={() => handleImageClick("turtle-boat")}
           src={turtleImg}
           alt="Turtle Boat"
@@ -50,7 +58,7 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
           onClick={() => handleImageClick("open-bus")}
           src={busImg}
           alt="Open Bus"
-        />
+        /> */}
       </div>
 
       <p ref={boatRef}>

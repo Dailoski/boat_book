@@ -45,7 +45,8 @@ const WrapperReservation = () => {
   const filteredDates = availableDates.length
     ? availableDates
         .sort((a, b) => moment(a.date, dateFormat) - moment(b.date, dateFormat))
-        .filter((item) => moment(item.date, dateFormat) > moment(today, dateFormat))
+        .filter((item) => new Date(item.date).getTime() > new Date(today).getTime())
+        // .filter((item) => moment(item.date, dateFormat) > moment(today, dateFormat))
         .filter((item, index, dates) => dates.indexOf(item) === index)
     : [];
   const [success, setSuccess] = useState(false);
@@ -198,11 +199,9 @@ const WrapperReservation = () => {
               
               const {date, type} = obj
 
-              console.log(selectedTour);
-
               return (
 
-                <TourButton onClick={() => {setSelectedIndex(i); setSelectedDate(date)}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
+                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date)}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
 
                 // <div
                 //   className={selectedDate === date ? "tour selected" : "tour"}
