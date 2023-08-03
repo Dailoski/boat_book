@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import moment from "moment/moment";
 import dayjs from "dayjs";
 import "./admin-tours.scss";
+import { DeleteButton } from "../DeleteButton";
 
 const AdminTours = ({ handleOpen }) => {
   const { allDocs, freshData, setFreshData } = useContext(applicationContext);
@@ -73,9 +74,10 @@ const AdminTours = ({ handleOpen }) => {
               <p>{dayjs(e?.data?.date).format("ddd DD-MM hh:mm")}</p>
               {/* <p>{e.data.time}</p> */}
               <button onClick={() => handleOpen(e)}>Tour Info</button>
-              <button className="del" onClick={() => handleDelete(e)}>
+              {/* <button className="del" onClick={() => handleDelete(e)}>
                 Delete
-              </button>
+              </button> */}
+              <DeleteButton deleteHandler={() => handleDelete(e)}/>
             </section>
           ))
         ) : (

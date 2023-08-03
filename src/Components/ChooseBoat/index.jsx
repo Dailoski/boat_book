@@ -15,11 +15,10 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
     setAvailableDates(dates);
     setSelectedDate(null)
     setSelectedRide(()=>rides.find((e)=>selectedBoat === e.data.name))
-    // setTimeout(() => {
-      try{boatRef.current.scrollIntoView({ behavior: "smooth" });} 
-      catch (error) {
-      
-     }
+    setTimeout(() => {
+    document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
+    }, 0);
+
      // 
     // }, 0);
   };

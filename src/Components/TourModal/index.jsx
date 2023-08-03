@@ -3,6 +3,7 @@ import { applicationContext } from "../../context";
 import { db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import "./tour-modal.scss";
+import { DeleteButton } from "../DeleteButton";
 
 const TourModal = ({ handleClose, clickedTour }) => {
   const { freshData, setFreshData, allDocs } = useContext(applicationContext);
@@ -74,13 +75,10 @@ const TourModal = ({ handleClose, clickedTour }) => {
                   <h5>Phone number:</h5>
                   <p>{e.phoneNumber}</p>
                 </div>
-                <button
-                  onClick={() =>
+                
+                <DeleteButton deleteHandler={() =>
                     handleDelete(e.id, e.numberOfPassengers + e.preteens+ e.children)
-                  }
-                >
-                  Delete
-                </button>
+                  } />
               </div>
             ))}
           </div>

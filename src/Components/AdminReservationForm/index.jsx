@@ -49,7 +49,9 @@ const AdminReservationForm = () => {
         type: values.type
       });
     });
-    tourRef.current.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
+      }, 0);
     setFreshData(!freshData);
     resetForm();
   };

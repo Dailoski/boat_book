@@ -201,38 +201,9 @@ const WrapperReservation = () => {
 
               return (
 
-                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date)}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
-
-                // <div
-                //   className={selectedDate === date ? "tour selected" : "tour"}
-                //   key={i}
-                //   ref={formRef}
-                //   onClick={() => {
-                //     setSelectedDate(date);
-                    
-                //       try {
-                //       formRef.current.scrollIntoView({ behavior: "smooth" });
-                        
-                //       } catch (error) {
-                        
-                //       }
-
-                //   }}
-                // >
-                //   <p
-                //     style={{
-                //       backgroundColor:
-                //         type === "sunset"
-                //           ? "orange"
-                //           : type === "daytime"
-                //           ? "yellow"
-                //           : "purple",
-                //     }}
-                //   >
-
-                //   {dayjs(new Date(date)).format("ddd DD-MM HH:mm")}
-                //   </p>
-                //  </div>
+                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);    setTimeout(() => {
+                  document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
+                  }, 0);}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
               );
             })
           )}
