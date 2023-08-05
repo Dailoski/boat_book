@@ -8,7 +8,7 @@ import "./admin-tours.scss";
 import { DeleteButton } from "../DeleteButton";
 
 const AdminTours = ({ handleOpen }) => {
-  const { allDocs, freshData, setFreshData } = useContext(applicationContext);
+  const { rides, allDocs, freshData, setFreshData } = useContext(applicationContext);
   const boats = ["Turtle Boat", "Key Boat", "Nikola Tesla Boat", "Open Bus"];
   const dateFormat = "YYYY-M-D HH:mm";
   const [selectedBoat, setSelectedBoat] = useState(boats[0]);
@@ -20,15 +20,7 @@ const AdminTours = ({ handleOpen }) => {
   const filteredDocs = allDocs
     .filter(
       (e) =>
-        (selectedBoat === boats[0] && e?.data?.boat === "turtle-boat") ||
-        (selectedBoat === boats[1] && e?.data?.boat === "key-boat") ||
-        (selectedBoat === boats[2] && e?.data?.boat === "nikola-tesla-boat") ||
-        (selectedBoat === boats[3] && e?.data?.boat === "open-bus")
-      // selectedBoat === boats[0]
-      //   ? e.data.boat === "turtle-boat"
-      //   : selectedBoat === boats[1]
-      //   ? e.data.boat === "key-boat"
-      //   : e.data.boat === "nikola-tesla-boat"
+      e?.data?.boat === selectedBoat.id
     )
     .sort((a, b) =>
       pastTours
@@ -43,13 +35,13 @@ const AdminTours = ({ handleOpen }) => {
   return (
     <div className="div-admin-tours">
       <div className="boat-toggle-div">
-        {boats.map((boat, i) => (
+        {rides.map((ride, i) => (
           <button
             key={i}
-            className={boat === selectedBoat ? "selected" : ""}
-            onClick={() => setSelectedBoat(boats[i])}
+            className={ride.id === selectedBoat.id ? "selected" : ""}
+            onClick={() => setSelectedBoat(ride)}
           >
-            {boat}
+            {ride.data.name}
           </button>
         ))}
       </div>
@@ -71,13 +63,14 @@ const AdminTours = ({ handleOpen }) => {
         {filteredDocs[0] ? (
           filteredDocs.map((e) => (
             <section key={e.id}>
-              <p>{dayjs(e?.data?.date).format("ddd DD-MM hh:mm")}</p>
+              <p>{dayjs(e?.data?.date).format("ddd DD-MM HH:mm")}</p>
+              <p>{e?.data?.availableSeats} free seats</p>
               {/* <p>{e.data.time}</p> */}
               <button onClick={() => handleOpen(e)}>Tour Info</button>
               {/* <button className="del" onClick={() => handleDelete(e)}>
                 Delete
               </button> */}
-              <DeleteButton deleteHandler={() => handleDelete(e)}/>
+              <DeleteButton color="error" deleteHandler={() => handleDelete(e)}/>
             </section>
           ))
         ) : (

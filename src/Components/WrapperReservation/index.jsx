@@ -18,7 +18,6 @@ import { TourButton } from "../TourButton";
 const WrapperReservation = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
   const { allDocs, user, freshData, setFreshData } = useContext(applicationContext);
   const reservationInfo = {
     id: "",
@@ -53,7 +52,7 @@ const WrapperReservation = () => {
   // const phoneRegExp =
     // /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const selectedBoat = allDocs?.filter(
-    (e) => e.data.boat === selectedRide?.data.name
+    (e) => e.data.boat === selectedRide?.id
   );
 
   const selectedTour = selectedBoat?.find((e) => e.data.date === selectedDate);
@@ -118,11 +117,6 @@ const WrapperReservation = () => {
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
 
-      // phoneNumber: yup
-      //   .string()
-      //   .matches(phoneRegExp, "Phone number is not valid")
-      //   .min(8, "too short")
-      //   .max(10, "too long"),
     });
   const handleSubmit = (values, { resetForm }) => {
     const tour = selectedTour;
@@ -177,22 +171,16 @@ const WrapperReservation = () => {
         setSelectedRide={setSelectedRide}
         setSelectedDate={setSelectedDate}
       />
-      {!selectedTour &&
+      {(selectedRide && filteredDates.length !== 0)  &&
       <h2 className="tour-title">
-      Select exact day/date/time: <span>*</span>
+      Select day/date/time: <span>*</span>
     </h2>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
-          
-          {(
-            !selectedRide
-              ? null
-              : filteredDates.length === 0 ||
-                new Date(filteredDates[0].date).getTime() > weekFromNow.getTime()
-          ) ? (
+          {(filteredDates.length === 0 && selectedRide) ? (
             <>
-              <p>There are no tours for this</p>
-              <p>boat during this week.</p>
+              <p>Sorry, there are no </p>
+              <p>tours in this week.</p>
             </>
           ) : (
             filteredDates.map((obj, i) => {
@@ -201,7 +189,7 @@ const WrapperReservation = () => {
 
               return (
 
-                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);    setTimeout(() => {
+                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);setTimeout(() => {
                   document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
                   }, 0);}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
               );
@@ -209,8 +197,7 @@ const WrapperReservation = () => {
           )}
         </div>
       </div>
-
-      {selectedTour && (
+      {(selectedTour && (filteredDates.length > 0)) && (
         <Formik
           initialValues={reservationInfo}
           validationSchema={() => validationSchema(selectedTour)}

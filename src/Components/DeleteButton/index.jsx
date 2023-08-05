@@ -24,7 +24,7 @@ export const  DeleteButton = ({deleteHandler}) => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button className='del' variant="outlined" onClick={handleClickOpen}>
         Delete
       </Button>
       <Dialog
@@ -43,7 +43,7 @@ export const  DeleteButton = ({deleteHandler}) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>NO</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button color='error' onClick={handleDelete} autoFocus>
             YES
           </Button>
         </DialogActions>

@@ -8,6 +8,7 @@ import { db } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import DatePickerField from "../DatePickerField";
 import "./admin-reservation-form.scss";
+import { Button } from "@mui/material";
 
 const AdminReservationForm = () => {
   const { setFreshData, freshData, rides } = useContext(applicationContext);
@@ -39,7 +40,7 @@ const AdminReservationForm = () => {
   
   const handleAdd = (values, { resetForm }) => {
     const dateRange = getDates(values.date);
-    const selectedRide = rides.find((e) => e.data.name === values.boat);
+    const selectedRide = rides.find((e) => e.id === values.boat);
     dateRange.forEach((singleDate) => {
       addDoc(collection(db, "tours"), {
         boat: values.boat,
@@ -73,14 +74,14 @@ const AdminReservationForm = () => {
         {({ values, setFieldValue }) => (
           <Form>
             <section className="admin-res">
-              <h4>Boat for tour:</h4>
+              <h4>Tour:</h4>
               {rides.map((data, i) => (
                 <label key={i}>
-                  <p>{data.data.name.split('-').join(' ') }</p>
+                  <p>{data.id }</p>
                   <Field
                     type="radio"
                     name="boat"
-                    value={data.data.name}
+                    value={data.id}
                     key={i}
                   />
                 </label>
@@ -112,9 +113,9 @@ const AdminReservationForm = () => {
               <p className="error-handle">
                 <ErrorMessage name="minutes" />
               </p>
-              <button className="submit-btn" type="submit" ref={tourRef}>
+              <Button variant="contained" type="submit" ref={tourRef}>
                 Create tour
-              </button>
+              </Button>
             </section>
           </Form>
         )}

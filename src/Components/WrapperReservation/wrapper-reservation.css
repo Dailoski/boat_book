@@ -26,6 +26,12 @@
   color: #fff;
   display: flex;
   flex-direction: column;
+
+}
+@media screen and (min-width: 600px){
+.div-WrapperReservation section {
+  width: 300px;
+}
 }
 .div-WrapperReservation section span {
   color: red;

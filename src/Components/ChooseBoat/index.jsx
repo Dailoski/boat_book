@@ -14,7 +14,7 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
       
     setAvailableDates(dates);
     setSelectedDate(null)
-    setSelectedRide(()=>rides.find((e)=>selectedBoat === e.data.name))
+    setSelectedRide(()=>rides.find((e)=>selectedBoat === e.id))
     setTimeout(() => {
     document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
     }, 0);
@@ -31,10 +31,10 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
       {filteredRItes.map(
         ride => (
           <img
-          onClick={() => handleImageClick(ride.data.name)}
+          onClick={() => handleImageClick(ride.id)}
           src={ride.data.image}
           alt={ride.data.name}
-          key={ride.data.name}
+          key={ride.id}
         />
         )
       )}
@@ -60,10 +60,9 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
         /> */}
       </div>
 
-      <p ref={boatRef}>
-        Selected Tour: {selectedRide?.data.name.split('-').join(' ').toUpperCase()}
-
-      </p>
+     { selectedRide && <p ref={boatRef}>
+        Selected Tour: {selectedRide?.data.name}
+      </p>}
     </div>
   );
 };

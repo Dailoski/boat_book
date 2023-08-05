@@ -1,6 +1,6 @@
 .div-admin-res {
   height: 100%;
-  background: linear-gradient(90deg, rgb(46 40 94), rgb(49, 190, 200));
+  background: #223381;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@
     padding: 10px;
     border-radius: 10px;
     background: rgb(176, 227, 231);
-    background: linear-gradient(90deg, rgb(0 0 0) 100%, rgb(49, 190, 200) 100%);
+    background: black;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -50,18 +50,13 @@
   color: red;
   height: 18px;
   padding: 5px;
-  min-width: 80vw;
+  // min-width: 80vw;
 }
 .submit-btn {
   margin-top: 10px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(31, 30, 142, 1) 100%
-  );
+  font-size: 25px;
   color: #fff;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
 }
 .joke {
@@ -69,12 +64,7 @@
   flex-direction: column;
   padding: 0 !important;
   margin-top: 0 !important;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgb(0, 0, 0) 100%
-  );
+  background: black;
 }
 .plus-minus {
   display: flex;

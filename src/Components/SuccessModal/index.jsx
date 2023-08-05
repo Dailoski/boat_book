@@ -10,6 +10,7 @@ import {
   View,
   Document,
   StyleSheet,
+  Link
   // Font
 } from "@react-pdf/renderer";
 import qrCode from "../../assets/qr-code.jpg";
@@ -53,7 +54,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     },
     fullBottom: {
       width: "100%",
-      paddingVertical: "15px",
+      paddingVertical: "5px",
       borderTop: "2px solid black",
       display: "flex",
       flexDirection: "row",
@@ -83,6 +84,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       color: "blue",
     },
     scanqr: {
+      fontFamily: "Helvetica-Bold",
       fontSize: "12px",
       position: "absolute",
       top: 135,
@@ -125,15 +127,15 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
           <Text style={styles.meetTitle}>Meeting point address:</Text>
           <Text style={styles.meetAddress} wrap>Main entrance of Kalemegdan park from Knez Mihailova street Pariska 15, Belgrade</Text>
           <Text style={styles.meetPointTime}>{"Meeting point time: " + meetingTime}</Text>
-          <Image src={qrCode} style={styles.qrCode} />
-          <Text style={styles.scanqr}>Scan QR code for location</Text>
+          <Link  style={styles.qrCode}  target="_blank"  src="https://maps.app.goo.gl/Vs3wHRYBbjiWvgtYA?g_st=ic"><Image src={qrCode} /></Link>
+          <Text style={styles.scanqr}>Scan or click QR code for location</Text>
           <View style={styles.fullp}>
 
             <View style={styles.halfp}>
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Tour: </Text>{selectedRide?.data.name}</Text>
-              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Hotel: </Text>{"Hotel: " + userData?.hotel_name}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Hotel: </Text>{userData?.hotel_name}</Text>
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Provider: </Text>{userData?.full_name}</Text>
-              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Room or name:</Text>{ticketInfo.roomNumber}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Room or name: </Text>{ticketInfo.roomNumber}</Text>
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Day/Date/departure time: </Text>{dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + "h"}</Text>
             </View>
             
@@ -157,6 +159,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
               </Text>
             </View>
           </View>
+          <Text style={{fontSize: "20px"}}>belgrade-sightseeing-tours.com</Text>
         </View>
       </Page>
     </Document>

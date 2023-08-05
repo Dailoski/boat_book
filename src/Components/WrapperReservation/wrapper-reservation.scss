@@ -1,6 +1,7 @@
 .div-WrapperReservation {
   flex-grow: 1;
-  background: linear-gradient(90deg, rgb(46 40 94), rgb(49, 190, 200));
+  background-color: #223381;
+  // background: linear-gradient(90deg, rgb(46 40 94), rgb(49, 190, 200));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,10 +23,13 @@
     padding: 10px;
     border-radius: 10px;
     background: rgb(176, 227, 231);
-    background: linear-gradient(90deg, rgb(0 0 0) 100%, rgb(49, 190, 200) 100%);
+    background: black;
     color: #fff;
     display: flex;
     flex-direction: column;
+    @media screen and (min-width: 600px){
+        width: 400px;
+    }
     span {
       color: red;
     }
@@ -61,7 +65,7 @@
   color: red;
   height: 10px;
   padding: 5px;
-  min-width: 80vw;
+  // min-width: 80vw;
 }
 // .submit-btn {
 //   margin-top: 10px;
@@ -98,6 +102,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (min-width: 600px){
+      width: 400px;
+  }
     div {
       width: 80%;
       margin-block: 2px;
