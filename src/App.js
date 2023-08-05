@@ -55,6 +55,7 @@ const App = () => {
     localStorage.removeItem("admin");
     localStorage.removeItem("userData");
     setIsAdmin(false);
+    setUser("")
   };
 
   return (

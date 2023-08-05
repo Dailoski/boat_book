@@ -1,5 +1,4 @@
 import { React, useContext } from "react";
-import { useRef } from "react";
 import { applicationContext } from "../../context";
 
 import "./choose-boat.scss";
@@ -7,7 +6,6 @@ import "./choose-boat.scss";
 const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelectedDate }) => {
   
   const { allDocs, rides } = useContext(applicationContext);
-  const boatRef = useRef(null);
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs?.filter((e) => e.data.boat === selectedBoat)
       .map((e) => ({date: e.data.date, type: e.data.type}));
@@ -60,9 +58,13 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
         /> */}
       </div>
 
-     { selectedRide && <p ref={boatRef}>
-        Selected Tour: {selectedRide?.data.name}
+      { selectedRide && <p>
+        Selected Tour: 
       </p>}
+      { selectedRide && <p style={{ fontSize: "25px", color: "cyan"}}>
+        {selectedRide?.data.name}
+      </p>}
+      
     </div>
   );
 };

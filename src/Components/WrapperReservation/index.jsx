@@ -3,8 +3,9 @@ import dayjs from "dayjs";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import ChooseBoat from "../ChooseBoat";
 import SuccessModal from "../SuccessModal";
+import SuccessModalNOT from "../SuccessModalNOT";
 import { applicationContext } from "../../context";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
@@ -48,8 +49,9 @@ const WrapperReservation = () => {
         // .filter((item) => moment(item.date, dateFormat) > moment(today, dateFormat))
         .filter((item, index, dates) => dates.indexOf(item) === index)
     : [];
-  const [success, setSuccess] = useState(false);
-  // const phoneRegExp =
+    const [success, setSuccess] = useState(false);
+    const [fail, setFail] = useState(false);
+    // const phoneRegExp =
     // /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const selectedBoat = allDocs?.filter(
     (e) => e.data.boat === selectedRide?.id
@@ -97,30 +99,29 @@ const WrapperReservation = () => {
         .number()
         .required("Please enter a number of passengers")
         .max(10, "Max passengers 10")
-        .min(1, "Min one passenger")
-        .test(
-          "not-enough-seats",
-          "There's not that many seats available",
-          (passengers) => tour.data.availableSeats >= passengers
-        ),
+        .min(1, "Min one passenger"),
       preteens: yup
         .number()
         .max(10, "Max passengers 10")
-        .min(0, "Can't be less than zero")
-        .test(
-          "not-enough-seats",
-          "There's not that many seats available",
-          (passengers) => tour.data.availableSeats >= passengers
-        ),
+        .min(0, "Can't be less than zero"),
       children: yup
         .number()
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
 
     });
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async(values, { resetForm }) => {
     const tour = selectedTour;
     const tourRef = doc(db, "tours", tour.id);
+    const docSnap = await getDoc(tourRef)
+    tour.data = docSnap.data()
+    console.log(docSnap.data())
+    if((values.numberOfPassengers + values.preteens + values.children) > tour.data.availableSeats){
+      const message = "This tour has " + tour.data.availableSeats + (tour.data.availableSeats === 1 ? " seat left" : " seats left");
+      //alert(message)
+      setFail(message)
+      return
+    }
     const random = Math.floor(Math.random() * 1000000000);
     setTicketInfo({
       ...ticketInfo,
@@ -323,19 +324,20 @@ const WrapperReservation = () => {
                     />
                   </label>
                 </Field>
-                {/* <Button size="large" variant="contained" variant="contained"  className="submit-btn" type="submit">
-                  Book now
-                </button> */}
+
                 <Button variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
-              </section>
+              </section>xa
             </Form>
           )}
         </Formik>
       )}
       {success && (
         <SuccessModal setSuccess={setSuccess} ticketInfo={ticketInfo} selectedRide={selectedRide} selectedDate={selectedDate} />
+      )}
+      {fail && (
+        <SuccessModalNOT text={fail} setFail={setFail} />
       )}
     </div>
   );

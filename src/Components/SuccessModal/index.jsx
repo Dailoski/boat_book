@@ -171,6 +171,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
           {({ blob, url, loading, error }) => {
             return (
               <div className="modal-content">
+                <button style={{padding:"3px", fontSize:"18px", position: "relative", right:"-155px", top:"-37px", color: "black"}} onClick={() => setSuccess(false)}>close</button>
                 <p>Thank you for making a reservation!</p>
                 <Button variant="contained" onClick={() => window.open(url, "_blank")}>
                   OPEN TICKET
