@@ -76,12 +76,11 @@ const WrapperLogin = () => {
       >
         <section>
           <Form>
-            {/* <h1>STA DA PISE OVDE?</h1> */}
-            <Field  type="text" name="email" placeholder="Email" style={{    height: "44px", fontSize: "20px", width:"100%"}} />
+            <Field  type="text" name="email" placeholder="Email" style={{ backgroundColor: "white",    height: "44px", fontSize: "20px", width:"100%"}} />
             <p className="error-handle">
               <ErrorMessage name="email" />
             </p>
-            <Field type="password" name="password" placeholder="Password" style={{    height: "44px", fontSize: "20px", width:"100%"}} />
+            <Field type="password" name="password" placeholder="Password" style={{ backgroundColor: "white",   height: "44px", fontSize: "20px", width:"100%"}} />
             <p className="error-handle">
               <ErrorMessage name="password" />
             </p>

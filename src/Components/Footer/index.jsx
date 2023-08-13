@@ -3,10 +3,7 @@ import "./footer.scss"
 import { applicationContext } from '../../context'
 
 const Footer = () => {
-  const {userData} = useContext(applicationContext)
-  const awd = useContext(applicationContext)
-
-  console.log(awd)
+  const { userData } = useContext(applicationContext)
   return (
     <div className='div-footer'>
       {userData ? <><span>Reservation support:</span>  <a

@@ -8,7 +8,7 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
   const { allDocs, rides } = useContext(applicationContext);
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs?.filter((e) => e.data.boat === selectedBoat)
-      .map((e) => ({date: e.data.date, type: e.data.type}));
+      .map((e) => ({date: e.data.date, type: e.data.type, availableSeats:e.data.availableSeats}));
       
     setAvailableDates(dates);
     setSelectedDate(null)

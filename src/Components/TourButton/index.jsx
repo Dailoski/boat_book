@@ -5,16 +5,17 @@ import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { Button } from "@mui/material";
 
-export function TourButton({ isSelected, type, onClick, tourDate }) {
-  
+export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
+  isSelected = isSelected && !disabled;
   return (
     <>
       <Button
+      disabled={disabled}
         onClick={onClick}
         sx={
           isSelected
-            ? { margin: "12px 0px", border: "1px white solid" }
-            : { margin: "2px 0px" }
+            ? { margin: "12px 0px", border: "1px white solid", color: disabled ? "red !important" : "white" }
+            : { margin: "2px 0px", color: disabled ? "red !important" : "white" }
         }
         startIcon={isSelected ? <DoneOutlineIcon /> : null}
         size={isSelected ? "large" : "small"}
@@ -37,7 +38,7 @@ export function TourButton({ isSelected, type, onClick, tourDate }) {
           )
         }
       >
-        {type + " tour"}
+        {disabled ? "SOLD OUT" : type + " tour"}
         <br/>
         {tourDate}
       </Button>

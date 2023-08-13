@@ -1,6 +1,5 @@
 import React from "react";
 import "./successModal.scss";
-import { Button } from "@mui/material";
 // import Roboto from "typeface-roboto"
 
 const SuccessModal = ({ setFail, text  }) => {
@@ -14,7 +13,6 @@ const SuccessModal = ({ setFail, text  }) => {
                 <p>{text}</p>
 
               </div>
-            );
       </div>
     </div>
   );

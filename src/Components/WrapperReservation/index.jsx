@@ -115,7 +115,6 @@ const WrapperReservation = () => {
     const tourRef = doc(db, "tours", tour.id);
     const docSnap = await getDoc(tourRef)
     tour.data = docSnap.data()
-    console.log(docSnap.data())
     if((values.numberOfPassengers + values.preteens + values.children) > tour.data.availableSeats){
       const message = "This tour has " + tour.data.availableSeats + (tour.data.availableSeats === 1 ? " seat left" : " seats left");
       //alert(message)
@@ -186,11 +185,10 @@ const WrapperReservation = () => {
           ) : (
             filteredDates.map((obj, i) => {
               
-              const {date, type} = obj
-
+              const {date, type, availableSeats} = obj
               return (
 
-                <TourButton key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);setTimeout(() => {
+                <TourButton disabled={availableSeats === 0} key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);setTimeout(() => {
                   document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
                   }, 0);}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
               );
@@ -208,6 +206,7 @@ const WrapperReservation = () => {
             <Form className="res-form">
               <section>
                 <h2>
+                <p style={{color: "darkorange"}}> {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}</p>
                   Adults: <span>*</span>
                 </h2>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
@@ -224,7 +223,6 @@ const WrapperReservation = () => {
                   <AddIcon />
                 </Button>
                 </div>
-
                 <p className="error-handle">
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
@@ -276,7 +274,7 @@ const WrapperReservation = () => {
                   name="roomNumber"
                   placeholder="Number of room"
                   className="form-field"
-                  style={{    height: "44px", fontSize: "20px"}}
+                  style={{  backgroundColor: "white",  height: "44px", fontSize: "20px"}}
                 />
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
@@ -328,7 +326,7 @@ const WrapperReservation = () => {
                 <Button variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
-              </section>xa
+              </section>
             </Form>
           )}
         </Formik>

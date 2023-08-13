@@ -84,6 +84,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       color: "blue",
     },
     scanqr: {
+      color: "red",
       fontFamily: "Helvetica-Bold",
       fontSize: "12px",
       position: "absolute",
