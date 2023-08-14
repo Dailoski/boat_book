@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 
 export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
   isSelected = isSelected && !disabled;
+  console.log(disabled)
   return (
     <>
       <Button

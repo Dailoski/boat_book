@@ -3,15 +3,15 @@ import { applicationContext } from "../../context";
 
 import "./choose-boat.scss";
 
-const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelectedDate }) => {
+const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelectedId}) => {
   
   const { allDocs, rides } = useContext(applicationContext);
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs?.filter((e) => e.data.boat === selectedBoat)
-      .map((e) => ({date: e.data.date, type: e.data.type, availableSeats:e.data.availableSeats}));
+      .map((e) => ({id: e.id, date: e.data.date, type: e.data.type, availableSeats:e.data.availableSeats}));
       
     setAvailableDates(dates);
-    setSelectedDate(null)
+    setSelectedId(null)
     setSelectedRide(()=>rides.find((e)=>selectedBoat === e.id))
     setTimeout(() => {
     document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });

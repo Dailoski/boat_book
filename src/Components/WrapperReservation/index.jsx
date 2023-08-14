@@ -18,7 +18,6 @@ import { TourButton } from "../TourButton";
 
 const WrapperReservation = () => {
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
   const { allDocs, user, freshData, setFreshData } = useContext(applicationContext);
   const reservationInfo = {
     id: "",
@@ -36,7 +35,7 @@ const WrapperReservation = () => {
   });
   const dateFormat = "D-M-YYYY H:m";
   const [availableDates, setAvailableDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
   const [selectedRide, setSelectedRide] = useState(null);
   
   const today = new Date();
@@ -57,7 +56,7 @@ const WrapperReservation = () => {
     (e) => e.data.boat === selectedRide?.id
   );
 
-  const selectedTour = selectedBoat?.find((e) => e.data.date === selectedDate);
+  const selectedTour = selectedBoat?.find((e) => e.id === selectedId);
   const prices = {
     adults: selectedRide?.data.prices.adults,
     preteens: selectedRide?.data.prices.preteens,
@@ -125,7 +124,7 @@ const WrapperReservation = () => {
     setTicketInfo({
       ...ticketInfo,
       boat: selectedRide.data.name,
-      date: selectedDate,
+      date: tour.data.date,
       numberOfPassengers: values.numberOfPassengers,
       roomNumber: values.roomNumber,
       phoneNumber: values.phoneNumber,
@@ -160,7 +159,6 @@ const WrapperReservation = () => {
     resetForm();
     setSuccess(true);
     setFreshData(!freshData);
-    // setSelectedDate(null);
 
   };
   return (
@@ -169,7 +167,7 @@ const WrapperReservation = () => {
         setAvailableDates={setAvailableDates}
         selectedRide={selectedRide}
         setSelectedRide={setSelectedRide}
-        setSelectedDate={setSelectedDate}
+        setSelectedId={setSelectedId}
       />
       {(selectedRide && filteredDates.length !== 0)  &&
       <h2 className="tour-title">
@@ -185,12 +183,13 @@ const WrapperReservation = () => {
           ) : (
             filteredDates.map((obj, i) => {
               
-              const {date, type, availableSeats} = obj
+              const {date, type, availableSeats, id} = obj
+              console.log(obj)
               return (
 
-                <TourButton disabled={availableSeats === 0} key={i} onClick={() => {setSelectedIndex(i); setSelectedDate(date);setTimeout(() => {
+                <TourButton disabled={availableSeats === 0} key={i} onClick={() => {setSelectedId(id); setTimeout(() => {
                   document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
-                  }, 0);}} isSelected={selectedIndex === i} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
+                  }, 0);}} isSelected={selectedId === id} tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")} type={type}/>
               );
             })
           )}
@@ -332,7 +331,7 @@ const WrapperReservation = () => {
         </Formik>
       )}
       {success && (
-        <SuccessModal setSuccess={setSuccess} ticketInfo={ticketInfo} selectedRide={selectedRide} selectedDate={selectedDate} />
+        <SuccessModal setSuccess={setSuccess} ticketInfo={ticketInfo} selectedRide={selectedRide} />
       )}
       {fail && (
         <SuccessModalNOT text={fail} setFail={setFail} />
