@@ -25,8 +25,6 @@ const WrapperReservation = () => {
     numberOfPassengers: 0,
     children: 0,
     preteens: 0,
-    phoneNumber: "",
-    isPaid: false,
   };
   const [ticketInfo, setTicketInfo] = useState({
     boat: "",
@@ -88,6 +86,7 @@ const WrapperReservation = () => {
       setFieldValue("preteens", values.preteens - 1);
     }
   };
+
   const validationSchema = (tour) =>
     yup.object().shape({
       roomNumber: yup
@@ -107,13 +106,18 @@ const WrapperReservation = () => {
         .number()
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
-
+      isPaid: yup
+        .mixed("majmune")
+        .required("majmune")
+        
     });
   const handleSubmit = async(values, { resetForm }) => {
     const tour = selectedTour;
     const tourRef = doc(db, "tours", tour.id);
     const docSnap = await getDoc(tourRef)
     tour.data = docSnap.data()
+    console.log(values.isPaid)
+    console.log(typeof values.isPaid)
     if((values.numberOfPassengers + values.preteens + values.children) > tour.data.availableSeats){
       const message = "This tour has " + tour.data.availableSeats + (tour.data.availableSeats === 1 ? " seat left" : " seats left");
       //alert(message)
@@ -127,7 +131,6 @@ const WrapperReservation = () => {
       date: tour.data.date,
       numberOfPassengers: values.numberOfPassengers,
       roomNumber: values.roomNumber,
-      phoneNumber: values.phoneNumber,
       children: values.children,
       preteens: values.preteens,
       ticketPrice:
@@ -147,7 +150,6 @@ const WrapperReservation = () => {
         children: values.children,
         preteens: values.preteens,
         roomNumber: values.roomNumber,
-        phoneNumber: values.phoneNumber,
         isPaid: values.isPaid,
         ticketPrice:
           values.numberOfPassengers * prices.adults +
@@ -170,9 +172,9 @@ const WrapperReservation = () => {
         setSelectedId={setSelectedId}
       />
       {(selectedRide && filteredDates.length !== 0)  &&
-      <h2 className="tour-title">
+      <h3 className="tour-title">
       Select day/date/time: <span>*</span>
-    </h2>}
+    </h3>}
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
           {(filteredDates.length === 0 && selectedRide) ? (
@@ -184,7 +186,6 @@ const WrapperReservation = () => {
             filteredDates.map((obj, i) => {
               
               const {date, type, availableSeats, id} = obj
-              console.log(obj)
               return (
 
                 <TourButton disabled={availableSeats === 0} key={i} onClick={() => {setSelectedId(id); setTimeout(() => {
@@ -204,10 +205,12 @@ const WrapperReservation = () => {
           {({ values, setFieldValue }) => (
             <Form className="res-form">
               <section>
-                <h2>
-                <p style={{color: "darkorange"}}> {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}</p>
+              <Button sx={{fontWeight:"bold", color:"yellow"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
+              {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}
+                </Button>
+                <h3>
                   Adults: <span>*</span>
-                </h2>
+                </h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Button size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -226,7 +229,7 @@ const WrapperReservation = () => {
                   <ErrorMessage name="numberOfPassengers" />
                 </p>
               
-                <h2>Kids 8-12 years:</h2>
+                <h3>Kids 8-12 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Button size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -241,11 +244,7 @@ const WrapperReservation = () => {
                   <AddIcon />
                 </Button>
                 </div>
-
-                <p className="error-handle">
-                  <ErrorMessage name="preteens" />
-                </p>
-                <h2>Kids 0-7 years:</h2>
+                <h3>Kids 0-7 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
                 <Button size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
@@ -261,13 +260,9 @@ const WrapperReservation = () => {
                 </Button>
                 </div>
 
-
-                <p className="error-handle">
-                  <ErrorMessage name="children" />
-                </p>
-                <h2>
-                  Room number or name<span>*</span>
-                </h2>
+                <h3>
+                  Room number or name: <span>*</span>
+                </h3>
                 <Field
                   type="text"
                   name="roomNumber"
@@ -278,19 +273,32 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
                 </p>
-                {/* <h2>Phone number</h2>
-                  <label className="joke">
-                  <Field
-                    type="number"
-                    name="phoneNumber"
-                    placeholder="Your phone number"
-                  />
-              
-                </label> */}
-                <p className="error-handle">
-                  <ErrorMessage name="phoneNumber" />
-                </p>
-                <p style={{ fontSize: "1.2em" }}>
+
+                <h3>
+                  Payment method: <span>*</span>
+                </h3>
+                <Field className="radio-group" component="div" name="isPaid">
+                  <label htmlFor="radioOne">
+                    Paid in cash
+                    <Field
+                      type="radio"
+                      id="radioOne"
+                      name="isPaid"
+                      value="true"
+                    />
+                  </label>
+                  <label style={{color: "red"}} htmlFor="radioTwo">
+                    Not paid
+                    <Field
+                      type="radio"
+                      id="radioTwo"
+                      name="isPaid"
+                      value="false"
+                    />
+                  </label>
+
+                </Field>
+                <p style={{ fontSize: "1.2em"}}>
                   {"Total price: " +
                     parseInt(
                       values.numberOfPassengers * prices.adults +
@@ -299,30 +307,7 @@ const WrapperReservation = () => {
                     ) +
                     " din."}
                 </p>
-                <Field className="radio-group" component="div" name="isPaid">
-                  <label htmlFor="radioOne">
-                    Paid in cash
-                    <input
-                      type="radio"
-                      id="radioOne"
-                      
-                      name="isPaid"
-                      value="true"
-                    />
-                  </label>
-                  <label style={{color: "red"}} htmlFor="radioTwo">
-                    Not Paid
-                    <input
-                      defaultChecked="radioOne"
-                      type="radio"
-                      id="radioTwo"
-                      name="isPaid"
-                      value="false"
-                    />
-                  </label>
-                </Field>
-
-                <Button variant="contained"   type="submit" size="large">
+                <Button sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
               </section>

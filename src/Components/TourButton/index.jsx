@@ -7,7 +7,6 @@ import { Button } from "@mui/material";
 
 export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
   isSelected = isSelected && !disabled;
-  console.log(disabled)
   return (
     <>
       <Button
@@ -15,8 +14,8 @@ export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
         onClick={onClick}
         sx={
           isSelected
-            ? { margin: "12px 0px", border: "1px white solid", color: disabled ? "red !important" : "white" }
-            : { margin: "2px 0px", color: disabled ? "red !important" : "white" }
+            ? { fontWeight:"bold", margin: "12px 0px", border: "1px white solid", color: disabled ? "red !important" : "white" }
+            : { fontWeight:"bold", margin: "2px 0px", color: disabled ? "red !important" : "white" }
         }
         startIcon={isSelected ? <DoneOutlineIcon /> : null}
         size={isSelected ? "large" : "small"}

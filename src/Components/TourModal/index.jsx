@@ -69,7 +69,8 @@ const TourModal = ({ handleClose, clickedTour }) => {
                 </div>
                 <div className="modal-content">
                   <h5>Is Paid:</h5>
-                  <p>{e.isPaid === true ? "paid" : "not paid"}</p>
+                  {console.log(typeof e.isPaid)}
+                  <p>{JSON.parse(e.isPaid) === true ? "paid" : "not paid"}</p>
                 </div>
                 <div className="modal-content">
                   <h5>Phone number:</h5>
