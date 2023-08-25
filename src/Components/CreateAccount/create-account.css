@@ -1,5 +1,5 @@
 .div-create-account {
-  background: linear-gradient(90deg, rgb(46, 40, 94), rgb(49, 190, 200));
+  background: #223381;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,8 @@
 }
 .div-create-account section input {
   margin-top: 15px;
+  width: 100%;
+  font-size: 20px;
   padding: 5px;
 }
 .div-create-account section h1 {

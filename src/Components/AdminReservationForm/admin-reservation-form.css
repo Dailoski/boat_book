@@ -1,13 +1,13 @@
 .div-admin-res {
   height: 100%;
-  background: linear-gradient(90deg, rgb(46, 40, 94), rgb(49, 190, 200));
+  background: #223381;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #fff;
 }
 .div-admin-res h3 {
-  padding: 10px 0;
+  padding: 7px 0;
 }
 .div-admin-res section {
   width: 100%;
@@ -16,7 +16,7 @@
   padding: 10px;
   border-radius: 10px;
   background: rgb(176, 227, 231);
-  background: linear-gradient(90deg, rgb(0, 0, 0) 100%, rgb(49, 190, 200) 100%);
+  background: black;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -43,6 +43,7 @@
 }
 
 .form-field {
+  background-color: white;
   padding: 2px;
 }
 
@@ -55,9 +56,9 @@
 
 .submit-btn {
   margin-top: 10px;
-  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(31, 30, 142) 100%);
+  font-size: 25px;
   color: #fff;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
 }
 
@@ -66,7 +67,7 @@
   flex-direction: column;
   padding: 0 !important;
   margin-top: 0 !important;
-  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(0, 0, 0) 100%);
+  background: black;
 }
 
 .plus-minus {

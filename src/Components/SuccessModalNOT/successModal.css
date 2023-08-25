@@ -10,29 +10,27 @@
   justify-content: center;
   width: 60%;
 }
-.successModal .modal-content {
-  background-color: rgb(150, 174, 253);
+.successModal .modal-content-red {
+  background-color: red;
   border-radius: 10px;
   padding: 20px;
   font-weight: 600;
-  color: rgb(17, 32, 117);
+  color: white;
   text-align: center;
   display: flex;
   flex-direction: column;
 }
-.successModal .modal-content p {
+.successModal .modal-content-red p {
   font-size: 20px;
   margin-bottom: 15px;
 }
-.successModal .modal-content a {
+.successModal .modal-content-red a {
   color: black;
 }
-.successModal .modal-content button {
+.successModal .modal-content-red button {
   margin-top: 15px;
   padding: 5px;
   cursor: pointer;
-  color: darkblue;
-  background-color: white;
   border: 1px solid darkblue;
   border-radius: 5px;
   font-weight: 600;

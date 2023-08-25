@@ -23,6 +23,7 @@ const App = () => {
   const [allDocs, setAllDocs] = useState([]);
   const [rides, setAllRides] = useState([]);
 
+
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tours");
