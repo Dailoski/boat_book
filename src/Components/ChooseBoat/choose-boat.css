@@ -32,12 +32,23 @@
 
 .choose-boat {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  justify-content: space-between;
+  gap: 40px;
+  justify-content: center;
 }
 .choose-boat img {
   width: 80%;
   cursor: pointer;
+  border-radius: 10%;
+  border: 2px solid white;
+}
+@media screen and (min-width: 600px) {
+  .choose-boat img {
+    width: 30%;
+    cursor: pointer;
+    border-radius: 10%;
+    border: 2px solid white;
+  }
 }/*# sourceMappingURL=choose-boat.css.map */

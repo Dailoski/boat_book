@@ -10,7 +10,8 @@ import DatePickerField from "../DatePickerField";
 import "./admin-reservation-form.scss";
 import { Button } from "@mui/material";
 
-const AdminReservationForm = () => {
+
+const AdminReservationForm = ({setModalIsOpen}) => {
   const { setFreshData, freshData, rides } = useContext(applicationContext);
   const tourRef = useRef(null);
   const d = new Date();
@@ -86,6 +87,8 @@ const AdminReservationForm = () => {
           <Form>
             <section className="admin-res">
               <h4>Tour:</h4>
+              <Button variant="text" onClick={() => {setModalIsOpen(true);}}>+ ADD NEW</Button>
+              
               {rides.map((data, i) => (
                 <label key={i}>
                   <p>{data.id }</p>
@@ -131,6 +134,7 @@ const AdminReservationForm = () => {
           </Form>
         )}
       </Formik>
+      
     </div>
   );
 };

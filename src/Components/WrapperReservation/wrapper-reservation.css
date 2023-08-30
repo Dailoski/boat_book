@@ -1,13 +1,13 @@
 .div-WrapperReservation {
   flex-grow: 1;
-  background: linear-gradient(90deg, rgb(46, 40, 94), rgb(49, 190, 200));
+  background-color: #223381;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #fff;
 }
 .div-WrapperReservation h3 {
-  padding: 10px 0;
+  padding: 7px 0;
 }
 .div-WrapperReservation .tour-title {
   padding: 10px 0;
@@ -22,25 +22,28 @@
   padding: 10px;
   border-radius: 10px;
   background: rgb(176, 227, 231);
-  background: linear-gradient(90deg, rgb(0, 0, 0) 100%, rgb(49, 190, 200) 100%);
+  background: black;
   color: #fff;
   display: flex;
   flex-direction: column;
-
+  width: 82vw;
 }
-@media screen and (min-width: 600px){
-.div-WrapperReservation section {
-  width: 300px;
-}
+@media screen and (min-width: 600px) {
+  .div-WrapperReservation section {
+    width: 400px;
+  }
 }
 .div-WrapperReservation section span {
   color: red;
 }
-.div-WrapperReservation section h4 {
+.div-WrapperReservation section h2 {
   padding: 10px 0;
 }
 .div-WrapperReservation section h6 {
   padding: 5px 0;
+}
+.div-WrapperReservation section .radio-group {
+  margin-bottom: 10px;
 }
 .div-WrapperReservation section label {
   display: flex;
@@ -49,6 +52,7 @@
   color: #000000;
   margin-top: 5px;
   padding: 5px;
+  font-size: x-large;
   cursor: pointer;
 }
 .div-WrapperReservation section label input[type=radio] {
@@ -56,23 +60,16 @@
 }
 
 .form-field {
+  background-color: white;
   padding: 2px;
 }
 
 .error-handle {
   font-size: 18px;
   color: red;
-  height: 10=8px;
+  height: 10px;
   padding: 5px;
 }
-
-/* .submit-btn {
-  margin-top: 10px;
-  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgb(31, 30, 142) 100%);
-  color: #fff;
-  padding: 5px;
-  cursor: pointer;
-} */
 
 .joke {
   display: flex;
@@ -93,6 +90,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (min-width: 600px) {
+  .dateWrapper > div {
+    width: 400px;
+  }
 }
 .dateWrapper > div div {
   width: 80%;
