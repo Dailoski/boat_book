@@ -5,7 +5,7 @@ import { applicationContext } from "../../context";
 import * as yup from "yup";
 import dayjs from "dayjs";
 import { db } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import DatePickerField from "../DatePickerField";
 import "./admin-reservation-form.scss";
 import { Button } from "@mui/material";
@@ -42,13 +42,24 @@ const AdminReservationForm = () => {
     const dateRange = getDates(values.date);
     const selectedRide = rides.find((e) => e.id === values.boat);
     dateRange.forEach((singleDate) => {
-      addDoc(collection(db, "tours"), {
-        boat: values.boat,
-        date: `${singleDate}`,
-        availableSeats: selectedRide.data.totalSeats,
-        reservations: [],
-        type: values.type
-      });
+      console.log(typeof singleDate)
+      const tourID = `${values.boat}-${singleDate.replace(" ", "-")}-${Math.floor(Math.random() * 1000000000)}`
+      const docRef = doc(db, "tours", "" + tourID );
+      setDoc(docRef, 
+        {
+          boat: values.boat,
+          date: `${singleDate}`,
+          availableSeats: selectedRide.data.totalSeats,
+          reservations: [],
+          type: values.type
+        })
+      // addDoc(collection(db, "tours"), {
+      //   boat: values.boat,
+      //   date: `${singleDate}`,
+      //   availableSeats: selectedRide.data.totalSeats,
+      //   reservations: [],
+      //   type: values.type
+      // });
     });
     setTimeout(() => {
       document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });

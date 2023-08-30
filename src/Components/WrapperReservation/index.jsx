@@ -5,7 +5,7 @@ import ChooseBoat from "../ChooseBoat";
 import SuccessModal from "../SuccessModal";
 import SuccessModalNOT from "../SuccessModalNOT";
 import { applicationContext } from "../../context";
-import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
@@ -124,7 +124,27 @@ const WrapperReservation = () => {
       setFail(message)
       return
     }
-    const random = Math.floor(Math.random() * 1000000000);
+    const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    const cardID = genRanHex(6)
+    const docRef = doc(db, "cards", "" + cardID );
+
+    setDoc(docRef,{
+      ...ticketInfo,
+      boat: selectedRide.data.name,
+      date: tour.data.date,
+      numberOfPassengers: values.numberOfPassengers,
+      roomNumber: values.roomNumber,
+      children: values.children,
+      preteens: values.preteens,
+      ticketPrice:
+        values.numberOfPassengers * prices.adults +
+        values.preteens * prices.preteens +
+        values.children * prices.children,
+      isPaid: values.isPaid,     
+      id: cardID,
+      userEmail: user,
+      tourID: tourRef.id
+    });
     setTicketInfo({
       ...ticketInfo,
       boat: selectedRide.data.name,
@@ -138,13 +158,14 @@ const WrapperReservation = () => {
         values.preteens * prices.preteens +
         values.children * prices.children,
       isPaid: values.isPaid,
-    });
+    })
+    ;
     updateDoc(tourRef, {
       availableSeats:
         tour.data.availableSeats -
         (values.numberOfPassengers + values.preteens + values.children),
       reservations: arrayUnion({
-        id: random,
+        id: cardID,
         userEmail: user,
         numberOfPassengers: values.numberOfPassengers,
         children: values.children,
