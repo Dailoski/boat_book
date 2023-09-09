@@ -26,7 +26,7 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
     <div className="div-choose-boat">
       <h4>Click on tour photo to make reservation now</h4>
       <div className="choose-boat">
-      {filteredRItes.map(
+      {/* {filteredRItes.map(
         ride => (
           <img
           onClick={() => handleImageClick(ride.id)}
@@ -34,6 +34,33 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
           alt={ride.data.name}
           key={ride.id}
         />
+        )
+      )} */}
+      {filteredRItes.map(
+        ride => (
+          <div onClick={() => handleImageClick(ride.id)} className="card">
+            <img
+          src={ride.data.image}
+          alt={ride.data.name}
+          key={ride.id}
+        />
+        <hr/>
+        <h2>{ride.data.name}</h2>
+        <h3>Google rating: 4.7 <span style={{color:"yellow"}}>{[...Array(Math.round(4.7))].map(()=>{return <>&#9733;</>})}</span> </h3>
+        <hr/>
+        <div className="tour-desc">
+          {[{img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},
+          {img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},
+          {img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},].map(e=>{
+            return(
+              <div>
+              <img src={`${process.env.PUBLIC_URL}/icons/${e.img}`} />
+              <p>{e.text}</p>
+            </div>
+            )
+          })}
+        </div>
+          </div>
         )
       )}
         {/* <img
