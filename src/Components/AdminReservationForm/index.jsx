@@ -104,7 +104,7 @@ const AdminReservationForm = () => {
                 onChange={setFieldValue}
               />
               <h4>Type:</h4>
-              {["daytime", "sunset", "night"].map((type, i) => (
+              {["daytime", "sunset", "night", "half day", "full day"].map((type, i) => (
                 <label key={i}>
                   <p>{type}</p>
                   <Field

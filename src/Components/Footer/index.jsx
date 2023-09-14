@@ -8,7 +8,7 @@ const Footer = () => {
     <div className='div-footer'>
       {userData ? <><span>Reservation support:</span>  <a
         href="tel:0693339696"
-        style={{padding: "10px", paddingTop: "13px", backgroundColor:"#223381", borderRadius:"7px"}}
+        style={{padding: "10px", paddingTop: "13px", backgroundColor:"#4120D8", borderRadius:"7px"}}
         target="_blank"
         rel="noreferrer">
         0693339696

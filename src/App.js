@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ApplicationProvider } from "./context";
 import { db } from "./firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, setDoc, doc } from "firebase/firestore";
 import LoginPage from "./Pages/LoginPage";
 import NoInternetConnection from "./Components/NoInternet";
 import ReservationPage from "./Pages/ReservationPage";
@@ -38,7 +38,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchAllRides = async () => {
-      const collectionRef = collection(db, "rides");
+      const collectionRef = collection(db, "tour-types");
       const querySnapshot = await getDocs(collectionRef);
       const ridesData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -48,6 +48,33 @@ const App = () => {
     };
     fetchAllRides();
   }, []);
+
+//   useEffect(() => {
+//     const docRef = doc(db, "tour-types", "turtle-boat");
+//     setDoc(docRef,{
+// image:"https://firebasestorage.googleapis.com/v0/b/boat-book.appspot.com/o/images%2Fturtle.jpg?alt=media&token=627a95bb-8267-4eba-9224-4a6bf8b372f4",
+// isAvailable:true,
+// meetinPoint:"In front of your hotel",
+// name:"Turtle Boat",
+// position:1,
+// rating: 4.8,
+// prices:{
+// adults:3000,
+// children:3000,
+// preteens:3000,
+
+// },
+// desc: [
+//   {img: "guide.svg", text:"live tour guide"},
+//   {img: "no-gift.svg", text:"unlimited soft drinks"},
+//   {img: "time.svg", text:"1h 30 minutes"},
+//   {img: "no-card.svg", text:"only cash"},
+//   {img: "distance.svg", text:"15km round trip"},
+//   {img: "cash.svg", text:"3000 dinars 25 euro"},
+// ],
+// totalSeats:120,
+//     })
+//   }, []);
 
   const logOut = () => {
     setAccessToken("");

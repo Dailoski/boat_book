@@ -24,7 +24,6 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
   const filteredRItes = sortedRides.filter(a => a.data.isAvailable)
   return (
     <div className="div-choose-boat">
-      <h4>Click on tour photo to make reservation now</h4>
       <div className="choose-boat">
       {/* {filteredRItes.map(
         ride => (
@@ -38,7 +37,11 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
       )} */}
       {filteredRItes.map(
         ride => (
-          <div onClick={() => handleImageClick(ride.id)} className="card">
+          <div className="card-and-buttons">
+
+          <div className="card">
+        <img className="pointer" style={{width:"80px", position:"absolute"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} />
+
             <img
           src={ride.data.image}
           alt={ride.data.name}
@@ -46,20 +49,25 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
         />
         <hr/>
         <h2>{ride.data.name}</h2>
-        <h3>Google rating: 4.7 <span style={{color:"yellow"}}>{[...Array(Math.round(4.7))].map(()=>{return <>&#9733;</>})}</span> </h3>
+        <h3>Google rating: {ride.data.rating} <span style={{color:"#F9992E"}}>{[...Array(Math.round(ride.data.rating))].map(()=>{return <>&#9733;</>})}</span> </h3>
         <hr/>
         <div className="tour-desc">
-          {[{img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},
-          {img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},
-          {img:"guide.svg", text:"LIVE TOUR  GUIDE"},{img:"guide.svg", text:"LIVE TOUR  GUIDE"},].map(e=>{
+          {ride.data.desc.map(e=>{
             return(
               <div>
               <img src={`${process.env.PUBLIC_URL}/icons/${e.img}`} />
-              <p>{e.text}</p>
+              <p dangerouslySetInnerHTML={{ __html: e.text }}></p>
             </div>
             )
           })}
         </div>
+          </div>
+          <div >
+          {/* <img style={{width:"100%"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} /> */}
+          <img className="pointer" onClick={() => handleImageClick(ride.id)}  style={{width:"80%", margin:"15px auto", display:"block"}} src={`${process.env.PUBLIC_URL}/book.svg`} />
+          </div>
+         
+
           </div>
         )
       )}
