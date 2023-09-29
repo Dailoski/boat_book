@@ -118,8 +118,14 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       fontFamily: "Helvetica-Bold",
       textTransform: "uppercase",
       fontSize: "14px",
-      color: 'red',
+      color: 'green',
     },
+    notPaid: {
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "14px",
+      color: 'red',
+    }
   });
   const Tiketino = (
     <Document>
@@ -145,8 +151,8 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
             <View style={styles.halfp}>
               <Text style={styles.passengersTitle}>Adults:</Text>
               <Text style={styles.passengersText}>{ticketInfo.numberOfPassengers} passengers</Text>
-              <Text style={styles.isPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash:" : "Not paid:"}</Text> 
-              <Text style={styles.isPaid}>{ticketInfo.ticketPrice + " dinars"}</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash:" : "Not paid:"}</Text> 
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{ticketInfo.ticketPrice + " dinars"}</Text>
             </View>
 
             <View style={styles.halfp}>

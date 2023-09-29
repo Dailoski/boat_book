@@ -49,10 +49,11 @@ const App = () => {
     fetchAllRides();
   }, []);
 
+
 //   useEffect(() => {
 //     const docRef = doc(db, "tour-types", "turtle-boat");
 //     setDoc(docRef,{
-// image:"https://firebasestorage.googleapis.com/v0/b/boat-book.appspot.com/o/images%2Fturtle.jpg?alt=media&token=627a95bb-8267-4eba-9224-4a6bf8b372f4",
+// image:"https://firebasestorage.googleapis.com/v0/b/boat-book.appspot.com/o/images%2Fturtle.jpg?alt=media&token=c2e1d4cf-0f3c-4b67-b5c8-0c88f9fc0875",
 // isAvailable:true,
 // meetinPoint:"In front of your hotel",
 // name:"Turtle Boat",
@@ -67,10 +68,10 @@ const App = () => {
 // desc: [
 //   {img: "guide.svg", text:"live tour guide"},
 //   {img: "no-gift.svg", text:"unlimited soft drinks"},
-//   {img: "time.svg", text:"1h 30 minutes"},
+//   {img: "time.svg", text:"1 hour 30 minutes"},
 //   {img: "no-card.svg", text:"only cash"},
-//   {img: "distance.svg", text:"15km round trip"},
-//   {img: "cash.svg", text:"3000 dinars 25 euro"},
+//   {img: "distance.svg", text:"15 km round trip"},
+//   {img: "cash.svg", text:"3000 dinars <br> 25 euro"},
 // ],
 // totalSeats:120,
 //     })

@@ -106,10 +106,6 @@ const WrapperReservation = () => {
         .number()
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
-      isPaid: yup
-        .mixed("majmune")
-        .required("majmune")
-        
     });
   const handleSubmit = async(values, { resetForm }) => {
     const tour = selectedTour;
@@ -173,9 +169,13 @@ const WrapperReservation = () => {
         roomNumber: values.roomNumber,
         isPaid: values.isPaid,
         ticketPrice:
-          values.numberOfPassengers * prices.adults +
-          values.preteens * prices.preteens +
-          values.children * prices.children,
+          values.promoCode ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+              values.preteens * (prices.preteens - (prices.preteens && 500)) +
+              values.children * (prices.children - (prices.children && 500) )
+            :
+            values.numberOfPassengers * (prices.adults) +
+              values.preteens * prices.preteens +
+              values.children * prices.children,
       }),
     });
     // setSelectedRide(null);
@@ -199,10 +199,10 @@ const WrapperReservation = () => {
       <div className="dateWrapper">
         <div className="dateWrapperScroll">
           {(filteredDates.length === 0 && selectedRide) ? (
-            <>
-              <p>Sorry, there are no </p>
-              <p>tours in this week.</p>
-            </>
+            <div style={{backgroundColor: "red", padding: "20px", color: "white"}}>
+              <p style={{color: "white"}}>Sorry, there are no </p>
+              <p style={{color: "white"}}>tours in this week.</p>
+            </div>
           ) : (
             filteredDates.map((obj, i) => {
               
@@ -284,6 +284,7 @@ const WrapperReservation = () => {
                 <h3>
                   Room number or name: <span>*</span>
                 </h3>
+
                 <Field
                   type="text"
                   name="roomNumber"
@@ -294,7 +295,20 @@ const WrapperReservation = () => {
                 <p className="error-handle">
                   <ErrorMessage name="roomNumber" />
                 </p>
-
+            
+                {/* <h3>
+                  Promo Code: <span>*</span>
+                </h3> */}
+                <Field className="checkbox" component="div" name="promoCode">
+                  <label htmlFor="promoCode">
+                    Promo Code
+                    <Field
+                      type="checkbox"
+                      id="promoCode"
+                      name="promoCode"
+                    />
+                  </label>
+                </Field>
                 <h3>
                   Payment method: <span>*</span>
                 </h3>
@@ -319,14 +333,27 @@ const WrapperReservation = () => {
                   </label>
 
                 </Field>
+                {console.log(values.promoCode)}
                 <p style={{ fontSize: "1.2em"}}>
-                  {"Total price: " +
-                    parseInt(
-                      values.numberOfPassengers * prices.adults +
+                  Total price: {values.promoCode ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+                        values.preteens * (prices.preteens - (prices.preteens && 500)) +
+                        values.children * (prices.children - (prices.children && 500) )
+                      :
+                      values.numberOfPassengers * (prices.adults) +
+                        values.preteens * prices.preteens +
+                        values.children * prices.children}
+
+                  {/* {"Total price: " +
+                    values.promoCode ? parseInt(
+                      values.numberOfPassengers * (prices.adults - 600) +
                         values.preteens * prices.preteens +
                         values.children * prices.children
-                    ) +
-                    " din."}
+                    ) : parseInt(
+                      values.numberOfPassengers * (prices.adults + 200) +
+                        values.preteens * (prices.preteens + 200) +
+                        values.children * prices.children
+                    )  +
+                    " din." } */}
                 </p>
                 <Button sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
                   Book now

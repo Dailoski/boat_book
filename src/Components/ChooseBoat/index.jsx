@@ -64,7 +64,13 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
           </div>
           <div >
           {/* <img style={{width:"100%"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} /> */}
+          {ride.data.external ? 
+          <img className="pointer"  style={{width:"80%", margin:"15px auto", display:"block"}} src={`${process.env.PUBLIC_URL}/wa.svg`} />
+          :
           <img className="pointer" onClick={() => handleImageClick(ride.id)}  style={{width:"80%", margin:"15px auto", display:"block"}} src={`${process.env.PUBLIC_URL}/book.svg`} />
+
+        }
+
           </div>
          
 
