@@ -15,6 +15,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Button from '@mui/material/Button';
 import { TourButton } from "../TourButton";
 
+const  EUR  = 118
 
 const WrapperReservation = () => {
 
@@ -25,6 +26,7 @@ const WrapperReservation = () => {
     numberOfPassengers: 0,
     children: 0,
     preteens: 0,
+    promoCode: false
   };
   const [ticketInfo, setTicketInfo] = useState({
     boat: "",
@@ -112,8 +114,7 @@ const WrapperReservation = () => {
     const tourRef = doc(db, "tours", tour.id);
     const docSnap = await getDoc(tourRef)
     tour.data = docSnap.data()
-    console.log(values.isPaid)
-    console.log(typeof values.isPaid)
+    
     if((values.numberOfPassengers + values.preteens + values.children) > tour.data.availableSeats){
       const message = "This tour has " + tour.data.availableSeats + (tour.data.availableSeats === 1 ? " seat left" : " seats left");
       //alert(message)
@@ -132,6 +133,7 @@ const WrapperReservation = () => {
       roomNumber: values.roomNumber,
       children: values.children,
       preteens: values.preteens,
+      prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
         values.preteens * prices.preteens +
@@ -149,10 +151,20 @@ const WrapperReservation = () => {
       roomNumber: values.roomNumber,
       children: values.children,
       preteens: values.preteens,
+      promoCode: values.promoCode,
+      prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
         values.preteens * prices.preteens +
         values.children * prices.children,
+      priceWithDiscount: 
+      values.promoCode ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+      values.preteens * (prices.preteens - (prices.preteens && 250)) +
+      values.children * (prices.children - (prices.children && 250) )
+    :
+    values.numberOfPassengers * (prices.adults) +
+      values.preteens * prices.preteens +
+      values.children * prices.children,
       isPaid: values.isPaid,
     })
     ;
@@ -168,10 +180,11 @@ const WrapperReservation = () => {
         preteens: values.preteens,
         roomNumber: values.roomNumber,
         isPaid: values.isPaid,
+        promoCode: values.promoCode,
         ticketPrice:
           values.promoCode ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
-              values.preteens * (prices.preteens - (prices.preteens && 500)) +
-              values.children * (prices.children - (prices.children && 500) )
+              values.preteens * (prices.preteens - (prices.preteens && 250)) +
+              values.children * (prices.children - (prices.children && 250) )
             :
             values.numberOfPassengers * (prices.adults) +
               values.preteens * prices.preteens +
@@ -226,14 +239,14 @@ const WrapperReservation = () => {
           {({ values, setFieldValue }) => (
             <Form className="res-form">
               <section>
-              <Button sx={{fontWeight:"bold", color:"yellow"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
+              <Button sx={{fontWeight:"bold", color:"yellow", backgroundColor:"#4120D8"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
               {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}
                 </Button>
                 <h3>
                   Adults: <span>*</span>
                 </h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}}  size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -242,7 +255,7 @@ const WrapperReservation = () => {
                   name="numberOfPassengers"
                   disabled
                 />
-                <Button size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -252,7 +265,7 @@ const WrapperReservation = () => {
               
                 <h3>Kids 8-12 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -261,13 +274,13 @@ const WrapperReservation = () => {
                   name="preteens"
                   disabled
                 />
-                <Button size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
                 <h3>Kids 0-7 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -276,7 +289,7 @@ const WrapperReservation = () => {
                   name="children"
                   disabled
                 />
-                <Button size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -301,7 +314,7 @@ const WrapperReservation = () => {
                 </h3> */}
                 <Field className="checkbox" component="div" name="promoCode">
                   <label htmlFor="promoCode">
-                    Promo Code
+                    Promo
                     <Field
                       type="checkbox"
                       id="promoCode"
@@ -336,12 +349,12 @@ const WrapperReservation = () => {
                 {console.log(values.promoCode)}
                 <p style={{ fontSize: "1.2em"}}>
                   Total price: {values.promoCode ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
-                        values.preteens * (prices.preteens - (prices.preteens && 500)) +
-                        values.children * (prices.children - (prices.children && 500) )
+                        values.preteens * (prices.preteens - (prices.preteens && 250)) +
+                        values.children * (prices.children - (prices.children && 250) )
                       :
                       values.numberOfPassengers * (prices.adults) +
                         values.preteens * prices.preteens +
-                        values.children * prices.children}
+                        values.children * prices.children} DINARS
 
                   {/* {"Total price: " +
                     values.promoCode ? parseInt(
@@ -355,7 +368,28 @@ const WrapperReservation = () => {
                     )  +
                     " din." } */}
                 </p>
-                <Button sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
+                <p style={{ fontSize: "1.2em"}}>
+                  <span style={{visibility:"hidden"}}>Total price:</span> {values.promoCode ? Math.round((values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+                        values.preteens * (prices.preteens - (prices.preteens && 250)) +
+                        values.children * (prices.children - (prices.children && 250)) )/  EUR)
+                      :
+                      Math.round(values.numberOfPassengers * Math.round((prices.adults) +
+                        values.preteens * prices.preteens +
+                        values.children * prices.children) / EUR)} EUROS
+
+                  {/* {"Total price: " +
+                    values.promoCode ? parseInt(
+                      values.numberOfPassengers * (prices.adults - 600) +
+                        values.preteens * prices.preteens +
+                        values.children * prices.children
+                    ) : parseInt(
+                      values.numberOfPassengers * (prices.adults + 200) +
+                        values.preteens * (prices.preteens + 200) +
+                        values.children * prices.children
+                    )  +
+                    " din." } */}
+                </p>
+                <Button sx={{fontWeight:"bold", backgroundColor:"#4120D8"}} variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
               </section>

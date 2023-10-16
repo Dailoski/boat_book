@@ -14,6 +14,7 @@ import {
   // Font
 } from "@react-pdf/renderer";
 import qrCode from "../../assets/qr-code.jpg";
+import barcode from "../../assets/barcode.png";
 import dayjs from "dayjs";
 import { Button } from "@mui/material";
 // import Roboto from "typeface-roboto"
@@ -30,34 +31,36 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
   // const tourDate = dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm");
   const tourDate = new Date(ticketInfo.date);
   const meetingTime = dayjs(new Date(tourDate - 1800000)).format("HH:mm");
-  
+  const currentDate = dayjs(new Date()).format("DD-MM-YYYY HH:mm")
   const styles = StyleSheet.create({
     page: {
-      width: "88%",
-      margin: "0 0 0 20px",
-      paddingTop: "200px",
+      width: "95%",
+      paddingTop: "20px",
+      margin: "0 auto",
       justifyContent: "center",
       alignItems: "center",
     },
     qrCode: {
-      position: "absolute",
-      top: 20,
-      right: 20,
-      width: "35%",
+      // position: "absolute",
+      // top: 20,
+      // right: 20,
+      width: "45%",
+      margin: "10px auto"
     },
     fullp: {
       width: "100%",
       paddingVertical: "15px",
       borderTop: "2px solid black",
+      borderBottom: "2px solid black",
       display: "flex",
       flexDirection: "column",
     },
     fullBottom: {
       width: "100%",
       paddingVertical: "5px",
-      borderTop: "2px solid black",
+      
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "row"
     },
     halfp: {
       width: "100%",
@@ -67,37 +70,25 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     // },
     meetTitle: {
       fontFamily: "Helvetica-Bold",
-      paddingBottom: "10px",
-      fontSize: "16px",
-      position: "absolute",
-      top: 20,
-      left: 0,
-      color: "blue",
+      paddingBottom: "5px",
+      fontSize: "18px",
     },
     meetAddress: {
-      fontSize: "11px",
-      position: "absolute",
-      top: 50,
-      left: 0,
-      width: "50%",
+      fontFamily: "Helvetica-Bold",
+      fontSize: "14px",
+      width: "100%",
       textAlign: "center",
-      color: "blue",
+      paddingBottom: "5px"
     },
     scanqr: {
-      color: "red",
+      fontSize: "14px",
       fontFamily: "Helvetica-Bold",
-      fontSize: "12px",
-      position: "absolute",
-      top: 135,
-      right: 7,
+      color: "red"
     },
     meetPointTime: {
       fontFamily: "Helvetica-Bold",
-      fontSize: "16px",
-      textDecoration: "underline",
-      position: "absolute",
-      top: 165,
-      left: 0,
+      fontSize: "14px",
+      paddingBottom: "5px",
     },
     tourText: {
       paddingBottom: '5px',
@@ -105,14 +96,26 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     },
     passengersTitle: {
       fontFamily: "Helvetica-Bold",
-      paddingBottom: "10px",
       textTransform: "uppercase",
-      fontSize: "13px",
+      fontSize: "14px",
+      marginBottom: "5px"
+    },
+    passengersTitleWithTopMarging: {
+      marginTop: "10px",
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "14px",
+      marginBottom: "5px"
     },
     passengersText: {
+      fontFamily: "Helvetica-Bold",
       paddingBottom: "20px",
       textTransform: "uppercase",
-      fontSize: "12px",
+      fontSize: "14px",
+    },
+    discount: {
+      fontFamily: "Helvetica-Bold",
+      fontSize: "14px",
     },
     isPaid: {
       fontFamily: "Helvetica-Bold",
@@ -125,17 +128,51 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       textTransform: "uppercase",
       fontSize: "14px",
       color: 'red',
+    },
+    isPaidBig: {
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "25px",
+      color: 'green',
+      width: "100%"
+
+    },
+    notPaidBig: {
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "25px",
+      color: 'red',
+      width: "100%"
+
+    },
+    isPaidWithPadding: {
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "14px",
+      color: 'green',
+      paddingBottom: "20px"
+
+    },
+    notPaidWithPadding: {
+      fontFamily: "Helvetica-Bold",
+      textTransform: "uppercase",
+      fontSize: "14px",
+      color: 'red',
+      paddingBottom: "20px"
     }
   });
+  console.log(typeof ticketInfo.prices.children)
   const Tiketino = (
     <Document>
-      <Page size="B6">
+      <Page size={["250"]} >
         <View style={styles.page}>
           <Text style={styles.meetTitle}>Meeting point address:</Text>
-          <Text style={styles.meetAddress} wrap>Main entrance of Kalemegdan park from Knez Mihailova street Pariska 15, Belgrade</Text>
-          <Text style={styles.meetPointTime}>{"Meeting point time: " + meetingTime}</Text>
-          <Link  style={styles.qrCode}  target="_blank"  src="https://maps.app.goo.gl/Vs3wHRYBbjiWvgtYA?g_st=ic"><Image src={qrCode} /></Link>
+          <Text style={styles.meetAddress} wrap>Main entrance of Kalemegdan park from Knez Mihailova</Text>
+          <Text style={styles.meetAddress} > Pariska 15, Belgrade</Text>
           <Text style={styles.scanqr}>Scan or click QR code for location</Text>
+          <Link  style={styles.qrCode}  target="_blank"  src="https://maps.app.goo.gl/Vs3wHRYBbjiWvgtYA?g_st=ic"><Image src={qrCode} /></Link>
+          <Text style={styles.meetPointTime}>{"Meeting point time: " + meetingTime} h</Text>
+
           <View style={styles.fullp}>
 
             <View style={styles.halfp}>
@@ -143,31 +180,47 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Hotel: </Text>{userData?.hotel_name}</Text>
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Provider: </Text>{userData?.full_name}</Text>
               <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Room or name: </Text>{ticketInfo.roomNumber}</Text>
-              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Day/Date/departure time: </Text>{dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + "h"}</Text>
+              <Text style={styles.tourText}><Text style={{fontFamily: "Helvetica-Bold"}}>Departure: </Text >{dayjs(new Date(ticketInfo.date)).format("ddd DD-MM HH:mm") + " h"}</Text>
             </View>
             
           </View>
-          <View style={styles.fullBottom}>
-            <View style={styles.halfp}>
-              <Text style={styles.passengersTitle}>Adults:</Text>
-              <Text style={styles.passengersText}>{ticketInfo.numberOfPassengers} passengers</Text>
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash:" : "Not paid:"}</Text> 
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{ticketInfo.ticketPrice + " dinars"}</Text>
+            <View >
+              <Text style={styles.passengersTitleWithTopMarging}>Adults: {ticketInfo.numberOfPassengers} * {ticketInfo.prices.adults} DINARS</Text>
+              
+              {ticketInfo.preteens && <Text style={styles.passengersTitle}>Kids 8-12 YEARS: {ticketInfo.preteens} * {ticketInfo.prices.preteens} DINARS</Text>}
+              {ticketInfo.children && <Text style={styles.passengersTitle}>Kids 0-7 YEARS: {ticketInfo.prices.children ? ticketInfo.children + " * " + ticketInfo.prices.children + " DINARS" : ticketInfo.children + " FOR FREE"} </Text>}
             </View>
+            {/* <View style={styles.halfp}>
+            <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash:" : "Not paid:"}</Text> 
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{ticketInfo.ticketPrice + " dinars"}</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>PROMO CODE:</Text> 
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{(ticketInfo.ticketPrice - ticketInfo.priceWithDiscount) + " dinars"}</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>TOTAL:</Text> 
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{ticketInfo.priceWithDiscount + " dinars"}</Text>
+            </View> */}
 
-            <View style={styles.halfp}>
-              <Text style={styles.passengersTitle}>Kids 8-12 years:</Text>
-              <Text style={styles.passengersText}>
-                {ticketInfo.preteens} passengers
-              </Text>
-              <Text style={styles.passengersTitle}>Kids 0-7 years:</Text>
-              <Text style={styles.passengersText}>
-                {ticketInfo.children} passengers
-              </Text>
+            {/* <View style={styles.fullBottom}> */}
+              <View style={styles.halfp}>
+              </View>
+
+              {ticketInfo.promoCode && <View >
+                <Text style={styles.discount}  >PRICE: </Text>
+                <Text style={styles.discount}  >{ticketInfo.ticketPrice} DINARS</Text>                
+                <Text style={styles.discount}  >DISCOUNT WITH PROMO CODE: </Text>
+                <Text style={styles.discount} >{ticketInfo.ticketPrice - ticketInfo.priceWithDiscount} DINARS</Text>
+              </View>}
+              </View>
+        {/* </View> */}
+        <View style={{padding: "10px"}}>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash " : "Not paid"}</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>TOTAL:</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>{ticketInfo.priceWithDiscount} DINARS</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>{Math.round(ticketInfo.priceWithDiscount / 118)} EUROS</Text>
+          <Image style={{width: "95%", marginTop:"5px"}} src={barcode} />
+
             </View>
-          </View>
-          <Text style={{fontSize: "20px"}}>belgrade-sightseeing-tours.com</Text>
-        </View>
+            <Text style={{textAlign: "center",}}>cruisebelgrade.com </Text>
+            <Text style={{textAlign: "center", fontSize: "10px"}}>{currentDate}</Text>
       </Page>
     </Document>
   );
@@ -176,6 +229,10 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
       <div onClick={(e) => e.stopPropagation()}>
         <BlobProvider document={Tiketino}>
           {({ blob, url, loading, error }) => {
+            console.log(blob)
+            console.log(url)
+            console.log(loading)
+            console.log(error)
             return (
               <div className="modal-content">
                 <button style={{padding:"3px", fontSize:"18px", position: "relative", right:"-155px", top:"-37px", color: "black"}} onClick={() => setSuccess(false)}>close</button>

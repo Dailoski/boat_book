@@ -1,5 +1,6 @@
 import { React, useContext } from "react";
 import { applicationContext } from "../../context";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 import "./choose-boat.scss";
 
@@ -61,6 +62,10 @@ const ChooseBoat = ({ setAvailableDates, setSelectedRide, selectedRide,setSelect
             )
           })}
         </div>
+        
+        <div style={{fontSize: "25px", width: "fit-content", fontFamily:"Gagalin", margin: "15px auto 15px auto"}} dangerouslySetInnerHTML={{ __html: ride.data.price }} > 
+        </div>
+
           </div>
           <div >
           {/* <img style={{width:"100%"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} /> */}
