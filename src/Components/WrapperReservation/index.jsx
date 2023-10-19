@@ -239,14 +239,14 @@ const WrapperReservation = () => {
           {({ values, setFieldValue }) => (
             <Form className="res-form">
               <section>
-              <Button sx={{fontWeight:"bold", color:"yellow", backgroundColor:"#4120D8"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
+              <Button color="warning" sx={{fontWeight:"bold", color:"white"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
               {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}
                 </Button>
                 <h3>
                   Adults: <span>*</span>
                 </h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button sx={{backgroundColor:"#4120D8"}}  size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button  color="warning"  size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -255,7 +255,7 @@ const WrapperReservation = () => {
                   name="numberOfPassengers"
                   disabled
                 />
-                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button color="warning"  size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -265,7 +265,7 @@ const WrapperReservation = () => {
               
                 <h3>Kids 8-12 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button  color="warning" size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -274,13 +274,13 @@ const WrapperReservation = () => {
                   name="preteens"
                   disabled
                 />
-                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button  color="warning" size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
                 <h3>Kids 0-7 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button  color="warning" size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -289,7 +289,7 @@ const WrapperReservation = () => {
                   name="children"
                   disabled
                 />
-                <Button sx={{backgroundColor:"#4120D8"}} size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} color="primary" aria-label="add">
+                <Button  color="warning" size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -389,7 +389,7 @@ const WrapperReservation = () => {
                     )  +
                     " din." } */}
                 </p>
-                <Button sx={{fontWeight:"bold", backgroundColor:"#4120D8"}} variant="contained"   type="submit" size="large">
+                <Button color="warning" sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
               </section>

@@ -189,26 +189,14 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
               
               {ticketInfo.preteens && <Text style={styles.passengersTitle}>Kids 8-12 YEARS: {ticketInfo.preteens} * {ticketInfo.prices.preteens} DINARS</Text>}
               {ticketInfo.children && <Text style={styles.passengersTitle}>Kids 0-7 YEARS: {ticketInfo.prices.children ? ticketInfo.children + " * " + ticketInfo.prices.children + " DINARS" : ticketInfo.children + " FOR FREE"} </Text>}
-            </View>
-            {/* <View style={styles.halfp}>
-            <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash:" : "Not paid:"}</Text> 
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{ticketInfo.ticketPrice + " dinars"}</Text>
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>PROMO CODE:</Text> 
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{(ticketInfo.ticketPrice - ticketInfo.priceWithDiscount) + " dinars"}</Text>
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>TOTAL:</Text> 
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidWithPadding : styles.notPaidWithPadding}>{ticketInfo.priceWithDiscount + " dinars"}</Text>
-            </View> */}
-
-            {/* <View style={styles.fullBottom}> */}
-              <View style={styles.halfp}>
-              </View>
-
+            
               {ticketInfo.promoCode && <View >
                 <Text style={styles.discount}  >PRICE: </Text>
                 <Text style={styles.discount}  >{ticketInfo.ticketPrice} DINARS</Text>                
                 <Text style={styles.discount}  >DISCOUNT WITH PROMO CODE: </Text>
                 <Text style={styles.discount} >{ticketInfo.ticketPrice - ticketInfo.priceWithDiscount} DINARS</Text>
               </View>}
+                </View>
               </View>
         {/* </View> */}
         <View style={{padding: "10px"}}>
@@ -220,7 +208,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
 
             </View>
             <Text style={{textAlign: "center",}}>cruisebelgrade.com </Text>
-            <Text style={{textAlign: "center", fontSize: "10px"}}>{currentDate}</Text>
+            <Text style={{textAlign: "center", fontSize: "10px", marginTop: "5px"}}>{currentDate}</Text>
       </Page>
     </Document>
   );

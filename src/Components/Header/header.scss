@@ -1,8 +1,8 @@
 .div-header {
   height: 8vh;
-  background: black;
-  box-shadow: 0px 0px 19px -3px rgba(29, 29, 107, 1);
-  color: #fff;
+  background: #ED6C02;
+  box-shadow: 0px 0px 19px -3px #ED6C02;
+  color: black;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -17,7 +17,7 @@
   button {
     background-color: transparent;
 
-    color: #fff;
+    color: black;
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -25,8 +25,8 @@
     cursor: pointer;
   }
   .log-out {
-    background-color: #721717;
-    color: #fff;
+    background-color: #FEC034;
+    color: black;
     border: none;
     border-radius: 5px;
     padding: 5px;

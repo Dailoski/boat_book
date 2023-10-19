@@ -1,17 +1,17 @@
 .div-footer {
-  background: black;
-  color: #fff;
+  background: #ED6C02;
+  color: black;
   display: flex;
   height: 8vh;
   justify-content: center;
   align-items: center;
   a {
     background-color: transparent;
-    color: white;
+    color: black;
     text-decoration: none;
     margin-left: 5px;
     &:hover{
-      color: yellow;
+      // color: yellow;
       cursor: pointer;
     }
   }

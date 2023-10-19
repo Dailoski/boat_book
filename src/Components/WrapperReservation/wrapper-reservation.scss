@@ -1,6 +1,6 @@
 .div-WrapperReservation {
   flex-grow: 1;
-  background-color: #4120D8;
+  background-color: black;
   // background: linear-gradient(90deg, rgb(46 40 94), rgb(49, 190, 200));
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
-    background: rgb(176, 227, 231);
+    border: white solid 4px;
     background: black;
     color: #fff;
     display: flex;
