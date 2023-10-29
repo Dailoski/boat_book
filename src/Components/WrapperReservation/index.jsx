@@ -17,6 +17,16 @@ import { TourButton } from "../TourButton";
 
 const  EUR  = 118
 
+const color = (type) => {
+  
+  return  type === "daytime"
+      ? "primary"
+      : type === "night"
+      ? "secondary"
+      : "warning"
+  
+}
+
 const WrapperReservation = () => {
 
   const { allDocs, user, freshData, setFreshData } = useContext(applicationContext);
@@ -239,14 +249,14 @@ const WrapperReservation = () => {
           {({ values, setFieldValue }) => (
             <Form className="res-form">
               <section>
-              <Button color="warning" sx={{fontWeight:"bold", color:"white"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
+              <Button color={ color(selectedTour.data.type)} sx={{fontWeight:"bold", color:"white"}} variant="contained" onClick={() => {setFreshData(!freshData)}} size="large">
               {selectedTour.data.availableSeats + (selectedTour.data.availableSeats === 1 ? " seat left" : " seats left")}
                 </Button>
                 <h3>
                   Adults: <span>*</span>
                 </h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button  color="warning"  size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} aria-label="add">
+                <Button  color={ color(selectedTour.data.type)}  size="large" variant="contained" onClick={() => minusPassengerCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -255,7 +265,7 @@ const WrapperReservation = () => {
                   name="numberOfPassengers"
                   disabled
                 />
-                <Button color="warning"  size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} aria-label="add">
+                <Button color={ color(selectedTour.data.type)}  size="large" variant="contained" onClick={() => plusPassengerCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -265,7 +275,7 @@ const WrapperReservation = () => {
               
                 <h3>Kids 8-12 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button  color="warning" size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} aria-label="add">
+                <Button  color={ color(selectedTour.data.type)} size="large" variant="contained"  onClick={() => minusPreteenCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -274,13 +284,13 @@ const WrapperReservation = () => {
                   name="preteens"
                   disabled
                 />
-                <Button  color="warning" size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} aria-label="add">
+                <Button  color={ color(selectedTour.data.type)} size="large" variant="contained"  onClick={() => plusPreteenCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
                 <h3>Kids 0-7 years:</h3>
                 <div style={{display: "flex",     justifyContent: "space-evenly"}}>
-                <Button  color="warning" size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} aria-label="add">
+                <Button  color={ color(selectedTour.data.type)} size="large" variant="contained"  onClick={() => minusChildrenCount(setFieldValue, values)} aria-label="add">
                   <RemoveIcon />
                 </Button>
                 <Field
@@ -289,7 +299,7 @@ const WrapperReservation = () => {
                   name="children"
                   disabled
                 />
-                <Button  color="warning" size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} aria-label="add">
+                <Button  color={ color(selectedTour.data.type)} size="large" variant="contained"  onClick={() => plusChildrenCount(setFieldValue, values)} aria-label="add">
                   <AddIcon />
                 </Button>
                 </div>
@@ -371,11 +381,11 @@ const WrapperReservation = () => {
                 <p style={{ fontSize: "1.2em"}}>
                   <span style={{visibility:"hidden"}}>Total price:</span> {values.promoCode ? Math.round((values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
                         values.preteens * (prices.preteens - (prices.preteens && 250)) +
-                        values.children * (prices.children - (prices.children && 250)) )/  EUR)
+                        values.children * (prices.children - (prices.children && 250)) )/ EUR +0.25)
                       :
                       Math.round(values.numberOfPassengers * Math.round((prices.adults) +
                         values.preteens * prices.preteens +
-                        values.children * prices.children) / EUR)} EUROS
+                        values.children * prices.children) / EUR + 0.25)} EUROS
 
                   {/* {"Total price: " +
                     values.promoCode ? parseInt(
@@ -389,7 +399,7 @@ const WrapperReservation = () => {
                     )  +
                     " din." } */}
                 </p>
-                <Button color="warning" sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
+                <Button color={ color(selectedTour.data.type)} sx={{fontWeight:"bold"}} variant="contained"   type="submit" size="large">
                   Book now
                 </Button>
               </section>
