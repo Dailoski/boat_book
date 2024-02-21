@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
 
@@ -7,6 +7,21 @@ function CardContainer({ ride }) {
   const { setAvailableDates, setSelectedId, setSelectedRide, selectedRide } =
     useContext(bookingContext);
   const [openBooking, setOpenBooking] = useState("");
+  const scrollRef = useRef();
+  const cardRef = useRef();
+
+  const scrollToElement = () => {
+    const { current } = scrollRef;
+    if (current !== null) {
+      current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollToCard = () => {
+    const { current } = cardRef;
+    if (current !== null) {
+      current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs
       ?.filter((e) => e.data.boat === selectedBoat)
@@ -22,17 +37,20 @@ function CardContainer({ ride }) {
     setSelectedRide(() => rides.find((e) => selectedBoat === e.id));
     if (openBooking === "") {
       setOpenBooking(() => rides.find((e) => selectedBoat === e.id));
+      scrollToCard();
     } else {
       setOpenBooking("");
+      scrollToElement();
     }
-    console.log(selectedRide?.id);
-    console.log(openBooking?.id);
+
+    // console.log(selectedRide?.id);
+    // console.log(openBooking?.id);
     //
     // }, 0);
   };
   return (
     <>
-      <div className="card">
+      <div className="card" ref={scrollRef}>
         <img
           className="pointer"
           style={{ width: "80px", position: "absolute" }}
@@ -93,6 +111,7 @@ function CardContainer({ ride }) {
         ) : (
           <img
             className="pointer"
+            ref={cardRef}
             onClick={() => handleImageClick(ride.id)}
             style={{
               width: "80%",
@@ -102,10 +121,28 @@ function CardContainer({ ride }) {
             src={`${process.env.PUBLIC_URL}/book.svg`}
             alt="pointer-img"
           />
+          // <img
+          //   className="pointer"
+          //   onClick={function () {
+          //     handleNavigate();
+          //     handleImageClick();
+          //   }}
+          //   style={{
+          //     width: "80%",
+          //     margin: "15px auto",
+          //     display: "block",
+          //   }}
+          //   src={`${process.env.PUBLIC_URL}/book.svg`}
+          //   alt="pointer-img"
+          // />
         )}
       </div>
 
-      {openBooking?.id === selectedRide?.id ? <FormCard /> : ""}
+      {openBooking?.id === selectedRide?.id ? (
+        <FormCard scrollRef={scrollRef} />
+      ) : (
+        ""
+      )}
     </>
   );
 }

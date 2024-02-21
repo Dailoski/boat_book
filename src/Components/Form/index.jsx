@@ -7,7 +7,7 @@ import { TourButton } from "../TourButton";
 import dayjs from "dayjs";
 import { applicationContext, bookingContext } from "../../context";
 import "../Form/form.css";
-function FormCard({ handleImageClick }) {
+function FormCard({ scrollRef }) {
   const { freshData, setFreshData } = useContext(applicationContext);
   const {
     selectedId,
@@ -28,7 +28,7 @@ function FormCard({ handleImageClick }) {
     selectedTour,
   } = useContext(bookingContext);
   return (
-    <>
+    <div>
       <div className="tour-display">
         {selectedRide && <p>Selected Tour:</p>}
         {selectedRide && (
@@ -334,7 +334,7 @@ function FormCard({ handleImageClick }) {
           )}
         </Formik>
       )}
-    </>
+    </div>
   );
 }
 

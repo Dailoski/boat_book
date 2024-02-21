@@ -10,6 +10,7 @@ import { db } from "../../firebase";
 import * as yup from "yup";
 import "./../WrapperReservation/wrapper-reservation.scss";
 import moment from "moment";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 const EUR = 118;
 
