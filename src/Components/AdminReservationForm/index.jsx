@@ -14,7 +14,7 @@ const AdminReservationForm = () => {
   const { setFreshData, freshData, rides } = useContext(applicationContext);
   const tourRef = useRef(null);
   const d = new Date();
-  d.setHours(16,0,0,0)
+  d.setHours(16, 0, 0, 0);
   const defaultValue = {
     boat: "",
     date: [d],
@@ -28,7 +28,7 @@ const AdminReservationForm = () => {
     available_seats: yup
       .number()
       .required("Enter available seats")
-      .min(1, "One seat minimum")
+      .min(1, "One seat minimum"),
   });
   const getDates = (datesArray) => {
     let dates = [];
@@ -37,22 +37,24 @@ const AdminReservationForm = () => {
     });
     return dates;
   };
-  
+
   const handleAdd = (values, { resetForm }) => {
     const dateRange = getDates(values.date);
     const selectedRide = rides.find((e) => e.id === values.boat);
     dateRange.forEach((singleDate) => {
-      console.log(typeof singleDate)
-      const tourID = `${values.boat}-${singleDate.replace(" ", "-")}-${Math.floor(Math.random() * 1000000000)}`
-      const docRef = doc(db, "tours", "" + tourID );
-      setDoc(docRef, 
-        {
-          boat: values.boat,
-          date: `${singleDate}`,
-          availableSeats: selectedRide.data.totalSeats,
-          reservations: [],
-          type: values.type
-        })
+      console.log(typeof singleDate);
+      const tourID = `${values.boat}-${singleDate.replace(
+        " ",
+        "-"
+      )}-${Math.floor(Math.random() * 1000000000)}`;
+      const docRef = doc(db, "tours2024", "" + tourID);
+      setDoc(docRef, {
+        boat: values.boat,
+        date: `${singleDate}`,
+        availableSeats: selectedRide.data.totalSeats,
+        reservations: [],
+        type: values.type,
+      });
       // addDoc(collection(db, "tours"), {
       //   boat: values.boat,
       //   date: `${singleDate}`,
@@ -62,8 +64,10 @@ const AdminReservationForm = () => {
       // });
     });
     setTimeout(() => {
-      document.querySelector(".div-footer").scrollIntoView({ behavior: "smooth" });
-      }, 0);
+      document
+        .querySelector(".div-footer")
+        .scrollIntoView({ behavior: "smooth" });
+    }, 0);
     setFreshData(!freshData);
     resetForm();
   };
@@ -75,7 +79,7 @@ const AdminReservationForm = () => {
 
   return (
     <div className="div-admin-res">
-      <h3>Create a tour:</h3>
+      <h3> a tour:</h3>
 
       <Formik
         initialValues={defaultValue}
@@ -88,13 +92,8 @@ const AdminReservationForm = () => {
               <h4>Tour:</h4>
               {rides.map((data, i) => (
                 <label key={i}>
-                  <p>{data.id }</p>
-                  <Field
-                    type="radio"
-                    name="boat"
-                    value={data.id}
-                    key={i}
-                  />
+                  <p>{data.id}</p>
+                  <Field type="radio" name="boat" value={data.id} key={i} />
                 </label>
               ))}
               <h4>Select Date/Dates</h4>
@@ -104,16 +103,14 @@ const AdminReservationForm = () => {
                 onChange={setFieldValue}
               />
               <h4>Type:</h4>
-              {["daytime", "sunset", "night", "half day", "full day"].map((type, i) => (
-                <label key={i}>
-                  <p>{type}</p>
-                  <Field
-                    type="radio"
-                    name="type"
-                    value={type}
-                  />
-                </label>
-              ))}
+              {["daytime", "sunset", "night", "half day", "full day"].map(
+                (type, i) => (
+                  <label key={i}>
+                    <p>{type}</p>
+                    <Field type="radio" name="type" value={type} />
+                  </label>
+                )
+              )}
               <p className="error-handle">
                 <ErrorMessage name="date" />
               </p>

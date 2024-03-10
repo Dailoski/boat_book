@@ -8,6 +8,7 @@ import NoInternetConnection from "./Components/NoInternet";
 import ReservationPage from "./Pages/ReservationPage";
 import AdminPage from "./Pages/AdminPage";
 import "./app.scss";
+import ProfilePage from "./Pages/ProfilePage";
 
 const App = () => {
   const [freshData, setFreshData] = useState(false);
@@ -124,6 +125,7 @@ const App = () => {
                   path="*"
                   element={<Navigate to="/reservation" replace />}
                 />
+                <Route path="/profile" element={<ProfilePage />} />
               </Routes>
             )
           ) : (

@@ -129,7 +129,7 @@ const WrapperReservation = () => {
         .map(() => Math.floor(Math.random() * 16).toString(16))
         .join("");
     const cardID = genRanHex(6);
-    const docRef = doc(db, "cards", "" + cardID);
+    const docRef = doc(db, "tickets2024", "" + cardID);
 
     setDoc(docRef, {
       ...ticketInfo,
