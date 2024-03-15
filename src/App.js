@@ -37,6 +37,7 @@ const App = () => {
       setAllDocs(docsData);
     };
     fetchAllDocs();
+    console.log(userData);
   }, [freshData]);
 
   useEffect(() => {
