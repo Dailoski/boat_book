@@ -10,19 +10,19 @@ function ProfileCard({ reservation }) {
           return (
             <div className="profile-card-content">
               <h2>
-                <span>Tour: </span>
+                <span className="profile-span">Tour: </span>
                 {res.data.boat}
               </h2>
               <p>
-                <span>Price: </span>
+                <span className="profile-span">Price: </span>
                 {res.data.ticketPrice}
               </p>
               <p>
-                <span>Number of Passangers: </span>
+                <span className="profile-span">Number of Passangers: </span>
                 {res.data.numberOfPassengers}
               </p>
               <p>
-                <span>Date: </span>
+                <span className="profile-span">Date: </span>
                 {res.data.date}
               </p>
             </div>

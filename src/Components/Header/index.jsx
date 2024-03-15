@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
-  const { logOut } = useContext(applicationContext);
+  const { logOut, user } = useContext(applicationContext);
   const path = useLocation().pathname;
   return (
     <div className="div-header">
@@ -28,7 +28,7 @@ const Header = () => {
         </Link>
       )}
 
-      <h3>Recepcioner.com</h3>
+      <h3>{user}</h3>
       {(path === "/admin_page" || path === "/reservation") && (
         <Link>
           <button className="log-out" onClick={logOut}>

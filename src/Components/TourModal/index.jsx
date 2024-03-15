@@ -14,7 +14,7 @@ const TourModal = ({ handleClose, clickedTour }) => {
   };
   const selectedTour = allDocs.filter((tour) => tour.id === clickedTour.id)[0];
   const handleDelete = async (resID, seats) => {
-    const docRef = doc(db, "tours", selectedTour?.id);
+    const docRef = doc(db, "tours2024", selectedTour?.id);
     const updatedReservations = selectedTour?.data.reservations.filter(
       (reservation) => reservation.id !== resID
     );
@@ -75,10 +75,15 @@ const TourModal = ({ handleClose, clickedTour }) => {
                   <h5>Phone number:</h5>
                   <p>{e.phoneNumber}</p>
                 </div>
-                
-                <DeleteButton deleteHandler={() =>
-                    handleDelete(e.id, e.numberOfPassengers + e.preteens+ e.children)
-                  } />
+
+                <DeleteButton
+                  deleteHandler={() =>
+                    handleDelete(
+                      e.id,
+                      e.numberOfPassengers + e.preteens + e.children
+                    )
+                  }
+                />
               </div>
             ))}
           </div>
