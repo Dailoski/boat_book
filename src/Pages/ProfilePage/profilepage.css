@@ -9,6 +9,7 @@
   flex: 1;
   color: white;
   padding: 1rem;
+  flex-direction: column;
   display: flex;
   justify-content: center;
 
@@ -21,7 +22,8 @@
 
 .profile-card-content {
   border: 3px solid white;
-  width: fit-content;
+  width: 90%;
+  margin: 0 auto;
   height: fit-content;
   padding: 1rem;
   border-radius: 0.5rem;

@@ -27,6 +27,13 @@ function FormCard({ scrollRef }) {
     prices,
     selectedTour,
   } = useContext(bookingContext);
+console.log(selectedTour);
+  const buttonColor = selectedTour?.data.type === "daytime"
+      ? "primary"
+      : selectedTour?.data.type === "night"
+      ? "secondary"
+      : "warning"
+  
   return (
     <div>
       <div className="tour-display">
@@ -84,7 +91,7 @@ function FormCard({ scrollRef }) {
             <Form className="res-form">
               <section>
                 <Button
-                  color="warning"
+                  color={buttonColor}
                   sx={{ fontWeight: "bold", color: "white" }}
                   variant="contained"
                   onClick={() => {
@@ -104,7 +111,7 @@ function FormCard({ scrollRef }) {
                   style={{ display: "flex", justifyContent: "space-evenly" }}
                 >
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => minusPassengerCount(setFieldValue, values)}
@@ -125,7 +132,7 @@ function FormCard({ scrollRef }) {
                     disabled
                   />
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => plusPassengerCount(setFieldValue, values)}
@@ -143,7 +150,7 @@ function FormCard({ scrollRef }) {
                   style={{ display: "flex", justifyContent: "space-evenly" }}
                 >
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => minusPreteenCount(setFieldValue, values)}
@@ -164,7 +171,7 @@ function FormCard({ scrollRef }) {
                     disabled
                   />
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => plusPreteenCount(setFieldValue, values)}
@@ -178,7 +185,7 @@ function FormCard({ scrollRef }) {
                   style={{ display: "flex", justifyContent: "space-evenly" }}
                 >
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => minusChildrenCount(setFieldValue, values)}
@@ -199,7 +206,7 @@ function FormCard({ scrollRef }) {
                     disabled
                   />
                   <Button
-                    color="warning"
+                    color={buttonColor}
                     size="large"
                     variant="contained"
                     onClick={() => plusChildrenCount(setFieldValue, values)}
@@ -321,7 +328,7 @@ function FormCard({ scrollRef }) {
                     " din." } */}
                 </p>
                 <Button
-                  color="warning"
+                  color={buttonColor}
                   sx={{ fontWeight: "bold" }}
                   variant="contained"
                   type="submit"

@@ -55,7 +55,7 @@ const AdminReservationForm = () => {
         reservations: [],
         type: values.type,
       });
-      // addDoc(collection(db, "tours"), {
+      // addDoc(collection(db, "tours2024"), {
       //   boat: values.boat,
       //   date: `${singleDate}`,
       //   availableSeats: selectedRide.data.totalSeats,

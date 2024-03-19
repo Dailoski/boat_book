@@ -108,7 +108,7 @@ const WrapperReservation = () => {
     });
   const handleSubmit = async (values, { resetForm }) => {
     const tour = selectedTour;
-    const tourRef = doc(db, "tours", tour.id);
+    const tourRef = doc(db, "tours2024", tour.id);
     const docSnap = await getDoc(tourRef);
     tour.data = docSnap.data();
 
