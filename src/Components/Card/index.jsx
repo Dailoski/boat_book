@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
 
@@ -7,20 +7,45 @@ function CardContainer({ ride }) {
   const { setAvailableDates, setSelectedId, setSelectedRide, selectedRide } =
     useContext(bookingContext);
   const [openBooking, setOpenBooking] = useState("");
-  const scrollRef = useRef();
+  const scrollRef = useRef(null);
   const cardRef = useRef();
+  // const refbuttons = document.querySelectorAll(".refbutton");
+  // useEffect(() => {
+  //   refbuttons.forEach((btn) => {
+  //     const btnRef = btn.getBoundingClientRect();
+
+  //     btn.addEventListener("click", function () {
+  //       if (openBooking === "" || openBooking?.id !== selectedRide?.id) {
+  //         window.scrollTo({
+  //           left: btnRef.left + 50,
+  //           top: btnRef.top + 10,
+  //           behavior: "smooth",
+  //         });
+  //       } else {
+  //         window.scrollTo({
+  //           left: btnRef.left,
+  //           top: btnRef.top,
+  //           behavior: "smooth",
+  //         });
+  //       }
+  //     });
+  //   });
+  // }, []);
+  const handleScroll = (ref) => {
+    window.scrollTo({
+      top: ref?.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   const scrollToElement = () => {
     const { current } = scrollRef;
-    if (current !== null) {
-      current.scrollIntoView({ behavior: "smooth" });
-    }
+
+    current?.scrollIntoView({ behavior: "smooth" });
   };
   const scrollToCard = () => {
-    const { current } = cardRef;
-    if (current !== null) {
-      current.scrollIntoView({ behavior: "smooth" });
-    }
+    cardRef.current?.scrollIntoView({ behavior: "smooth" });
   };
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs
@@ -35,22 +60,20 @@ function CardContainer({ ride }) {
     setAvailableDates(dates);
     setSelectedId(null);
     setSelectedRide(() => rides.find((e) => selectedBoat === e.id));
-    if (openBooking === "") {
+
+    if (openBooking === "" || openBooking?.id !== selectedRide?.id) {
       setOpenBooking(() => rides.find((e) => selectedBoat === e.id));
-      scrollToCard();
     } else {
       setOpenBooking("");
-      scrollToElement();
     }
 
     // console.log(selectedRide?.id);
     // console.log(openBooking?.id);
-    //
-    // }, 0);
+    // console.log(scrollRef);
   };
   return (
     <>
-      <div className="card" ref={scrollRef}>
+      <div className="card" ref={cardRef}>
         <img
           className="pointer"
           style={{ width: "80px", position: "absolute" }}
@@ -110,8 +133,7 @@ function CardContainer({ ride }) {
           />
         ) : (
           <img
-            className="pointer"
-            ref={cardRef}
+            className="pointer refbutton"
             onClick={() => handleImageClick(ride.id)}
             style={{
               width: "80%",
@@ -138,11 +160,7 @@ function CardContainer({ ride }) {
         )}
       </div>
 
-      {openBooking?.id === selectedRide?.id ? (
-        <FormCard scrollRef={scrollRef} />
-      ) : (
-        ""
-      )}
+      {openBooking?.id === selectedRide?.id ? <FormCard ref={scrollRef} /> : ""}
     </>
   );
 }

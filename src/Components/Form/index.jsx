@@ -7,8 +7,11 @@ import { TourButton } from "../TourButton";
 import dayjs from "dayjs";
 import { applicationContext, bookingContext } from "../../context";
 import "../Form/form.css";
-function FormCard({ scrollRef }) {
+import { forwardRef } from "react";
+
+const FormCard = forwardRef(({}, ref) => {
   const { freshData, setFreshData } = useContext(applicationContext);
+
   const {
     selectedId,
     selectedRide,
@@ -29,7 +32,7 @@ function FormCard({ scrollRef }) {
   } = useContext(bookingContext);
   return (
     <div>
-      <div className="tour-display">
+      <div className="tour-display" ref={ref}>
         {selectedRide && <p>Selected Tour:</p>}
         {selectedRide && (
           <p style={{ fontSize: "25px", color: "cyan" }}>
@@ -336,6 +339,5 @@ function FormCard({ scrollRef }) {
       )}
     </div>
   );
-}
-
+});
 export default FormCard;
