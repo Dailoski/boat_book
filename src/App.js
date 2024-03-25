@@ -9,6 +9,7 @@ import ReservationPage from "./Pages/ReservationPage";
 import AdminPage from "./Pages/AdminPage";
 import "./app.scss";
 import ProfilePage from "./Pages/ProfilePage";
+import Overlay from "./Components/Overlay";
 
 const App = () => {
   const [freshData, setFreshData] = useState(false);
@@ -25,7 +26,7 @@ const App = () => {
   );
   const [allDocs, setAllDocs] = useState([]);
   const [rides, setAllRides] = useState([]);
-
+  const [showOverlay, setShowOverlay] = useState(false);
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tours");
@@ -105,6 +106,7 @@ const App = () => {
             setFreshData,
             freshData,
             rides,
+            setShowOverlay,
           }}
         >
           {accessToken ? (
@@ -137,6 +139,7 @@ const App = () => {
           )}
         </ApplicationProvider>
       </NoInternetConnection>
+      {showOverlay ? <Overlay /> : ""}
     </div>
   );
 };

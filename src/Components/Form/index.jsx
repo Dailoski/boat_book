@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -9,9 +9,16 @@ import { applicationContext, bookingContext } from "../../context";
 import "../Form/form.css";
 import { forwardRef } from "react";
 
-const FormCard = forwardRef(({}, ref) => {
-  const { freshData, setFreshData } = useContext(applicationContext);
-
+const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
+  const { freshData, setFreshData, setShowOverlay } =
+    useContext(applicationContext);
+  const formRef = useRef(null);
+  const handleRef = function () {
+    const { current } = formRef;
+    if (current !== null) {
+      current?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   const {
     selectedId,
     selectedRide,
@@ -31,7 +38,20 @@ const FormCard = forwardRef(({}, ref) => {
     selectedTour,
   } = useContext(bookingContext);
   return (
-    <div>
+    <div
+      className="form-modal"
+      style={{ visibility: openBooking === "" ? "hidden" : "visible" }}
+    >
+      <img
+        src={`${process.env.PUBLIC_URL}/close.png`}
+        alt="close-modal"
+        className="close-modal-img"
+        onClick={function () {
+          setOpenBooking("");
+          setShowOverlay(false);
+        }}
+      />
+
       <div className="tour-display" ref={ref}>
         {selectedRide && <p>Selected Tour:</p>}
         {selectedRide && (
@@ -67,6 +87,7 @@ const FormCard = forwardRef(({}, ref) => {
                   key={i}
                   onClick={() => {
                     setSelectedId(id);
+                    handleRef();
                   }}
                   isSelected={selectedId === id}
                   tourDate={dayjs(new Date(date)).format("ddd DD-MM HH:mm")}
@@ -84,8 +105,8 @@ const FormCard = forwardRef(({}, ref) => {
           onSubmit={handleSubmit}
         >
           {({ values, setFieldValue }) => (
-            <Form className="res-form">
-              <section>
+            <Form className="res-form" ref={formRef}>
+              <section className="form-section">
                 <Button
                   color="warning"
                   sx={{ fontWeight: "bold", color: "white" }}

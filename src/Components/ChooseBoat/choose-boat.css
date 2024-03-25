@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .div-choose-boat h4 {
   padding: 10px;
@@ -12,7 +13,13 @@
 .div-choose-boat p span {
   margin-left: 4px;
   text-transform: uppercase;
-  background-image: linear-gradient(-225deg, #ffffff 0%, #ffffff 29%, #000000 67%, #000000 100%);
+  background-image: linear-gradient(
+    -225deg,
+    #ffffff 0%,
+    #ffffff 29%,
+    #000000 67%,
+    #000000 100%
+  );
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
@@ -40,4 +47,4 @@
 .choose-boat img {
   width: 80%;
   cursor: pointer;
-}/*# sourceMappingURL=choose-boat.css.map */
+} /*# sourceMappingURL=choose-boat.css.map */

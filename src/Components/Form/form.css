@@ -1,5 +1,120 @@
+@media screen and (max-width: 580px) {
+  .form-modal {
+    position: absolute;
+    top: 20%;
+    left: 13%;
+    width: 75%;
+    height: fit-content;
+    background-color: black;
+    padding: 1rem;
+    z-index: 1000;
+    border-radius: 1rem;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+body {
+  display: grid;
+  min-height: 100vh;
+}
+.form-section {
+  /* width: 300px; */
+}
+
+.form-modal > .close-modal-img {
+  width: 13%;
+  height: 13%;
+  margin-bottom: 0.7rem;
+  align-self: flex-end;
+}
+
 .tour-display {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+}
+@media screen and (min-width: 581px) {
+  .form-modal {
+    position: absolute;
+    top: 0;
+    left: 15%;
+    margin: 15% auto;
+    justify-self: center;
+    width: 500px;
+    height: fit-content;
+    background-color: black;
+    padding: 1rem;
+    z-index: 1000;
+    border-radius: 1rem;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-section {
+    position: relative;
+    left: 1.5%;
+  }
+}
+@media screen and (min-width: 700px) {
+  .form-modal {
+    position: absolute;
+    top: 0;
+    left: 35%;
+    margin: 15% auto;
+    justify-self: center;
+    width: 500px;
+    height: fit-content;
+    background-color: black;
+    padding: 1rem;
+    z-index: 1000;
+    border-radius: 1rem;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-section {
+    position: relative;
+    left: 1.5%;
+  }
+}
+
+@media screen and (min-width: 701px) {
+  .form-modal {
+    position: absolute;
+    /* top: 0;
+    left: 15%;
+    margin: 15% auto; */
+    justify-self: center;
+    width: 500px;
+    height: fit-content;
+    background-color: black;
+    padding: 1rem;
+    z-index: 1000;
+    border-radius: 1rem;
+    border: 5px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+  }
+  .form-section {
+    position: relative;
+    left: 1.5%;
+  }
 }

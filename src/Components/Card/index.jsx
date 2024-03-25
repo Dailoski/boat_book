@@ -3,7 +3,7 @@ import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
 
 function CardContainer({ ride }) {
-  const { allDocs, rides } = useContext(applicationContext);
+  const { allDocs, rides, setShowOverlay } = useContext(applicationContext);
   const { setAvailableDates, setSelectedId, setSelectedRide, selectedRide } =
     useContext(bookingContext);
   const [openBooking, setOpenBooking] = useState("");
@@ -47,6 +47,7 @@ function CardContainer({ ride }) {
   const scrollToCard = () => {
     cardRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs
       ?.filter((e) => e.data.boat === selectedBoat)
@@ -67,6 +68,16 @@ function CardContainer({ ride }) {
       setOpenBooking("");
     }
 
+    const headerRef = document
+      .querySelector(".div-header")
+      .getBoundingClientRect();
+    window.scrollTo({
+      left: headerRef.left,
+      top: headerRef.top,
+      behavior: "smooth",
+    });
+
+    setShowOverlay(true);
     // console.log(selectedRide?.id);
     // console.log(openBooking?.id);
     // console.log(scrollRef);
@@ -160,7 +171,15 @@ function CardContainer({ ride }) {
         )}
       </div>
 
-      {openBooking?.id === selectedRide?.id ? <FormCard ref={scrollRef} /> : ""}
+      {openBooking?.id === selectedRide?.id ? (
+        <FormCard
+          ref={scrollRef}
+          openBooking={openBooking}
+          setOpenBooking={setOpenBooking}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 }

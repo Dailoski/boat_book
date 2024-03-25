@@ -27,9 +27,9 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-    width: 82vw;
-    @media screen and (min-width: 600px){
-        width: 400px;
+    // width: 82vw;
+    @media screen and (min-width: 600px) {
+      width: 400px;
     }
     span {
       color: red;
@@ -40,7 +40,7 @@
     h6 {
       padding: 5px 0;
     }
-    .radio-group{
+    .radio-group {
       margin-bottom: 10px;
     }
     label {
@@ -104,9 +104,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media screen and (min-width: 600px){
+    @media screen and (min-width: 600px) {
       width: 400px;
-  }
+    }
     div {
       width: 80%;
       margin-block: 2px;
@@ -132,6 +132,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
