@@ -28,7 +28,7 @@ const Header = () => {
         </Link>
       )}
 
-      <h3>{userData.full_name}</h3>
+      <h3>{userData?.full_name}</h3>
       {(path === "/admin_page" || path === "/reservation") && (
         <Link>
           <button className="log-out" onClick={logOut}>
