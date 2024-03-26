@@ -27,6 +27,7 @@ const App = () => {
   const [allDocs, setAllDocs] = useState([]);
   const [rides, setAllRides] = useState([]);
   const [showOverlay, setShowOverlay] = useState(false);
+
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tours");

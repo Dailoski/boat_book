@@ -106,100 +106,100 @@ const WrapperReservation = () => {
         .max(10, "Max passengers 10")
         .min(0, "Can't be less than zero"),
     });
-  const handleSubmit = async (values, { resetForm }) => {
-    const tour = selectedTour;
-    const tourRef = doc(db, "tours", tour.id);
-    const docSnap = await getDoc(tourRef);
-    tour.data = docSnap.data();
+  // const handleSubmit = async (values, { resetForm }) => {
+  //   const tour = selectedTour;
+  //   const tourRef = doc(db, "tours", tour.id);
+  //   const docSnap = await getDoc(tourRef);
+  //   tour.data = docSnap.data();
 
-    if (
-      values.numberOfPassengers + values.preteens + values.children >
-      tour.data.availableSeats
-    ) {
-      const message =
-        "This tour has " +
-        tour.data.availableSeats +
-        (tour.data.availableSeats === 1 ? " seat left" : " seats left");
-      //alert(message)
-      setFail(message);
-      return;
-    }
-    const genRanHex = (size) =>
-      [...Array(size)]
-        .map(() => Math.floor(Math.random() * 16).toString(16))
-        .join("");
-    const cardID = genRanHex(6);
-    const docRef = doc(db, "tickets2024", "" + cardID);
+  //   if (
+  //     values.numberOfPassengers + values.preteens + values.children >
+  //     tour.data.availableSeats
+  //   ) {
+  //     const message =
+  //       "This tour has " +
+  //       tour.data.availableSeats +
+  //       (tour.data.availableSeats === 1 ? " seat left" : " seats left");
+  //     //alert(message)
+  //     setFail(message);
+  //     return;
+  //   }
+  //   const genRanHex = (size) =>
+  //     [...Array(size)]
+  //       .map(() => Math.floor(Math.random() * 16).toString(16))
+  //       .join("");
+  //   const cardID = genRanHex(6);
+  //   const docRef = doc(db, "tickets2024", "" + cardID);
 
-    setDoc(docRef, {
-      ...ticketInfo,
-      boat: selectedRide.data.name,
-      date: tour.data.date,
-      numberOfPassengers: values.numberOfPassengers,
-      roomNumber: values.roomNumber,
-      children: values.children,
-      preteens: values.preteens,
-      prices: prices,
-      ticketPrice:
-        values.numberOfPassengers * prices.adults +
-        values.preteens * prices.preteens +
-        values.children * prices.children,
-      isPaid: values.isPaid,
-      id: cardID,
-      userEmail: user,
-      tourID: tourRef.id,
-    });
-    setTicketInfo({
-      ...ticketInfo,
-      boat: selectedRide.data.name,
-      date: tour.data.date,
-      numberOfPassengers: values.numberOfPassengers,
-      roomNumber: values.roomNumber,
-      children: values.children,
-      preteens: values.preteens,
-      promoCode: values.promoCode,
-      prices: prices,
-      ticketPrice:
-        values.numberOfPassengers * prices.adults +
-        values.preteens * prices.preteens +
-        values.children * prices.children,
-      priceWithDiscount: values.promoCode
-        ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
-          values.preteens * (prices.preteens - (prices.preteens && 250)) +
-          values.children * (prices.children - (prices.children && 250))
-        : values.numberOfPassengers * prices.adults +
-          values.preteens * prices.preteens +
-          values.children * prices.children,
-      isPaid: values.isPaid,
-    });
-    updateDoc(tourRef, {
-      availableSeats:
-        tour.data.availableSeats -
-        (values.numberOfPassengers + values.preteens + values.children),
-      reservations: arrayUnion({
-        id: cardID,
-        userEmail: user,
-        numberOfPassengers: values.numberOfPassengers,
-        children: values.children,
-        preteens: values.preteens,
-        roomNumber: values.roomNumber,
-        isPaid: values.isPaid,
-        promoCode: values.promoCode,
-        ticketPrice: values.promoCode
-          ? values.numberOfPassengers *
-              (prices.adults - (prices.adults && 500)) +
-            values.preteens * (prices.preteens - (prices.preteens && 250)) +
-            values.children * (prices.children - (prices.children && 250))
-          : values.numberOfPassengers * prices.adults +
-            values.preteens * prices.preteens +
-            values.children * prices.children,
-      }),
-    });
-    // setSelectedRide(null);
-    resetForm();
-    setSuccess(true);
-    setFreshData(!freshData);
-  };
+  //   setDoc(docRef, {
+  //     ...ticketInfo,
+  //     boat: selectedRide.data.name,
+  //     date: tour.data.date,
+  //     numberOfPassengers: values.numberOfPassengers,
+  //     roomNumber: values.roomNumber,
+  //     children: values.children,
+  //     preteens: values.preteens,
+  //     prices: prices,
+  //     ticketPrice:
+  //       values.numberOfPassengers * prices.adults +
+  //       values.preteens * prices.preteens +
+  //       values.children * prices.children,
+  //     isPaid: values.isPaid,
+  //     id: cardID,
+  //     userEmail: user,
+  //     tourID: tourRef.id,
+  //   });
+  //   setTicketInfo({
+  //     ...ticketInfo,
+  //     boat: selectedRide.data.name,
+  //     date: tour.data.date,
+  //     numberOfPassengers: values.numberOfPassengers,
+  //     roomNumber: values.roomNumber,
+  //     children: values.children,
+  //     preteens: values.preteens,
+  //     promoCode: values.promoCode,
+  //     prices: prices,
+  //     ticketPrice:
+  //       values.numberOfPassengers * prices.adults +
+  //       values.preteens * prices.preteens +
+  //       values.children * prices.children,
+  //     priceWithDiscount: values.promoCode
+  //       ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+  //         values.preteens * (prices.preteens - (prices.preteens && 250)) +
+  //         values.children * (prices.children - (prices.children && 250))
+  //       : values.numberOfPassengers * prices.adults +
+  //         values.preteens * prices.preteens +
+  //         values.children * prices.children,
+  //     isPaid: values.isPaid,
+  //   });
+  //   updateDoc(tourRef, {
+  //     availableSeats:
+  //       tour.data.availableSeats -
+  //       (values.numberOfPassengers + values.preteens + values.children),
+  //     reservations: arrayUnion({
+  //       id: cardID,
+  //       userEmail: user,
+  //       numberOfPassengers: values.numberOfPassengers,
+  //       children: values.children,
+  //       preteens: values.preteens,
+  //       roomNumber: values.roomNumber,
+  //       isPaid: values.isPaid,
+  //       promoCode: values.promoCode,
+  //       ticketPrice: values.promoCode
+  //         ? values.numberOfPassengers *
+  //             (prices.adults - (prices.adults && 500)) +
+  //           values.preteens * (prices.preteens - (prices.preteens && 250)) +
+  //           values.children * (prices.children - (prices.children && 250))
+  //         : values.numberOfPassengers * prices.adults +
+  //           values.preteens * prices.preteens +
+  //           values.children * prices.children,
+  //     }),
+  //   });
+  //   // setSelectedRide(null);
+  //   resetForm();
+  //   setSuccess(true);
+  //   setFreshData(!freshData);
+  // };
   return (
     <BookingProvider
       value={{
@@ -215,7 +215,14 @@ const WrapperReservation = () => {
         validationSchema,
         plusPreteenCount,
         minusPreteenCount,
-        handleSubmit,
+        fail,
+        setFail,
+        ticketInfo,
+        setTicketInfo,
+        user,
+        freshData,
+        setFreshData,
+        setSuccess,
         reservationInfo,
         EUR,
         prices,

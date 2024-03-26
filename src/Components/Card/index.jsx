@@ -68,14 +68,14 @@ function CardContainer({ ride }) {
       setOpenBooking("");
     }
 
-    const headerRef = document
-      .querySelector(".div-header")
-      .getBoundingClientRect();
-    window.scrollTo({
-      left: headerRef.left,
-      top: headerRef.top,
-      behavior: "smooth",
-    });
+    // const headerRef = document
+    //   .querySelector(".div-header")
+    //   .getBoundingClientRect();
+    // window.scrollTo({
+    //   left: headerRef.left,
+    //   top: headerRef.top,
+    //   behavior: "smooth",
+    // });
 
     setShowOverlay(true);
     // console.log(selectedRide?.id);
