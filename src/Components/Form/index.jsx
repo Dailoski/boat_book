@@ -16,9 +16,11 @@ import { db } from "../../firebase";
 const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
   const handleSubmit = async (values, { resetForm }) => {
     const tour = selectedTour;
-    const tourRef = doc(db, "tours", tour.id);
+    const tourRef = doc(db, "tours2024", tour.id);
     const docSnap = await getDoc(tourRef);
     tour.data = docSnap.data();
+
+
 
     if (
       values.numberOfPassengers + values.preteens + values.children >
@@ -154,6 +156,11 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
     boxShadow: 24,
     p: 4,
   };
+  const buttonColor = selectedTour?.data.type === "daytime"
+  ? "primary"
+  : selectedTour?.data.type === "night"
+  ? "secondary"
+  : "warning"
   return (
     <Modal
       open={openBooking}
@@ -247,7 +254,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                 <Form className="res-form" ref={formRef}>
                   <section className="form-section">
                     <Button
-                      color="warning"
+                      color={buttonColor}
                       sx={{ fontWeight: "bold", color: "white" }}
                       variant="contained"
                       onClick={() => {
@@ -272,7 +279,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                       }}
                     >
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() =>
@@ -295,7 +302,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                         disabled
                       />
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() =>
@@ -318,7 +325,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                       }}
                     >
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() => minusPreteenCount(setFieldValue, values)}
@@ -339,7 +346,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                         disabled
                       />
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() => plusPreteenCount(setFieldValue, values)}
@@ -356,7 +363,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                       }}
                     >
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() =>
@@ -379,7 +386,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                         disabled
                       />
                       <Button
-                        color="warning"
+                        color={buttonColor}
                         size="large"
                         variant="contained"
                         onClick={() => plusChildrenCount(setFieldValue, values)}
@@ -539,7 +546,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                     " din." } */}
                     </p>
                     <Button
-                      color="warning"
+                      color={buttonColor}
                       sx={{ fontWeight: "bold" }}
                       variant="contained"
                       type="submit"

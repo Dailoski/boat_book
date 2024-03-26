@@ -30,7 +30,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchAllDocs = async () => {
-      const collectionRef = collection(db, "tours");
+      const collectionRef = collection(db, "tours2024");
       const querySnapshot = await getDocs(collectionRef);
       const docsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
