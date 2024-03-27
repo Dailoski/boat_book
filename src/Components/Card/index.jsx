@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
+import CardCarousel from "../CardCarousel";
 
 function CardContainer({ ride }) {
   const { allDocs, rides, setShowOverlay } = useContext(applicationContext);
@@ -9,43 +10,10 @@ function CardContainer({ ride }) {
   const [openBooking, setOpenBooking] = useState("");
   const scrollRef = useRef(null);
   const cardRef = useRef();
-  // const refbuttons = document.querySelectorAll(".refbutton");
-  // useEffect(() => {
-  //   refbuttons.forEach((btn) => {
-  //     const btnRef = btn.getBoundingClientRect();
+  const [carousel, showCarousel] = useState(false);
 
-  //     btn.addEventListener("click", function () {
-  //       if (openBooking === "" || openBooking?.id !== selectedRide?.id) {
-  //         window.scrollTo({
-  //           left: btnRef.left + 50,
-  //           top: btnRef.top + 10,
-  //           behavior: "smooth",
-  //         });
-  //       } else {
-  //         window.scrollTo({
-  //           left: btnRef.left,
-  //           top: btnRef.top,
-  //           behavior: "smooth",
-  //         });
-  //       }
-  //     });
-  //   });
-  // }, []);
-  const handleScroll = (ref) => {
-    window.scrollTo({
-      top: ref?.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const scrollToElement = () => {
-    const { current } = scrollRef;
-
-    current?.scrollIntoView({ behavior: "smooth" });
-  };
-  const scrollToCard = () => {
-    cardRef.current?.scrollIntoView({ behavior: "smooth" });
+  const handleCarousel = function () {
+    showCarousel((prev) => !prev);
   };
 
   const handleImageClick = (selectedBoat) => {
@@ -68,15 +36,6 @@ function CardContainer({ ride }) {
       setOpenBooking("");
     }
 
-    // const headerRef = document
-    //   .querySelector(".div-header")
-    //   .getBoundingClientRect();
-    // window.scrollTo({
-    //   left: headerRef.left,
-    //   top: headerRef.top,
-    //   behavior: "smooth",
-    // });
-
     setShowOverlay(true);
     // console.log(selectedRide?.id);
     // console.log(openBooking?.id);
@@ -90,6 +49,7 @@ function CardContainer({ ride }) {
           style={{ width: "80px", position: "absolute" }}
           src={`${process.env.PUBLIC_URL}/gallery.svg`}
           alt="pointer-img"
+          onClick={handleCarousel}
         />
 
         <img src={ride.data.image} alt={ride.data.name} key={ride.id} />
@@ -180,6 +140,7 @@ function CardContainer({ ride }) {
       ) : (
         ""
       )}
+      {carousel ? <CardCarousel handleCarousel={handleCarousel} /> : ""}
     </>
   );
 }
