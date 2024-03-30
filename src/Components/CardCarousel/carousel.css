@@ -1,3 +1,6 @@
 /* .carousel {
   position: absolute;
 } */
+
+@media screen and (min-width: 700px) {
+}

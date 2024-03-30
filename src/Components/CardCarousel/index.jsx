@@ -28,7 +28,7 @@ function CardCarousel({ handleCarousel }) {
       aria-describedby="modal-modal-description"
       style={{ overflow: "scroll" }}
     >
-      <Box sx={style}>
+      <Box sx={style} className="carousel-box">
         <Button
           size="small"
           onClick={handleCarousel}

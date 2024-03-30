@@ -28,7 +28,13 @@ const Header = () => {
         </Link>
       )}
 
-      <h3>{userData.full_name}</h3>
+      {userData ? (
+        <h3 style={{ fontFamily: "Gagalin" }}>
+          {userData.full_name.toUpperCase()}
+        </h3>
+      ) : (
+        ""
+      )}
       {(path === "/admin_page" || path === "/reservation") && (
         <Link>
           <button className="log-out" onClick={logOut}>

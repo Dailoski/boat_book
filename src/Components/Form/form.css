@@ -1,5 +1,5 @@
 @media screen and (max-width: 580px) {
-  .form-modal {
+  /* .form-modal {
     position: absolute;
     top: 20%;
     left: 13%;
@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+  } */
 }
 body {
   display: grid;

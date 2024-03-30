@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -14,13 +14,12 @@ import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
+  const [formModal, setFormModal] = useState(false);
   const handleSubmit = async (values, { resetForm }) => {
     const tour = selectedTour;
     const tourRef = doc(db, "tours2024", tour.id);
     const docSnap = await getDoc(tourRef);
     tour.data = docSnap.data();
-
-
 
     if (
       values.numberOfPassengers + values.preteens + values.children >
@@ -110,7 +109,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
     setSuccess(true);
     setFreshData(!freshData);
     setOpenBooking("");
-    setShowOverlay(false);
+    // setShowOverlay(false);
   };
   const { freshData, setFreshData, setShowOverlay } =
     useContext(applicationContext);
@@ -145,10 +144,25 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
   } = useContext(bookingContext);
   const style = {
     position: "absolute",
-    top: "60%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -40%)",
-    width: 400,
+    width: "400px",
+
+    bgcolor: "#000000",
+    cololr: "#FFF",
+    outline: "none",
+    maxHeight: "fit-content",
+    boxShadow: 24,
+    p: 4,
+  };
+  const style2 = {
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -40%)",
+    width: "400px",
+    height: "70vh",
     bgcolor: "#000000",
     cololr: "#FFF",
     border: "2px solid #000",
@@ -156,21 +170,27 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
     boxShadow: 24,
     p: 4,
   };
-  const buttonColor = selectedTour?.data.type === "daytime"
-  ? "primary"
-  : selectedTour?.data.type === "night"
-  ? "secondary"
-  : "warning"
+  const buttonColor =
+    selectedTour?.data.type === "daytime"
+      ? "primary"
+      : selectedTour?.data.type === "night"
+      ? "secondary"
+      : "warning";
   return (
     <Modal
       open={openBooking}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      style={{ overflow: "scroll" }}
+      style={{ overflow: "scroll", zIndex: "1000", outline: "none" }}
     >
-      <Box sx={style}>
+      <Box sx={style} className="box-modal">
         <div
-          style={{ color: "#FFF", display: "flex", flexDirection: "column" }}
+          style={{
+            color: "#FFF",
+            display: "flex",
+            flexDirection: "column",
+            border: "4px solid black",
+          }}
           // className="form-modal"
           // style={{ visibility: openBooking === "" ? "hidden" : "visible" }}
         >
@@ -187,7 +207,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
             size="small"
             onClick={function () {
               setOpenBooking("");
-              setShowOverlay(false);
+              // setShowOverlay(false);
             }}
             style={{
               color: "#ed6c02",
@@ -233,6 +253,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                       key={i}
                       onClick={() => {
                         setSelectedId(id);
+                        setFormModal(true);
                         handleRef();
                       }}
                       isSelected={selectedId === id}
@@ -244,296 +265,321 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
               )}
             </div>
           </div>
-          {selectedTour && filteredDates.length > 0 && (
-            <Formik
-              initialValues={reservationInfo}
-              validationSchema={() => validationSchema(selectedTour)}
-              onSubmit={handleSubmit}
-            >
-              {({ values, setFieldValue }) => (
-                <Form className="res-form" ref={formRef}>
-                  <section className="form-section">
-                    <Button
-                      color={buttonColor}
-                      sx={{ fontWeight: "bold", color: "white" }}
-                      variant="contained"
-                      onClick={() => {
-                        setFreshData(!freshData);
-                      }}
-                      size="large"
-                      style={{ width: "100%" }}
-                    >
-                      {selectedTour.data.availableSeats +
-                        (selectedTour.data.availableSeats === 1
-                          ? " seat left"
-                          : " seats left")}
-                    </Button>
-                    <h3>
-                      Adults: <span>*</span>
-                    </h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        width: "100%",
-                      }}
-                    >
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() =>
-                          minusPassengerCount(setFieldValue, values)
-                        }
-                        aria-label="add"
-                      >
-                        <RemoveIcon />
-                      </Button>
-                      <Field
-                        style={{
-                          width: "30px",
-                          fontSize: "30px",
-                          color: "white",
-                          backgroundColor: "transparent",
-                          border: "none",
-                        }}
-                        type="number"
-                        name="numberOfPassengers"
-                        disabled
-                      />
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() =>
-                          plusPassengerCount(setFieldValue, values)
-                        }
-                        aria-label="add"
-                      >
-                        <AddIcon />
-                      </Button>
-                    </div>
-                    <p className="error-handle">
-                      <ErrorMessage name="numberOfPassengers" />
+
+          <Modal
+            open={selectedTour && filteredDates.length > 0 && formModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            style={{
+              overflow: "scroll",
+              zIndex: "9999",
+            }}
+          >
+            <Box sx={style} className="box-modal">
+              <div
+                style={{
+                  color: "#FFF",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                // className="form-modal"
+                // style={{ visibility: openBooking === "" ? "hidden" : "visible" }}
+              >
+                <Button
+                  size="small"
+                  onClick={function () {
+                    console.log(filteredDates);
+                    console.log(selectedTour);
+                    setFormModal(false);
+                  }}
+                  style={{
+                    color: "#ed6c02",
+                    alignSelf: "start ",
+                    marginTop: "13px",
+                    paddingTop: "25px",
+                  }}
+                >
+                  Back
+                </Button>
+                <div
+                  className="tour-display"
+                  ref={ref}
+                  style={{ gap: ".5rem" }}
+                >
+                  {selectedRide && <p>Selected Tour:</p>}
+                  {selectedRide && (
+                    <p style={{ fontSize: "25px", color: "cyan" }}>
+                      {selectedRide?.data.name}
                     </p>
+                  )}
+                  <p>Date: {selectedTour?.data.date}</p>
+                  <p style={{ marginBottom: ".5rem" }}>
+                    Type:{" "}
+                    {selectedTour?.data.type[0].toUpperCase() +
+                      selectedTour?.data.type.slice(1)}
+                  </p>
+                </div>
+                <Formik
+                  initialValues={reservationInfo}
+                  validationSchema={() => validationSchema(selectedTour)}
+                  onSubmit={handleSubmit}
+                >
+                  {({ values, setFieldValue }) => (
+                    <Form className="res-form" ref={formRef}>
+                      <section className="form-section">
+                        <Button
+                          color={buttonColor}
+                          sx={{ fontWeight: "bold", color: "white" }}
+                          variant="contained"
+                          onClick={() => {
+                            setFreshData(!freshData);
+                          }}
+                          size="large"
+                          style={{ width: "100%" }}
+                        >
+                          {selectedTour.data.availableSeats +
+                            (selectedTour.data.availableSeats === 1
+                              ? " seat left"
+                              : " seats left")}
+                        </Button>
+                        <h3>
+                          Adults: <span>*</span>
+                        </h3>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                            width: "100%",
+                          }}
+                        >
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              minusPassengerCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <RemoveIcon />
+                          </Button>
+                          <Field
+                            style={{
+                              width: "30px",
+                              fontSize: "30px",
+                              color: "white",
+                              backgroundColor: "transparent",
+                              border: "none",
+                            }}
+                            type="number"
+                            name="numberOfPassengers"
+                            disabled
+                          />
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              plusPassengerCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <AddIcon />
+                          </Button>
+                        </div>
+                        <p className="error-handle">
+                          <ErrorMessage name="numberOfPassengers" />
+                        </p>
 
-                    <h3>Kids 8-12 years:</h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                      }}
-                    >
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() => minusPreteenCount(setFieldValue, values)}
-                        aria-label="add"
-                      >
-                        <RemoveIcon />
-                      </Button>
-                      <Field
-                        style={{
-                          width: "30px",
-                          fontSize: "30px",
-                          color: "white",
-                          backgroundColor: "transparent",
-                          border: "none",
-                        }}
-                        type="number"
-                        name="preteens"
-                        disabled
-                      />
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() => plusPreteenCount(setFieldValue, values)}
-                        aria-label="add"
-                      >
-                        <AddIcon />
-                      </Button>
-                    </div>
-                    <h3>Kids 0-7 years:</h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                      }}
-                    >
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() =>
-                          minusChildrenCount(setFieldValue, values)
-                        }
-                        aria-label="add"
-                      >
-                        <RemoveIcon />
-                      </Button>
-                      <Field
-                        style={{
-                          width: "30px",
-                          fontSize: "30px",
-                          color: "white",
-                          backgroundColor: "transparent",
-                          border: "none",
-                        }}
-                        type="number"
-                        name="children"
-                        disabled
-                      />
-                      <Button
-                        color={buttonColor}
-                        size="large"
-                        variant="contained"
-                        onClick={() => plusChildrenCount(setFieldValue, values)}
-                        aria-label="add"
-                      >
-                        <AddIcon />
-                      </Button>
-                    </div>
+                        <h3>Kids 8-12 years:</h3>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                          }}
+                        >
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              minusPreteenCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <RemoveIcon />
+                          </Button>
+                          <Field
+                            style={{
+                              width: "30px",
+                              fontSize: "30px",
+                              color: "white",
+                              backgroundColor: "transparent",
+                              border: "none",
+                            }}
+                            type="number"
+                            name="preteens"
+                            disabled
+                          />
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              plusPreteenCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <AddIcon />
+                          </Button>
+                        </div>
+                        <h3>Kids 0-7 years:</h3>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-evenly",
+                          }}
+                        >
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              minusChildrenCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <RemoveIcon />
+                          </Button>
+                          <Field
+                            style={{
+                              width: "30px",
+                              fontSize: "30px",
+                              color: "white",
+                              backgroundColor: "transparent",
+                              border: "none",
+                            }}
+                            type="number"
+                            name="children"
+                            disabled
+                          />
+                          <Button
+                            color={buttonColor}
+                            size="large"
+                            variant="contained"
+                            onClick={() =>
+                              plusChildrenCount(setFieldValue, values)
+                            }
+                            aria-label="add"
+                          >
+                            <AddIcon />
+                          </Button>
+                        </div>
 
-                    <h3>
-                      Room number or name: <span>*</span>
-                    </h3>
+                        <h3>
+                          Room number or name: <span>*</span>
+                        </h3>
 
-                    <Field
-                      type="text"
-                      name="roomNumber"
-                      placeholder="Number of room"
-                      className="form-field"
-                      style={{
-                        backgroundColor: "white",
-                        height: "44px",
-                        fontSize: "20px",
-                      }}
-                    />
-                    <p className="error-handle">
-                      <ErrorMessage name="roomNumber" />
-                    </p>
+                        <Field
+                          type="text"
+                          name="roomNumber"
+                          placeholder="Number of room"
+                          className="form-field"
+                          style={{
+                            backgroundColor: "white",
+                            height: "44px",
+                            fontSize: "20px",
+                          }}
+                        />
+                        <p className="error-handle">
+                          <ErrorMessage name="roomNumber" />
+                        </p>
 
-                    {/* <h3>
+                        {/* <h3>
                   Promo Code: <span>*</span>
                 </h3> */}
-                    <Field
-                      className="checkbox"
-                      component="div"
-                      name="promoCode"
-                    >
-                      <label htmlFor="promoCode">
-                        Promo
                         <Field
-                          type="checkbox"
-                          id="promoCode"
+                          className="checkbox"
+                          component="div"
                           name="promoCode"
-                        />
-                      </label>
-                    </Field>
-                    <h3>
-                      Payment method: <span>*</span>
-                    </h3>
-                    <Field
-                      className="radio-group"
-                      component="div"
-                      name="isPaid"
-                      style={{
-                        display: "flex ",
-                        flexDirection: "column",
-                        fontSize: "24px",
-                        marginTop: "7px",
-                        gap: ".3rem",
-                      }}
-                    >
-                      <label
-                        htmlFor="radioOne"
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          background: "#FFF",
-                          color: "#000",
-                          padding: "0.3rem",
-                        }}
-                      >
-                        Paid in cash
+                        >
+                          <label htmlFor="promoCode">
+                            Promo
+                            <Field
+                              type="checkbox"
+                              id="promoCode"
+                              name="promoCode"
+                            />
+                          </label>
+                        </Field>
+                        <h3>
+                          Payment method: <span>*</span>
+                        </h3>
                         <Field
-                          type="radio"
-                          id="radioOne"
+                          className="radio-group"
+                          component="div"
                           name="isPaid"
-                          value="true"
-                        />
-                      </label>
-                      <label
-                        style={{
-                          color: "red",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          background: "#FFF",
-                          padding: "0.3rem",
-                          marginBottom: "13px",
-                        }}
-                        htmlFor="radioTwo"
-                      >
-                        Not paid
-                        <Field
-                          type="radio"
-                          id="radioTwo"
-                          name="isPaid"
-                          value="false"
-                        />
-                      </label>
-                    </Field>
-                    {console.log(values.promoCode)}
-                    <p style={{ fontSize: "1.2em" }}>
-                      Total price:{" "}
-                      {values.promoCode
-                        ? values.numberOfPassengers *
-                            (prices.adults - (prices.adults && 500)) +
-                          values.preteens *
-                            (prices.preteens - (prices.preteens && 250)) +
-                          values.children *
-                            (prices.children - (prices.children && 250))
-                        : values.numberOfPassengers * prices.adults +
-                          values.preteens * prices.preteens +
-                          values.children * prices.children}{" "}
-                      DINARS
-                      {/* {"Total price: " +
-                    values.promoCode ? parseInt(
-                      values.numberOfPassengers * (prices.adults - 600) +
-                        values.preteens * prices.preteens +
-                        values.children * prices.children
-                    ) : parseInt(
-                      values.numberOfPassengers * (prices.adults + 200) +
-                        values.preteens * (prices.preteens + 200) +
-                        values.children * prices.children
-                    )  +
-                    " din." } */}
-                    </p>
-                    <p style={{ fontSize: "1.2em" }}>
-                      <span style={{ visibility: "hidden" }}>Total price:</span>{" "}
-                      {values.promoCode
-                        ? Math.round(
-                            (values.numberOfPassengers *
-                              (prices.adults - (prices.adults && 500)) +
+                          style={{
+                            display: "flex ",
+                            flexDirection: "column",
+                            fontSize: "24px",
+                            marginTop: "7px",
+                            gap: ".3rem",
+                          }}
+                        >
+                          <label
+                            htmlFor="radioOne"
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              background: "#FFF",
+                              color: "#000",
+                              padding: "0.3rem",
+                            }}
+                          >
+                            Paid in cash
+                            <Field
+                              type="radio"
+                              id="radioOne"
+                              name="isPaid"
+                              value="true"
+                            />
+                          </label>
+                          <label
+                            style={{
+                              color: "red",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              background: "#FFF",
+                              padding: "0.3rem",
+                              marginBottom: "13px",
+                            }}
+                            htmlFor="radioTwo"
+                          >
+                            Not paid
+                            <Field
+                              type="radio"
+                              id="radioTwo"
+                              name="isPaid"
+                              value="false"
+                            />
+                          </label>
+                        </Field>
+                        {console.log(values.promoCode)}
+                        <p style={{ fontSize: "1.2em" }}>
+                          Total price:{" "}
+                          {values.promoCode
+                            ? values.numberOfPassengers *
+                                (prices.adults - (prices.adults && 500)) +
                               values.preteens *
                                 (prices.preteens - (prices.preteens && 250)) +
                               values.children *
-                                (prices.children - (prices.children && 250))) /
-                              EUR
-                          )
-                        : Math.round(
-                            (values.numberOfPassengers *
-                              Math.round(
-                                prices.adults +
-                                  values.preteens * prices.preteens +
-                                  values.children * prices.children
-                              )) /
-                              EUR
-                          )}{" "}
-                      EUROS
-                      {/* {"Total price: " +
+                                (prices.children - (prices.children && 250))
+                            : values.numberOfPassengers * prices.adults +
+                              values.preteens * prices.preteens +
+                              values.children * prices.children}{" "}
+                          DINARS
+                          {/* {"Total price: " +
                     values.promoCode ? parseInt(
                       values.numberOfPassengers * (prices.adults - 600) +
                         values.preteens * prices.preteens +
@@ -544,22 +590,62 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                         values.children * prices.children
                     )  +
                     " din." } */}
-                    </p>
-                    <Button
-                      color={buttonColor}
-                      sx={{ fontWeight: "bold" }}
-                      variant="contained"
-                      type="submit"
-                      size="large"
-                      style={{ width: "100%", marginTop: "13px" }}
-                    >
-                      Book now
-                    </Button>
-                  </section>
-                </Form>
-              )}
-            </Formik>
-          )}
+                        </p>
+                        <p style={{ fontSize: "1.2em" }}>
+                          <span style={{ visibility: "hidden" }}>
+                            Total price:
+                          </span>{" "}
+                          {values.promoCode
+                            ? Math.round(
+                                (values.numberOfPassengers *
+                                  (prices.adults - (prices.adults && 500)) +
+                                  values.preteens *
+                                    (prices.preteens -
+                                      (prices.preteens && 250)) +
+                                  values.children *
+                                    (prices.children -
+                                      (prices.children && 250))) /
+                                  EUR
+                              )
+                            : Math.round(
+                                (values.numberOfPassengers *
+                                  Math.round(
+                                    prices.adults +
+                                      values.preteens * prices.preteens +
+                                      values.children * prices.children
+                                  )) /
+                                  EUR
+                              )}{" "}
+                          EUROS
+                          {/* {"Total price: " +
+                    values.promoCode ? parseInt(
+                      values.numberOfPassengers * (prices.adults - 600) +
+                        values.preteens * prices.preteens +
+                        values.children * prices.children
+                    ) : parseInt(
+                      values.numberOfPassengers * (prices.adults + 200) +
+                        values.preteens * (prices.preteens + 200) +
+                        values.children * prices.children
+                    )  +
+                    " din." } */}
+                        </p>
+                        <Button
+                          color={buttonColor}
+                          sx={{ fontWeight: "bold" }}
+                          variant="contained"
+                          type="submit"
+                          size="large"
+                          style={{ width: "100%", marginTop: "13px" }}
+                        >
+                          Book now
+                        </Button>
+                      </section>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            </Box>
+          </Modal>
         </div>
       </Box>
     </Modal>

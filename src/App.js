@@ -26,7 +26,7 @@ const App = () => {
   );
   const [allDocs, setAllDocs] = useState([]);
   const [rides, setAllRides] = useState([]);
-  const [showOverlay, setShowOverlay] = useState(false);
+  // const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     const fetchAllDocs = async () => {
@@ -107,7 +107,7 @@ const App = () => {
             setFreshData,
             freshData,
             rides,
-            setShowOverlay,
+            // setShowOverlay,
           }}
         >
           {accessToken ? (
@@ -140,7 +140,7 @@ const App = () => {
           )}
         </ApplicationProvider>
       </NoInternetConnection>
-      {showOverlay ? <Overlay /> : ""}
+      {/* {showOverlay ? <Overlay /> : ""} */}
     </div>
   );
 };
