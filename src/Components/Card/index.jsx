@@ -35,7 +35,7 @@ function CardContainer({ ride }) {
     } else {
       setOpenBooking("");
     }
-    console.log(ride);
+
     // setShowOverlay(true);
     // console.log(selectedRide?.id);
     // console.log(openBooking?.id);
