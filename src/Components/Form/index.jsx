@@ -148,7 +148,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
     left: "50%",
     transform: "translate(-50%, -40%)",
     width: "400px",
-
+    margin: "5rem 0",
     bgcolor: "#000000",
     cololr: "#FFF",
     outline: "none",
@@ -181,7 +181,11 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
       open={openBooking}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      style={{ overflow: "scroll", zIndex: "1000", outline: "none" }}
+      style={{
+        overflow: "scroll",
+        zIndex: "1000",
+        outline: "none",
+      }}
     >
       <Box sx={style} className="box-modal">
         <div
@@ -212,7 +216,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
             style={{
               color: "#ed6c02",
               alignSelf: "end",
-              marginBottom: "13px",
+              marginTop: "23px",
             }}
           >
             Close
