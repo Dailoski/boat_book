@@ -7,6 +7,7 @@ import Footer from "../../Components/Footer";
 import CreateAccount from "../../Components/CreateAccount";
 
 import "./admin-page.scss";
+import AdminHeader from "../../Components/AdminHeader";
 
 const AdminPage = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -22,10 +23,14 @@ const AdminPage = () => {
 
   return (
     <div className="div-admin-page">
-      <Header />
+      <AdminHeader />
       <WrapperAdmin handleOpen={handleOpen} />
       {openModal && (
-        <TourModal handleClose={handleClose} clickedTour={clickedTour} setClickedTour={setClickedTour}/>
+        <TourModal
+          handleClose={handleClose}
+          clickedTour={clickedTour}
+          setClickedTour={setClickedTour}
+        />
       )}
       <CreateAccount />
       <Footer />

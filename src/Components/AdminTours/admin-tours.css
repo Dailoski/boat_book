@@ -1,21 +1,25 @@
 :root {
-  --height:50px;
+  --height: 50px;
 }
 
-.boat-toggle-div, .past-toggle-div {
+.boat-toggle-div,
+.past-toggle-div {
   margin: 10px;
   display: flex;
   justify-content: center;
+
   gap: 10px;
 }
-.boat-toggle-div button, .past-toggle-div button {
+.boat-toggle-div button,
+.past-toggle-div button {
   border: none;
   padding: 5px;
   color: rgb(46, 40, 94);
   background-color: rgb(49, 190, 200);
-  background: #21307C;
+  background: #21307c;
 }
-.boat-toggle-div button.selected, .past-toggle-div button.selected {
+.boat-toggle-div button.selected,
+.past-toggle-div button.selected {
   background-color: white;
   box-shadow: 0 0 10px 0 white;
   color: rgb(46, 40, 94);
@@ -63,4 +67,4 @@
 }
 .div-admin-tours main section .del {
   background-color: #721717;
-}/*# sourceMappingURL=admin-tours.css.map */
+} /*# sourceMappingURL=admin-tours.css.map */

@@ -79,7 +79,7 @@ const AdminReservationForm = () => {
 
   return (
     <div className="div-admin-res">
-      <h3> a tour:</h3>
+      <h3 style={{ paddingTop: "1.3rem" }}>Create a tour:</h3>
 
       <Formik
         initialValues={defaultValue}

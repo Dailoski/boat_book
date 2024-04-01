@@ -32,7 +32,7 @@ const AdminTours = ({ handleOpen }) => {
     );
   return (
     <div className="div-admin-tours">
-      <div className="boat-toggle-div">
+      <div className="boat-toggle-div" style={{ flexFlow: "row wrap" }}>
         {rides.map((ride, i) => (
           <button
             key={i}

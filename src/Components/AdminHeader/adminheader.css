@@ -1,0 +1,19 @@
+.admin-header {
+  height: 8vh;
+  background-color: #ed6c02;
+  box-shadow: 0px 0px 19px -3px rgb(29, 29, 107);
+  color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.log-out {
+  background-color: #fec034;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 75px;
+  cursor: pointer;
+}
