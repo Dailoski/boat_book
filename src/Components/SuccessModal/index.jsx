@@ -203,7 +203,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
               <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaid : styles.notPaid}>{JSON.parse(ticketInfo.isPaid) ? "Paid in cash " : "Not paid"}</Text>
               <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>TOTAL:</Text>
               <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>{ticketInfo.priceWithDiscount} DINARS</Text>
-              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>{Math.round(ticketInfo.priceWithDiscount / 118)} EUROS</Text>
+              <Text style={JSON.parse(ticketInfo.isPaid) ? styles.isPaidBig : styles.notPaidBig}>{Math.round(ticketInfo.priceWithDiscount / 118  *100)/100} EUROS</Text>
           <Image style={{width: "95%", marginTop:"5px"}} src={barcode} />
 
             </View>

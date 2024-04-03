@@ -609,17 +609,16 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                                   values.children *
                                     (prices.children -
                                       (prices.children && 250))) /
-                                  EUR
-                              )
+                                  EUR 
+                                  * 100)/100
                             : Math.round(
                                 (values.numberOfPassengers *
-                                  Math.round(
                                     prices.adults +
                                       values.preteens * prices.preteens +
                                       values.children * prices.children
-                                  )) /
+                                  ) /
                                   EUR
-                              )}{" "}
+                              * 100)/100}{" "}
                           EUROS
                           {/* {"Total price: " +
                     values.promoCode ? parseInt(
