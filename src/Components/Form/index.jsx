@@ -183,7 +183,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
       aria-describedby="modal-modal-description"
       style={{
         overflow: "scroll",
-        zIndex: "1000",
+        zIndex: "9999",
         outline: "none",
       }}
     >
@@ -601,7 +601,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                           </span>{" "}
                           {values.promoCode
                             ? Math.round(
-                                (values.numberOfPassengers *
+                                ((values.numberOfPassengers *
                                   (prices.adults - (prices.adults && 500)) +
                                   values.preteens *
                                     (prices.preteens -
@@ -609,16 +609,16 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                                   values.children *
                                     (prices.children -
                                       (prices.children && 250))) /
-                                  EUR 
-                                  * 100)/100
+                                  EUR) *
+                                  100
+                              ) / 100
                             : Math.round(
-                                (values.numberOfPassengers *
-                                    prices.adults +
-                                      values.preteens * prices.preteens +
-                                      values.children * prices.children
-                                  ) /
-                                  EUR
-                              * 100)/100}{" "}
+                                ((values.numberOfPassengers * prices.adults +
+                                  values.preteens * prices.preteens +
+                                  values.children * prices.children) /
+                                  EUR) *
+                                  100
+                              ) / 100}{" "}
                           EUROS
                           {/* {"Total price: " +
                     values.promoCode ? parseInt(

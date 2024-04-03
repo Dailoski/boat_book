@@ -45,7 +45,7 @@ const CreateAccount = () => {
   };
   return (
     <div className="div-create-account" style={{ padding: "0.5rem" }}>
-      <button {...getToggleProps()}>
+      <button {...getToggleProps()} style={{ padding: "0.5rem" }}>
         {isExpanded
           ? "Collapse, Vuchko"
           : "DO YOU WANT TO CREATE ACCOUNT, VUCHKO?"}

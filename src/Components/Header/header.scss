@@ -1,7 +1,7 @@
 .div-header {
   height: 8vh;
-  background: #ED6C02;
-  box-shadow: 0px 0px 19px -3px #ED6C02;
+  background: #ed6c02;
+  box-shadow: 0px 0px 19px -3px #ed6c02;
   color: black;
   display: flex;
   justify-content: space-around;
@@ -17,7 +17,7 @@
   button {
     background-color: transparent;
 
-    color: black;
+    color: rgb(22, 13, 13);
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -25,7 +25,7 @@
     cursor: pointer;
   }
   .log-out {
-    background-color: #FEC034;
+    background-color: #fec034;
     color: black;
     border: none;
     border-radius: 5px;
@@ -33,7 +33,7 @@
     width: 75px;
     cursor: pointer;
   }
-  img{
+  img {
     width: 70px;
   }
 }
