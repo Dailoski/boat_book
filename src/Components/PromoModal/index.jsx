@@ -31,7 +31,14 @@ function PromoModal({ handlePromo }) {
       fullWidth={true}
     >
       <Box sx={style} className="carousel-box">
-        <div style={{ fontFamily: "Gagalin", color: "#FFF" }}>
+        <div
+          style={{
+            fontFamily: "Gagalin",
+            color: "#FFF",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Button
             size="small"
             onClick={handlePromo}
