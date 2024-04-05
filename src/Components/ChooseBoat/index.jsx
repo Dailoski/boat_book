@@ -20,7 +20,7 @@ const ChooseBoat = ({
   const filteredRItes = sortedRides.filter((a) => a.data.isAvailable);
   return (
     <div className="div-choose-boat">
-      <div className="choose-boat">
+      <div className="choose-boat" style={{ alignItems: "flex-start" }}>
         {/* {filteredRItes.map(
         ride => (
           <img

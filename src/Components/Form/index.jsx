@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
+const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
   const [formModal, setFormModal] = useState(false);
   const handleSubmit = async (values, { resetForm }) => {
     const tour = selectedTour;
@@ -502,20 +502,24 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking }, ref) => {
                         {/* <h3>
                   Promo Code: <span>*</span>
                 </h3> */}
-                        <Field
-                          className="checkbox"
-                          component="div"
-                          name="promoCode"
-                        >
-                          <label htmlFor="promoCode">
-                            Promo
-                            <Field
-                              type="checkbox"
-                              id="promoCode"
-                              name="promoCode"
-                            />
-                          </label>
-                        </Field>
+                        {ride.data.promoCode ? (
+                          <Field
+                            className="checkbox"
+                            component="div"
+                            name="promoCode"
+                          >
+                            <label htmlFor="promoCode">
+                              Promo
+                              <Field
+                                type="checkbox"
+                                id="promoCode"
+                                name="promoCode"
+                              />
+                            </label>
+                          </Field>
+                        ) : (
+                          ""
+                        )}
                         <h3>
                           Payment method: <span>*</span>
                         </h3>

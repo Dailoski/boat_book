@@ -41,6 +41,11 @@ const Header = () => {
             Log Out
           </button>
         </Link>
+        // <img
+        //   src={`${process.env.PUBLIC_URL}/logout.svg`}
+        //   alt="logout"
+        //   onClick={logOut}
+        // />
       )}
     </div>
   );

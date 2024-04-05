@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
 import CardCarousel from "../CardCarousel";
+import PromoModal from "../PromoModal";
 
 function CardContainer({ ride }) {
   const { allDocs, rides, setShowOverlay } = useContext(applicationContext);
@@ -11,11 +12,14 @@ function CardContainer({ ride }) {
   const scrollRef = useRef(null);
   const cardRef = useRef();
   const [carousel, showCarousel] = useState(false);
+  const [promoModal, setPromoModal] = useState(false);
 
   const handleCarousel = function () {
     showCarousel((prev) => !prev);
   };
-
+  const handlePromo = function () {
+    setPromoModal((prev) => !prev);
+  };
   const handleImageClick = (selectedBoat) => {
     const dates = allDocs
       ?.filter((e) => e.data.boat === selectedBoat)
@@ -40,6 +44,7 @@ function CardContainer({ ride }) {
     // console.log(selectedRide?.id);
     // console.log(openBooking?.id);
     // console.log(scrollRef);
+    console.log(ride);
   };
   return (
     <>
@@ -77,16 +82,28 @@ function CardContainer({ ride }) {
             );
           })}
         </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              fontSize: "25px",
+              width: "fit-content",
 
-        <div
-          style={{
-            fontSize: "25px",
-            width: "fit-content",
-            fontFamily: "Gagalin",
-            margin: "15px auto 15px auto",
-          }}
-          dangerouslySetInnerHTML={{ __html: ride.data.price }}
-        ></div>
+              fontFamily: "Gagalin",
+              margin: "15px auto 15px auto",
+            }}
+            dangerouslySetInnerHTML={{ __html: ride.data.price }}
+          ></div>
+          {ride.data.promoCode ? (
+            <img
+              src={`${process.env.PUBLIC_URL}/promodugme.svg`}
+              alt=""
+              style={{ width: "150px", cursor: "pointer" }}
+              onClick={handlePromo}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
 
       <div>
@@ -136,11 +153,13 @@ function CardContainer({ ride }) {
           ref={scrollRef}
           openBooking={openBooking}
           setOpenBooking={setOpenBooking}
+          ride={ride}
         />
       ) : (
         ""
       )}
       {carousel ? <CardCarousel handleCarousel={handleCarousel} /> : ""}
+      {promoModal ? <PromoModal handlePromo={handlePromo} /> : ""}
     </>
   );
 }
