@@ -2,8 +2,9 @@ import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { promoMsg } from "../../msgs";
-function PromoModal({ handlePromo }) {
+
+import { beforeBookingMsg } from "../../msgs";
+function BookModal({ handleBookModal }) {
   const style = {
     position: "absolute",
     top: "50%",
@@ -14,7 +15,7 @@ function PromoModal({ handlePromo }) {
     width: "50%",
     bgcolor: "#000000",
     cololr: "#FFF",
-    border: "4px solid #FFF",
+    border: "5px solid #FFF",
 
     boxShadow: 24,
     outline: "none",
@@ -41,20 +42,20 @@ function PromoModal({ handlePromo }) {
         >
           <Button
             size="small"
-            onClick={handlePromo}
             style={{
               color: "red",
               alignSelf: "end",
               marginBottom: "13px",
             }}
+            onClick={handleBookModal}
           >
             Close
           </Button>
-          <p>{promoMsg}</p>
+          <p>{beforeBookingMsg}</p>
         </div>
       </Box>
     </Modal>
   );
 }
 
-export default PromoModal;
+export default BookModal;

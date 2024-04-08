@@ -3,6 +3,7 @@ import FormCard from "../Form";
 import { applicationContext, bookingContext } from "../../context";
 import CardCarousel from "../CardCarousel";
 import PromoModal from "../PromoModal";
+import BookModal from "../bookModal";
 
 function CardContainer({ ride }) {
   const { allDocs, rides, setShowOverlay } = useContext(applicationContext);
@@ -13,10 +14,14 @@ function CardContainer({ ride }) {
   const cardRef = useRef();
   const [carousel, showCarousel] = useState(false);
   const [promoModal, setPromoModal] = useState(false);
-
+  const [showBookModal, setShowBookModal] = useState(false);
+  const handleBookModal = function () {
+    setShowBookModal((prev) => !prev);
+  };
   const handleCarousel = function () {
     showCarousel((prev) => !prev);
   };
+
   const handlePromo = function () {
     setPromoModal((prev) => !prev);
   };
@@ -106,7 +111,7 @@ function CardContainer({ ride }) {
         </div>
       </div>
 
-      <div>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {/* <img style={{width:"100%"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} /> */}
         {ride.data.external ? (
           <img
@@ -124,30 +129,46 @@ function CardContainer({ ride }) {
             className="pointer refbutton"
             onClick={() => handleImageClick(ride.id)}
             style={{
-              width: "80%",
-              margin: "15px auto",
+              width: ride.data.beforeBooking ? "50%" : "80%",
+              margin: ride.data.beforeBooking ? "" : "15px auto",
               display: "block",
             }}
             src={`${process.env.PUBLIC_URL}/book.svg`}
             alt="pointer-img"
           />
-          // <img
-          //   className="pointer"
-          //   onClick={function () {
-          //     handleNavigate();
-          //     handleImageClick();
-          //   }}
-          //   style={{
-          //     width: "80%",
-          //     margin: "15px auto",
-          //     display: "block",
-          //   }}
-          //   src={`${process.env.PUBLIC_URL}/book.svg`}
-          //   alt="pointer-img"
-          // />
+        )}
+        {ride.data.beforeBooking ? (
+          <img
+            className="pointer refbutton"
+            style={{
+              width: "50%",
+            }}
+            src={`${process.env.PUBLIC_URL}/b4booknow.svg`}
+            alt="pointer-img"
+            onClick={handleBookModal}
+          />
+        ) : (
+          ""
+        )}
+        {ride.data.beforeBooking ? (
+          <a
+            href="tel:063-319-913"
+            style={{
+              width: "50%",
+              marginLeft: "50%",
+            }}
+          >
+            <img
+              className="pointer refbutton"
+              src={`${process.env.PUBLIC_URL}/callhere.svg`}
+              alt="pointer-img"
+            />
+          </a>
+        ) : (
+          ""
         )}
       </div>
-
+      {showBookModal ? <BookModal handleBookModal={handleBookModal} /> : ""}
       {openBooking?.id === selectedRide?.id ? (
         <FormCard
           ref={scrollRef}
