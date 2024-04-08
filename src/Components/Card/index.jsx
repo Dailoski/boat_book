@@ -158,7 +158,15 @@ function CardContainer({ ride }) {
       ) : (
         ""
       )}
-      {carousel ? <CardCarousel handleCarousel={handleCarousel} /> : ""}
+      {carousel && ride.data.carouselContent ? (
+        <CardCarousel
+          handleCarousel={handleCarousel}
+          content={ride.data.carouselContent}
+          type={ride.data.carouselType}
+        />
+      ) : (
+        ""
+      )}
       {promoModal ? <PromoModal handlePromo={handlePromo} /> : ""}
     </>
   );
