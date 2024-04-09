@@ -20,10 +20,10 @@ const Header = () => {
       ) : (
         <Link to="/reservation">
           <img
-            src={`${process.env.PUBLIC_URL}/backicon.png`}
+            src={`${process.env.PUBLIC_URL}/back.svg`}
             alt="profile-icon"
             className="profile-icon"
-            style={{ width: "45px", cursor: "pointer" }}
+            style={{ width: "120px", cursor: "pointer", marginTop: ".5rem" }}
           />
         </Link>
       )}
@@ -36,16 +36,21 @@ const Header = () => {
         ""
       )}
       {(path === "/admin_page" || path === "/reservation") && (
-        <Link>
-          <button className="log-out" onClick={logOut}>
-            Log Out
-          </button>
-        </Link>
-        // <img
-        //   src={`${process.env.PUBLIC_URL}/logout.svg`}
-        //   alt="logout"
-        //   onClick={logOut}
-        // />
+        // <Link>
+        //   <button className="log-out" onClick={logOut}>
+        //     Log Out
+        //   </button>
+        // </Link>
+        <img
+          src={`${process.env.PUBLIC_URL}/logout.svg`}
+          alt="logout"
+          onClick={logOut}
+          style={{
+            width: "190px",
+            marginBottom: ".5rem",
+            paddingLeft: "1.5rem",
+          }}
+        />
       )}
     </div>
   );

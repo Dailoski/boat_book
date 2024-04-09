@@ -108,10 +108,23 @@ function CardContainer({ ride }) {
           ) : (
             ""
           )}
+          {ride.data.beforeBooking ? (
+            <img
+              className="pointer refbutton"
+              style={{
+                width: "150px",
+              }}
+              src={`${process.env.PUBLIC_URL}/b4booknow.svg`}
+              alt="pointer-img"
+              onClick={handleBookModal}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div style={{ display: "flex" }}>
         {/* <img style={{width:"100%"}} src={`${process.env.PUBLIC_URL}/gallery.svg`} /> */}
         {ride.data.external ? (
           <img
@@ -129,7 +142,7 @@ function CardContainer({ ride }) {
             className="pointer refbutton"
             onClick={() => handleImageClick(ride.id)}
             style={{
-              width: ride.data.beforeBooking ? "50%" : "80%",
+              width: ride.data.beforeBooking ? "60%" : "80%",
               margin: ride.data.beforeBooking ? "" : "15px auto",
               display: "block",
             }}
@@ -137,7 +150,7 @@ function CardContainer({ ride }) {
             alt="pointer-img"
           />
         )}
-        {ride.data.beforeBooking ? (
+        {/* {ride.data.beforeBooking ? (
           <img
             className="pointer refbutton"
             style={{
@@ -149,13 +162,12 @@ function CardContainer({ ride }) {
           />
         ) : (
           ""
-        )}
+        )} */}
         {ride.data.beforeBooking ? (
           <a
             href="tel:063-319-913"
             style={{
-              width: "50%",
-              marginLeft: "50%",
+              width: "40%",
             }}
           >
             <img

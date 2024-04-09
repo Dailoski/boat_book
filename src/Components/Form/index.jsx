@@ -553,25 +553,29 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                               value="true"
                             />
                           </label>
-                          <label
-                            style={{
-                              color: "red",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              background: "#FFF",
-                              padding: "0.3rem",
-                              marginBottom: "13px",
-                            }}
-                            htmlFor="radioTwo"
-                          >
-                            Not paid
-                            <Field
-                              type="radio"
-                              id="radioTwo"
-                              name="isPaid"
-                              value="false"
-                            />
-                          </label>
+                          {ride.data.beforeBooking ? (
+                            ""
+                          ) : (
+                            <label
+                              style={{
+                                color: "red",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                background: "#FFF",
+                                padding: "0.3rem",
+                                marginBottom: "13px",
+                              }}
+                              htmlFor="radioTwo"
+                            >
+                              Not paid
+                              <Field
+                                type="radio"
+                                id="radioTwo"
+                                name="isPaid"
+                                value="false"
+                              />
+                            </label>
+                          )}
                         </Field>
                         {console.log(values.promoCode)}
                         <p style={{ fontSize: "1.2em" }}>
