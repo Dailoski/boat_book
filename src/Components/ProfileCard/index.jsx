@@ -13,10 +13,14 @@ function ProfileCard({ reservation }) {
                 <span className="profile-span">Tour: </span>
                 {res.data.boat}
               </h2>
-              <p>
-                <span className="profile-span">Price: </span>
-                {res.data.ticketPrice}
-              </p>
+              {!res.data.promoCode ? (
+                <p>
+                  <span className="profile-span">Coins: </span>
+                  {res.data.numberOfPassengers * 500}
+                </p>
+              ) : (
+                ""
+              )}
               <p>
                 <span className="profile-span">Number of Passangers: </span>
                 {res.data.numberOfPassengers}

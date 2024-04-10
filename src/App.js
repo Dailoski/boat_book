@@ -26,6 +26,7 @@ const App = () => {
   );
   const [allDocs, setAllDocs] = useState([]);
   const [rides, setAllRides] = useState([]);
+  const [uid, setUid] = useState(JSON.parse(localStorage.getItem("uid")));
   // const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
@@ -107,6 +108,8 @@ const App = () => {
             setFreshData,
             freshData,
             rides,
+            setUid,
+            uid,
             // setShowOverlay,
           }}
         >

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -10,11 +10,20 @@ import "../Form/form.css";
 import { forwardRef } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+  setDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
   const [formModal, setFormModal] = useState(false);
+
   const handleSubmit = async (values, { resetForm }) => {
     const tour = selectedTour;
     const tourRef = doc(db, "tours2024", tour.id);
@@ -48,6 +57,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       roomNumber: values.roomNumber,
       children: values.children,
       preteens: values.preteens,
+      promoCode: values.promoCode,
       prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
@@ -104,14 +114,22 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
             values.children * prices.children,
       }),
     });
+    if (ride.data.promoCode && !values.promoCode) {
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+      const docsData = docSnap.data();
+      console.log(docsData);
+      await updateDoc(doc(db, "users", uid), {
+        coins: (docsData.coins || 0) + values.numberOfPassengers * 500,
+      });
+    }
     // setSelectedRide(null);
     resetForm();
     setSuccess(true);
     setFreshData(!freshData);
     setOpenBooking("");
-    // setShowOverlay(false);
   };
-  const { freshData, setFreshData, setShowOverlay } =
+  const { freshData, setFreshData, setShowOverlay, uid } =
     useContext(applicationContext);
   const formRef = useRef(null);
   const handleRef = function () {
@@ -120,6 +138,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       current?.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   const {
     selectedId,
     selectedRide,
@@ -337,6 +356,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                           variant="contained"
                           onClick={() => {
                             setFreshData(!freshData);
+                            console.log(uid);
                           }}
                           size="large"
                           style={{ width: "100%" }}
@@ -532,6 +552,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                             flexDirection: "column",
                             fontSize: "24px",
                             marginTop: "7px",
+                            marginBottom: !ride.data.promoCode ? "10px" : "",
                             gap: ".3rem",
                           }}
                         >

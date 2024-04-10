@@ -317,7 +317,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
                 </button>
                 <p>Thank you for making a reservation!</p>
                 <img
-                  src={`${process.env.PUBLIC_URL}/printdugme.svg`}
+                  src={`${process.env.PUBLIC_URL}/ticketdugme.svg`}
                   alt="print"
                   onClick={() => window.open(url, "_blank")}
                   style={{ cursor: "pointer" }}
