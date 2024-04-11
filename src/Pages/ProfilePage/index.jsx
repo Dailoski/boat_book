@@ -7,10 +7,17 @@ import { useEffect } from "react";
 import { applicationContext } from "../../context";
 import ProfileCard from "../../Components/ProfileCard";
 import "../ProfilePage/profilepage.css";
+import ProfileFooter from "../../Components/ProfileFooter";
 
 function ProfilePage() {
-  const [reservation, setReservation] = useState([]);
-  const { user, setUser } = useContext(applicationContext);
+  const {
+    user,
+    setUser,
+    reservation,
+    setReservation,
+    setTotalCoins,
+    totalCoins,
+  } = useContext(applicationContext);
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tickets2024");
@@ -24,15 +31,22 @@ function ProfilePage() {
       });
 
       setReservation(data);
+      console.log(reservation);
+      setTotalCoins(
+        data
+          ?.filter((el) => el.data.promoCode === false)
+          ?.reduce((acc, curr) => acc + curr.data.numberOfPassengers, 0) * 500
+      );
     };
+
     fetchAllDocs();
   }, []);
-  console.log(reservation);
+
   return (
     <div className="profile-page">
       <Header />
       <ProfileCard reservation={reservation} />
-      <Footer />
+      <ProfileFooter />
     </div>
   );
 }

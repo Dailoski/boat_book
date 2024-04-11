@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
-  const { logOut, user, userData } = useContext(applicationContext);
+  const { logOut, user, userData, totalCoins } = useContext(applicationContext);
   const path = useLocation().pathname;
   return (
     <div className="div-header">
@@ -26,6 +26,24 @@ const Header = () => {
             style={{ width: "120px", cursor: "pointer", marginTop: ".5rem" }}
           />
         </Link>
+      )}
+      {!path.includes("reservation") ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <p style={{ fontFamily: "Gagalin" }}>{totalCoins || 0}</p>
+          <img
+            src={`${process.env.PUBLIC_URL}/coindugme.svg`}
+            alt="coin-icon"
+            className="coin-icon"
+            style={{ width: "45px", cursor: "pointer", marginTop: "12px" }}
+          />
+        </div>
+      ) : (
+        ""
       )}
 
       {userData ? (

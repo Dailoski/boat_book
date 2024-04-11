@@ -28,7 +28,8 @@ const App = () => {
   const [rides, setAllRides] = useState([]);
   const [uid, setUid] = useState(JSON.parse(localStorage.getItem("uid")));
   // const [showOverlay, setShowOverlay] = useState(false);
-
+  const [reservation, setReservation] = useState([]);
+  const [totalCoins, setTotalCoins] = useState(0);
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tours2024");
@@ -40,6 +41,7 @@ const App = () => {
       setAllDocs(docsData);
     };
     fetchAllDocs();
+
     console.log(userData);
   }, [freshData]);
 
@@ -53,6 +55,7 @@ const App = () => {
       }));
       setAllRides(ridesData);
     };
+
     fetchAllRides();
   }, []);
 
@@ -110,6 +113,10 @@ const App = () => {
             rides,
             setUid,
             uid,
+            reservation,
+            setReservation,
+            totalCoins,
+            setTotalCoins,
             // setShowOverlay,
           }}
         >

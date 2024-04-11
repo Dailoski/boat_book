@@ -124,13 +124,13 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       });
     }
     // setSelectedRide(null);
+    setFreshData(!freshData);
     resetForm();
     setSuccess(true);
-    setFreshData(!freshData);
+    console.log(filteredDates);
     setOpenBooking("");
   };
-  const { freshData, setFreshData, setShowOverlay, uid } =
-    useContext(applicationContext);
+  const { freshData, setFreshData, uid } = useContext(applicationContext);
   const formRef = useRef(null);
   const handleRef = function () {
     const { current } = formRef;
