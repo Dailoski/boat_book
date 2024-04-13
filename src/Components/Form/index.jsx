@@ -532,7 +532,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                             name="promoCode"
                           >
                             <label htmlFor="promoCode">
-                              Promo
+                              Special Promo
                               <Field
                                 type="checkbox"
                                 id="promoCode"
