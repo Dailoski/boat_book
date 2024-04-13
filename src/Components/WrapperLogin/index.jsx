@@ -104,9 +104,18 @@ const WrapperLogin = () => {
             <p className="error-handle">
               <ErrorMessage name="password" />
             </p>
-            <Button variant="contained" size="large" type="submit">
-              LOG IN
-            </Button>
+            <button
+              type="submit"
+              style={{ background: "transparent", border: "0" }}
+            >
+              <img
+                className="pointer"
+                src={`${process.env.PUBLIC_URL}/login.svg`}
+                alt="pointer-img"
+                style={{ width: "fit-content" }}
+              />
+            </button>
+            {/* <Button variant="contained" size="large" type="submit"></Button> */}
             <p className="error-handle">{wrongCredentials}</p>
           </Form>
         </section>

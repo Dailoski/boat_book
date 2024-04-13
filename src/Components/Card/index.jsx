@@ -5,6 +5,12 @@ import CardCarousel from "../CardCarousel";
 import PromoModal from "../PromoModal";
 import BookModal from "../bookModal";
 
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+
 function CardContainer({ ride }) {
   const { allDocs, rides, setShowOverlay } = useContext(applicationContext);
   const { setAvailableDates, setSelectedId, setSelectedRide, selectedRide } =
@@ -15,6 +21,7 @@ function CardContainer({ ride }) {
   const [carousel, showCarousel] = useState(false);
   const [promoModal, setPromoModal] = useState(false);
   const [showBookModal, setShowBookModal] = useState(false);
+  const [phoneDialog, setPhoneDialog] = useState(false);
   const handleBookModal = function () {
     setShowBookModal((prev) => !prev);
   };
@@ -164,18 +171,29 @@ function CardContainer({ ride }) {
           ""
         )} */}
         {ride.data.beforeBooking ? (
-          <a
-            href="tel:063-319-913"
-            style={{
-              width: "40%",
-            }}
-          >
+          <>
             <img
               className="pointer refbutton"
               src={`${process.env.PUBLIC_URL}/callhere.svg`}
               alt="pointer-img"
+              style={{
+                width: "40%",
+              }}
+              onClick={() => setPhoneDialog(true)}
             />
-          </a>
+            <Dialog
+              open={phoneDialog}
+              onClose={() => setPhoneDialog(false)}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Call this number: 063-319-913
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>
         ) : (
           ""
         )}

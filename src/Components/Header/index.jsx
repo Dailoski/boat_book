@@ -1,10 +1,11 @@
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
 import { applicationContext } from "../../context";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
   const { logOut, user, userData, totalCoins } = useContext(applicationContext);
+  const [tooltip, setTooltip] = useState(false);
   const path = useLocation().pathname;
   return (
     <div className="div-header">
@@ -32,14 +33,35 @@ const Header = () => {
           style={{
             display: "flex",
             alignItems: "center",
+            position: "relative",
           }}
+          onMouseEnter={() => setTooltip(true)}
+          onMouseLeave={() => setTooltip(false)}
         >
-          <p style={{ fontFamily: "Gagalin" }}>{totalCoins || 0}</p>
+          {tooltip ? (
+            <p
+              style={{
+                position: "absolute",
+                top: "100%",
+                background: "black",
+                color: "white",
+                padding: ".5rem",
+                borderRadius: ".5rem",
+              }}
+            >
+              Total amount of Coins
+            </p>
+          ) : (
+            ""
+          )}
+          <p style={{ fontFamily: "Gagalin", fontSize: "32px" }}>
+            {totalCoins || 1000}
+          </p>
           <img
             src={`${process.env.PUBLIC_URL}/coindugme.svg`}
             alt="coin-icon"
             className="coin-icon"
-            style={{ width: "45px", cursor: "pointer", marginTop: "12px" }}
+            style={{ width: "45px", cursor: "pointer" }}
           />
         </div>
       ) : (

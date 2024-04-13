@@ -10,14 +10,8 @@ import "../ProfilePage/profilepage.css";
 import ProfileFooter from "../../Components/ProfileFooter";
 
 function ProfilePage() {
-  const {
-    user,
-    setUser,
-    reservation,
-    setReservation,
-    setTotalCoins,
-    totalCoins,
-  } = useContext(applicationContext);
+  const { user, reservation, setReservation, setTotalCoins } =
+    useContext(applicationContext);
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tickets2024");

@@ -10,6 +10,7 @@ import "../Form/form.css";
 import { forwardRef } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+
 import {
   doc,
   updateDoc,
@@ -127,7 +128,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
     setFreshData(!freshData);
     resetForm();
     setSuccess(true);
-    console.log(filteredDates);
     setOpenBooking("");
   };
   const { freshData, setFreshData, uid } = useContext(applicationContext);
@@ -161,6 +161,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
     prices,
     selectedTour,
   } = useContext(bookingContext);
+  const newDate = new Date(selectedTour?.data.date);
   const style = {
     position: "absolute",
     top: "40%",
@@ -335,7 +336,9 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                       {selectedRide?.data.name}
                     </p>
                   )}
-                  <p>Date: {selectedTour?.data.date}</p>
+                  <p>
+                    Date: {dayjs(new Date(newDate)).format("DD-MM YYYY HH:mm")}
+                  </p>
                   <p style={{ marginBottom: ".5rem" }}>
                     Type:{" "}
                     {selectedTour?.data.type[0].toUpperCase() +
