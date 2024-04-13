@@ -104,7 +104,7 @@ const WrapperLogin = () => {
             <p className="error-handle">
               <ErrorMessage name="password" />
             </p>
-            <button
+            {/* <button
               type="submit"
               style={{ background: "transparent", border: "0" }}
             >
@@ -114,8 +114,10 @@ const WrapperLogin = () => {
                 alt="pointer-img"
                 style={{ width: "200px" }}
               />
-            </button>
-            {/* <Button variant="contained" size="large" type="submit"></Button> */}
+            </button> */}
+            <Button variant="contained" size="large" type="submit">
+              LOG IN
+            </Button>
             <p className="error-handle">{wrongCredentials}</p>
           </Form>
         </section>

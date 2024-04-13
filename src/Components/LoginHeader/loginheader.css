@@ -1,6 +1,7 @@
 .log-in-header {
   height: 8vh;
-  background-color: #ed6c02;
+  /* background-color: #ed6c02; */
+  background: #ffaa00;
   box-shadow: 0px 0px 19px -3px rgb(29, 29, 107);
   color: black;
   display: flex;
