@@ -110,9 +110,9 @@ const WrapperLogin = () => {
             >
               <img
                 className="pointer"
-                src={`${process.env.PUBLIC_URL}/login.svg`}
+                src={`${process.env.PUBLIC_URL}/login2.png`}
                 alt="pointer-img"
-                style={{ width: "fit-content" }}
+                style={{ width: "200px" }}
               />
             </button>
             {/* <Button variant="contained" size="large" type="submit"></Button> */}

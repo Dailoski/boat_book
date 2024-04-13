@@ -317,10 +317,10 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
                 </button>
                 <p>Thank you for making a reservation!</p>
                 <img
-                  src={`${process.env.PUBLIC_URL}/ticketdugme.svg`}
+                  src={`${process.env.PUBLIC_URL}/ticketdugme2.png`}
                   alt="print"
                   onClick={() => window.open(url, "_blank")}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", width: "350px" }}
                 />
                 {/* <Button
                   variant="contained"

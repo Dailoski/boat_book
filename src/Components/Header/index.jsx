@@ -47,9 +47,10 @@ const Header = () => {
                 color: "white",
                 padding: ".5rem",
                 borderRadius: ".5rem",
+                textTransform: "uppercase",
               }}
             >
-              Total amount of Coins
+              Total Coins
             </p>
           ) : (
             ""
@@ -69,7 +70,7 @@ const Header = () => {
       )}
 
       {userData ? (
-        <h3 style={{ fontFamily: "Gagalin" }}>
+        <h3 style={{ fontFamily: "Gagalin", fontSize: "26px" }}>
           {userData.full_name.toUpperCase()}
         </h3>
       ) : (
