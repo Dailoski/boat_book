@@ -171,29 +171,44 @@ function CardContainer({ ride }) {
           ""
         )} */}
         {ride.data.beforeBooking ? (
-          <>
-            <img
-              className="pointer refbutton"
-              src={`${process.env.PUBLIC_URL}/callhere.svg`}
-              alt="pointer-img"
+          window.innerWidth > 700 ? (
+            <>
+              <img
+                className="pointer refbutton"
+                src={`${process.env.PUBLIC_URL}/callhere.svg`}
+                alt="pointer-img"
+                style={{
+                  width: "40%",
+                }}
+                onClick={() => setPhoneDialog(true)}
+              />
+              <Dialog
+                open={phoneDialog}
+                onClose={() => setPhoneDialog(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Call this number: 063-319-913
+                  </DialogContentText>
+                </DialogContent>
+              </Dialog>
+            </>
+          ) : (
+            <a
+              href="tel:063-319-913"
               style={{
                 width: "40%",
               }}
-              onClick={() => setPhoneDialog(true)}
-            />
-            <Dialog
-              open={phoneDialog}
-              onClose={() => setPhoneDialog(false)}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
             >
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Call this number: 063-319-913
-                </DialogContentText>
-              </DialogContent>
-            </Dialog>
-          </>
+              <img
+                className="pointer refbutton"
+                src={`${process.env.PUBLIC_URL}/callhere.svg`}
+                alt="pointer-img"
+              />
+            </a>
+          )
         ) : (
           ""
         )}
