@@ -160,6 +160,11 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
     <Document>
       <Page size={["250"]}>
         <View style={styles.page}>
+          <Text
+            style={{ fontSize: "12px", color: "red", marginBottom: "1.5rem" }}
+          >
+            Napomena : Ovo nije fiskalni racun
+          </Text>
           <Text style={styles.meetTitle}>Meeting point address:</Text>
           <Text style={styles.meetAddress} wrap>
             Main entrance of Kalemegdan park from Knez Mihailova
@@ -190,6 +195,12 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
               <Text style={styles.tourText}>
                 <Text style={{ fontFamily: "Helvetica-Bold" }}>Provider: </Text>
                 {userData?.full_name}
+              </Text>
+              <Text style={styles.tourText}>
+                <Text style={{ fontFamily: "Helvetica-Bold" }}>
+                  Receptionist:{" "}
+                </Text>
+                {ticketInfo?.receptionist ? "Yes" : "No"}
               </Text>
               <Text style={styles.tourText}>
                 <Text style={{ fontFamily: "Helvetica-Bold" }}>

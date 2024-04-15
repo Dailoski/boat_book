@@ -107,7 +107,7 @@ function CardContainer({ ride }) {
           ></div>
           {ride.data.promoCode ? (
             <img
-              src={`${process.env.PUBLIC_URL}/promodugme.svg`}
+              src={`${process.env.PUBLIC_URL}/promodugme2.png`}
               alt=""
               style={{ width: "150px", cursor: "pointer" }}
               onClick={handlePromo}
@@ -189,8 +189,13 @@ function CardContainer({ ride }) {
                 aria-describedby="alert-dialog-description"
               >
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Call this number: 063-319-913
+                  <DialogContentText
+                    id="alert-dialog-description"
+                    style={{ textAlign: "center" }}
+                  >
+                    * Call this number and check availability for the tour in
+                    exact day you want to make reservation * <br />
+                    <span>+381693339696</span>
                   </DialogContentText>
                 </DialogContent>
               </Dialog>

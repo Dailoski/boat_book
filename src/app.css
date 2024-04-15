@@ -5,3 +5,7 @@
   box-sizing: border-box;
   font-family: "League Spartan", sans-serif;
 } /*# sourceMappingURL=app.css.map */
+
+#root {
+  background-color: black;
+}

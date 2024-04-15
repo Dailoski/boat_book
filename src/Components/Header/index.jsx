@@ -2,6 +2,7 @@ import { React, useContext, useState } from "react";
 import { applicationContext } from "../../context";
 import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
+import "./header.css";
 
 const Header = () => {
   const { logOut, user, userData, totalCoins } = useContext(applicationContext);
@@ -70,7 +71,7 @@ const Header = () => {
       )}
 
       {userData ? (
-        <h3 style={{ fontFamily: "Gagalin", fontSize: "26px" }}>
+        <h3 style={{ fontFamily: "Gagalin" }} className="profile-name">
           {userData.full_name.toUpperCase()}
         </h3>
       ) : (

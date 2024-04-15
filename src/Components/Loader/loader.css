@@ -1,0 +1,9 @@
+.loader {
+  margin: 40vh 43vw;
+}
+
+@media screen and (min-width: 700px) {
+  .loader {
+    margin: 40vh 50vw;
+  }
+}

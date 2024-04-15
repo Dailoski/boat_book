@@ -137,10 +137,7 @@ const WrapperReservation = () => {
         selectedId,
       }}
     >
-      <div
-        className="div-WrapperReservation"
-        onClick={console.log(availableDates)}
-      >
+      <div className="div-WrapperReservation" onClick={console.log(ticketInfo)}>
         <ChooseBoat
           setAvailableDates={setAvailableDates}
           selectedRide={selectedRide}

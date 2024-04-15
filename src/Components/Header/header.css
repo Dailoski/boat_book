@@ -1,4 +1,4 @@
-.div-header {
+/* .div-header {
   height: 8vh;
   background: linear-gradient(
     90deg,
@@ -39,5 +39,13 @@
   cursor: pointer;
 }
 .div-header img {
-  width: 70px;
-} /*# sourceMappingURL=header.css.map */
+  width: 70px; */
+/* } # sourceMappingURL=header.css.map */
+.profile-name {
+  padding-left: 16px;
+}
+@media screen and (min-width: 700px) {
+  .profile-name {
+    font-size: 26px;
+  }
+}

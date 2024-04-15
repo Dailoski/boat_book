@@ -59,6 +59,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       children: values.children,
       preteens: values.preteens,
       promoCode: values.promoCode,
+      receptionist: values.receptionist,
       prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
@@ -78,6 +79,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       children: values.children,
       preteens: values.preteens,
       promoCode: values.promoCode,
+      receptionist: values.receptionist,
       prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
@@ -195,7 +197,11 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       ? "primary"
       : selectedTour?.data.type === "night"
       ? "secondary"
-      : "warning";
+      : // : selectedTour?.data.type === "half-day"
+        // ? "purple"
+        // : selectedTour?.data.type === "full day"
+        // ? "blue"
+        "warning";
   return (
     <Modal
       open={openBooking}
@@ -329,6 +335,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                   className="tour-display"
                   ref={ref}
                   style={{ gap: ".5rem" }}
+                  onClick={console.log(selectedTour)}
                 >
                   {selectedRide && <p>Selected Tour:</p>}
                   {selectedRide && (
@@ -461,6 +468,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                           </Button>
                         </div>
                         <h3>Kids 0-7 years:</h3>
+
                         <div
                           style={{
                             display: "flex",
@@ -502,7 +510,20 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                             <AddIcon />
                           </Button>
                         </div>
-
+                        <Field
+                          className="checkbox"
+                          component="div"
+                          name="receptionist"
+                        >
+                          <label htmlFor="receptionist">
+                            Receptionist
+                            <Field
+                              type="checkbox"
+                              id="receptionist"
+                              name="receptionist"
+                            />
+                          </label>
+                        </Field>
                         <h3>
                           Room number or name: <span>*</span>
                         </h3>

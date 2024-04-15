@@ -10,6 +10,7 @@ import AdminPage from "./Pages/AdminPage";
 import "./app.scss";
 import ProfilePage from "./Pages/ProfilePage";
 import Overlay from "./Components/Overlay";
+import Loader from "./Components/Loader";
 
 const App = () => {
   const [freshData, setFreshData] = useState(false);
@@ -30,6 +31,7 @@ const App = () => {
   // const [showOverlay, setShowOverlay] = useState(false);
   const [reservation, setReservation] = useState([]);
   const [totalCoins, setTotalCoins] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchAllDocs = async () => {
       const collectionRef = collection(db, "tours2024");
@@ -57,6 +59,12 @@ const App = () => {
     };
 
     fetchAllRides();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   //   useEffect(() => {
@@ -94,6 +102,10 @@ const App = () => {
     setIsAdmin(false);
     setUser("");
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="div-app">
