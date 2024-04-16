@@ -522,8 +522,9 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                         </div>
                         {window.innerWidth > 700 ? (
                           <div style={{ width: "100%" }}>
-                            <h3>Receptionist Name (optional):</h3>
-
+                            <h3>
+                              Receptionist Name: <span>*</span>
+                            </h3>
                             <Field
                               type="text"
                               name="receptionist"
@@ -536,13 +537,16 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                                 width: "100%",
                               }}
                             />
+                            <p className="error-handle">
+                              <ErrorMessage name="receptionist" />
+                            </p>
                           </div>
                         ) : (
                           ""
                         )}
 
                         <h3>
-                          Room number or name: <span>*</span>
+                          Room number or One name: <span>*</span>
                         </h3>
 
                         <Field
