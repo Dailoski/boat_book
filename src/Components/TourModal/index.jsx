@@ -5,6 +5,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import "./tour-modal.scss";
 import { DeleteButton } from "../DeleteButton";
 import { collection, getDocs } from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
 const TourModal = ({ handleClose, clickedTour }) => {
   const { freshData, setFreshData, allDocs } = useContext(applicationContext);
   const handleOverlayClick = (event) => {
@@ -38,6 +39,24 @@ const TourModal = ({ handleClose, clickedTour }) => {
     }));
     const data = docsData.find((el) => el.data.roomNumber === res.roomNumber);
     console.log(data);
+    const docRef = doc(db, "tickets2024", id);
+    const docSnap = await getDoc(docRef);
+    const docsData2 = docSnap.data();
+    console.log(docsData2);
+    await updateDoc(doc(db, "tickets2024", id), {
+      checkedIn: true,
+      hasntShown: false,
+    });
+  };
+  const handleNotShown = async function (id) {
+    const docRef = doc(db, "tickets2024", id);
+    const docSnap = await getDoc(docRef);
+    const docsData2 = docSnap.data();
+    console.log(docsData2);
+    await updateDoc(doc(db, "tickets2024", id), {
+      hasntShown: true,
+      checkedIn: false,
+    });
   };
   return (
     <div className="div-modal-tour" onClick={handleOverlayClick}>
@@ -93,7 +112,12 @@ const TourModal = ({ handleClose, clickedTour }) => {
                   >
                     Checked in
                   </button>
-                  <button style={{ padding: ".5rem" }}>Hasn't shown</button>
+                  <button
+                    style={{ padding: ".5rem" }}
+                    onClick={() => handleNotShown(e.id)}
+                  >
+                    Hasn't shown
+                  </button>
                 </div>
 
                 <DeleteButton

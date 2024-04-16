@@ -11,6 +11,7 @@ function ProfileCard() {
         {reservation
           .sort((a, b) => Date.parse(a.data.date) - Date.parse(b.data.date))
           .map((res) => {
+            console.log(res);
             return (
               <div
                 className="profile-card-content"
@@ -71,13 +72,34 @@ function ProfileCard() {
                     {dayjs(new Date(res.data.date)).format("DD-MM YYYY HH:mm")}
                   </p>
                 </div>
-
-                <img
-                  src={`${process.env.PUBLIC_URL}/printdugme.svg`}
-                  alt="print-icon"
-                  className="print-icon"
-                  style={{ width: "150px", cursor: "pointer" }}
-                />
+                <div style={{ display: "flex" }}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/printdugme.svg`}
+                    alt="print-icon"
+                    className="print-icon"
+                    style={{ width: "150px", cursor: "pointer" }}
+                  />
+                  {res.data.checkedIn ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/checkedin.svg`}
+                      alt="-icon"
+                      className="print-icon"
+                      style={{ width: "50px", cursor: "pointer" }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {res.data.hasntShown ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/hasntshown.svg`}
+                      alt="-icon"
+                      className="print-icon"
+                      style={{ width: "50px", cursor: "pointer" }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
             );
           })}
