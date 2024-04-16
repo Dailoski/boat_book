@@ -200,7 +200,7 @@ const SuccessModal = ({ setSuccess, ticketInfo, selectedRide }) => {
                 <Text style={{ fontFamily: "Helvetica-Bold" }}>
                   Receptionist:{" "}
                 </Text>
-                {ticketInfo?.receptionist ? "Yes" : "No"}
+                {ticketInfo?.receptionist ? ticketInfo?.receptionist : "/"}
               </Text>
               <Text style={styles.tourText}>
                 <Text style={{ fontFamily: "Helvetica-Bold" }}>

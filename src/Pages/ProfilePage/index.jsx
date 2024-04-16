@@ -43,7 +43,7 @@ function ProfilePage() {
   return (
     <div className="profile-page">
       <Header />
-      {isLoading ? <Loader /> : <ProfileCard />}
+      {isLoading ? <Loader height={"84vh"} /> : <ProfileCard />}
       <ProfileFooter />
     </div>
   );

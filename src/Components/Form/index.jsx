@@ -23,6 +23,14 @@ import {
 import { db } from "../../firebase";
 
 const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
+  // const theme = createTheme({
+  //   palette: {
+  //     daytime: "#1565c0",
+  //     night: "#e65100",
+  //     halfday: "#9C294B",
+  //     fullday: "#80A7BF",
+  //   },
+  // });
   const [formModal, setFormModal] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -197,11 +205,11 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       ? "primary"
       : selectedTour?.data.type === "night"
       ? "secondary"
-      : // : selectedTour?.data.type === "half-day"
-        // ? "purple"
-        // : selectedTour?.data.type === "full day"
-        // ? "blue"
-        "warning";
+      : selectedTour?.data.type === "half day"
+      ? "error"
+      : selectedTour?.data.type === "full day"
+      ? "success"
+      : "warning";
   return (
     <Modal
       open={openBooking}
@@ -367,6 +375,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                           onClick={() => {
                             setFreshData(!freshData);
                             console.log(uid);
+                            console.log(selectedTour);
                           }}
                           size="large"
                           style={{ width: "100%" }}
@@ -376,6 +385,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                               ? " seat left"
                               : " seats left")}
                         </Button>
+
                         <h3>
                           Adults: <span>*</span>
                         </h3>
@@ -510,20 +520,27 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                             <AddIcon />
                           </Button>
                         </div>
-                        <Field
-                          className="checkbox"
-                          component="div"
-                          name="receptionist"
-                        >
-                          <label htmlFor="receptionist">
-                            Receptionist
+                        {window.innerWidth > 700 ? (
+                          <div style={{ width: "100%" }}>
+                            <h3>Receptionist Name (optional):</h3>
+
                             <Field
-                              type="checkbox"
-                              id="receptionist"
+                              type="text"
                               name="receptionist"
+                              placeholder="Receptionist"
+                              className="form-field"
+                              style={{
+                                backgroundColor: "white",
+                                height: "44px",
+                                fontSize: "20px",
+                                width: "100%",
+                              }}
                             />
-                          </label>
-                        </Field>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
                         <h3>
                           Room number or name: <span>*</span>
                         </h3>

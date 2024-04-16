@@ -11,8 +11,21 @@ import "./app.scss";
 import ProfilePage from "./Pages/ProfilePage";
 import Overlay from "./Components/Overlay";
 import Loader from "./Components/Loader";
-
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 const App = () => {
+  const theme = createTheme({
+    palette: {
+      success: {
+        main: "#269be3",
+      },
+      error: {
+        light: "#9C294B",
+        main: "#9C294B",
+        dark: "#9C294B",
+      },
+    },
+  });
   const [freshData, setFreshData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(
     JSON.parse(localStorage.getItem("admin"))
@@ -104,7 +117,7 @@ const App = () => {
   };
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader height={"100vh"} />;
   }
 
   return (
@@ -132,34 +145,36 @@ const App = () => {
             // setShowOverlay,
           }}
         >
-          {accessToken ? (
-            isAdmin ? (
-              <Routes>
-                <Route exact path="/admin_page" element={<AdminPage />} />
-                <Route
-                  path="*"
-                  element={<Navigate to="/admin_page" replace />}
-                />
-              </Routes>
+          <ThemeProvider theme={theme}>
+            {accessToken ? (
+              isAdmin ? (
+                <Routes>
+                  <Route exact path="/admin_page" element={<AdminPage />} />
+                  <Route
+                    path="*"
+                    element={<Navigate to="/admin_page" replace />}
+                  />
+                </Routes>
+              ) : (
+                <Routes>
+                  <Route
+                    path="/reservation"
+                    element={<ReservationPage />}
+                  ></Route>
+                  <Route
+                    path="*"
+                    element={<Navigate to="/reservation" replace />}
+                  />
+                  <Route path="/profile" element={<ProfilePage />} />
+                </Routes>
+              )
             ) : (
               <Routes>
-                <Route
-                  path="/reservation"
-                  element={<ReservationPage />}
-                ></Route>
-                <Route
-                  path="*"
-                  element={<Navigate to="/reservation" replace />}
-                />
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route exact path="/" element={<LoginPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
-            )
-          ) : (
-            <Routes>
-              <Route exact path="/" element={<LoginPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          )}
+            )}
+          </ThemeProvider>
         </ApplicationProvider>
       </NoInternetConnection>
       {/* {showOverlay ? <Overlay /> : ""} */}

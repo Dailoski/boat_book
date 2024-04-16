@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import "./tour-modal.scss";
 import { DeleteButton } from "../DeleteButton";
-
+import { collection, getDocs } from "firebase/firestore";
 const TourModal = ({ handleClose, clickedTour }) => {
   const { freshData, setFreshData, allDocs } = useContext(applicationContext);
   const handleOverlayClick = (event) => {
@@ -28,6 +28,17 @@ const TourModal = ({ handleClose, clickedTour }) => {
   //   (a, b) => a + b.children,
   //   0
   // );
+  const handleCheckIn = async function (res, id) {
+    console.log(id);
+    const collectionRef = collection(db, "tickets2024");
+    const querySnapshot = await getDocs(collectionRef);
+    const docsData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+    const data = docsData.find((el) => el.data.roomNumber === res.roomNumber);
+    console.log(data);
+  };
   return (
     <div className="div-modal-tour" onClick={handleOverlayClick}>
       <div className="modal-container">
@@ -40,7 +51,7 @@ const TourModal = ({ handleClose, clickedTour }) => {
             <h5>Available Seats:</h5>
             <p>{selectedTour.data.availableSeats} seats</p>
 
-            <h5>Name of Boat:</h5>
+            <h5>Name of the Tour:</h5>
             <p>{selectedTour.data.boat} </p>
           </div>
           <div className="reservation-passengers">
@@ -74,6 +85,15 @@ const TourModal = ({ handleClose, clickedTour }) => {
                 <div className="modal-content">
                   <h5>Phone number:</h5>
                   <p>{e.phoneNumber}</p>
+                </div>
+                <div style={{ display: "flex" }}>
+                  <button
+                    style={{ padding: ".5rem", backgroundColor: "green" }}
+                    onClick={() => handleCheckIn(e, e.id)}
+                  >
+                    Checked in
+                  </button>
+                  <button style={{ padding: ".5rem" }}>Hasn't shown</button>
                 </div>
 
                 <DeleteButton

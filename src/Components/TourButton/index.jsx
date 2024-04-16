@@ -10,12 +10,21 @@ export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
   return (
     <>
       <Button
-      disabled={disabled}
+        disabled={disabled}
         onClick={onClick}
         sx={
           isSelected
-            ? { fontWeight:"bold", margin: "12px 0px", border: "1px white solid", color: disabled ? "red !important" : "white" }
-            : { fontWeight:"bold", margin: "2px 0px", color: disabled ? "red !important" : "white" }
+            ? {
+                fontWeight: "bold",
+                margin: "12px 0px",
+                border: "1px white solid",
+                color: disabled ? "red !important" : "white",
+              }
+            : {
+                fontWeight: "bold",
+                margin: "2px 0px",
+                color: disabled ? "red !important" : "white",
+              }
         }
         startIcon={isSelected ? <DoneOutlineIcon /> : null}
         size={isSelected ? "large" : "small"}
@@ -25,6 +34,10 @@ export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
             ? "primary"
             : type === "night"
             ? "secondary"
+            : type === "half day"
+            ? "error"
+            : type === "full day"
+            ? "success"
             : "warning"
         }
         variant="contained"
@@ -39,7 +52,7 @@ export function TourButton({ isSelected, type, onClick, tourDate, disabled }) {
         }
       >
         {disabled ? "SOLD OUT" : type + " tour"}
-        <br/>
+        <br />
         {tourDate}
       </Button>
     </>
