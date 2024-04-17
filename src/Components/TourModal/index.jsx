@@ -6,8 +6,10 @@ import "./tour-modal.scss";
 import { DeleteButton } from "../DeleteButton";
 import { collection, getDocs } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
+import { ModifyButton } from "../ModifyButton";
 const TourModal = ({ handleClose, clickedTour }) => {
-  const { freshData, setFreshData, allDocs } = useContext(applicationContext);
+  const { freshData, setFreshData, allDocs, setTotalCoins } =
+    useContext(applicationContext);
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       handleClose();
@@ -53,6 +55,7 @@ const TourModal = ({ handleClose, clickedTour }) => {
     const docSnap = await getDoc(docRef);
     const docsData2 = docSnap.data();
     console.log(docsData2);
+
     await updateDoc(doc(db, "tickets2024", id), {
       hasntShown: true,
       checkedIn: false,
@@ -105,19 +108,34 @@ const TourModal = ({ handleClose, clickedTour }) => {
                   <h5>Phone number:</h5>
                   <p>{e.phoneNumber}</p>
                 </div>
-                <div style={{ display: "flex" }}>
-                  <button
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "1rem",
+                  }}
+                >
+                  <ModifyButton
+                    handler={() => handleCheckIn(e, e.id)}
+                    mod="Checked In"
+                  />
+                  <ModifyButton
+                    handler={() => handleNotShown(e.id)}
+                    mod="Hasn't Shown"
+                  />
+                  {/* <button
                     style={{ padding: ".5rem", backgroundColor: "green" }}
                     onClick={() => handleCheckIn(e, e.id)}
                   >
                     Checked in
-                  </button>
-                  <button
+                  </button> */}
+                  {/* <button
                     style={{ padding: ".5rem" }}
                     onClick={() => handleNotShown(e.id)}
                   >
                     Hasn't shown
-                  </button>
+                  </button> */}
                 </div>
 
                 <DeleteButton

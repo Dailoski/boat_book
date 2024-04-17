@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const DeleteButton = ({ deleteHandler }) => {
+export const ModifyButton = ({ handler, mod }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -16,20 +16,19 @@ export const DeleteButton = ({ deleteHandler }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleDelete = () => {
-    deleteHandler();
+  const handleUpdate = () => {
+    handler();
     setOpen(false);
   };
 
   return (
-    <div>
+    <div style={{ paddingTop: "0" }}>
       <Button
-        className="del"
         variant="outlined"
         onClick={handleClickOpen}
         style={{ padding: ".5rem" }}
       >
-        Delete
+        {mod}
       </Button>
       <Dialog
         open={open}
@@ -37,7 +36,10 @@ export const DeleteButton = ({ deleteHandler }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"CONFIRM DELETION"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"CONFIRM "}
+          {mod}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             This action can't be reverted
@@ -45,7 +47,7 @@ export const DeleteButton = ({ deleteHandler }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>NO</Button>
-          <Button color="error" onClick={handleDelete} autoFocus>
+          <Button color="error" onClick={handleUpdate} autoFocus>
             YES
           </Button>
         </DialogActions>

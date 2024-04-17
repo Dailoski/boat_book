@@ -16,7 +16,6 @@ function ProfileCard() {
         {reservation
           .sort((a, b) => Date.parse(a.data.date) - Date.parse(b.data.date))
           .map((res) => {
-            console.log(res);
             return (
               <div
                 className="profile-card-content"
@@ -37,7 +36,7 @@ function ProfileCard() {
                     <span className="profile-span">Tour: </span>
                     {res.data.boat}
                   </h2>
-                  {!res.data.promoCode ? (
+                  {!res.data.promoCode && res.data.specialPromo ? (
                     <p
                       style={{
                         color: "white",

@@ -67,6 +67,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       children: values.children,
       preteens: values.preteens,
       promoCode: values.promoCode,
+      specialPromo: ride.data.promoCode ? true : false,
       receptionist: window.innerWidth < 700 ? false : values.receptionist,
       prices: prices,
       ticketPrice:
@@ -87,6 +88,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       children: values.children,
       preteens: values.preteens,
       promoCode: values.promoCode,
+      specialPromo: ride.data.promoCode ? true : false,
       receptionist: values.receptionist,
       prices: prices,
       ticketPrice:
@@ -115,6 +117,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
         roomNumber: values.roomNumber,
         isPaid: values.isPaid,
         promoCode: values.promoCode,
+        specialPromo: ride.data.promoCode ? true : false,
         ticketPrice: values.promoCode
           ? values.numberOfPassengers *
               (prices.adults - (prices.adults && 500)) +
@@ -328,6 +331,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                   onClick={function () {
                     console.log(filteredDates);
                     console.log(selectedTour);
+                    console.log(ride);
                     setFormModal(false);
                   }}
                   style={{

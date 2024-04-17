@@ -9,9 +9,10 @@ import ProfileCard from "../../Components/ProfileCard";
 import "../ProfilePage/profilepage.css";
 import ProfileFooter from "../../Components/ProfileFooter";
 import Loader from "../../Components/Loader";
+import { getDoc } from "firebase/firestore";
 
 function ProfilePage() {
-  const { setReservation, reservation, setTotalCoins, user } =
+  const { setReservation, reservation, setTotalCoins, user, rides, uid } =
     useContext(applicationContext);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -25,14 +26,20 @@ function ProfilePage() {
       const data = docsData.filter((data) => {
         return data.data.userEmail === user;
       });
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+      const docsData2 = docSnap.data();
 
       setReservation(data);
+      console.log(data);
       console.log(reservation);
-      setTotalCoins(
-        data
-          ?.filter((el) => el.data.promoCode === false)
-          ?.reduce((acc, curr) => acc + curr.data.numberOfPassengers, 0) * 500
-      );
+
+      // setTotalCoins(
+      //   data
+      //     ?.filter((el) => el.data.promoCode === false && el.data.specialPromo)
+      //     ?.reduce((acc, curr) => acc + curr.data.numberOfPassengers, 0) * 500
+      // );
+      setTotalCoins(docsData2.coins);
     };
 
     fetchAllDocs();
