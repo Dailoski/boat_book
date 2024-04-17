@@ -7,7 +7,12 @@ function ProfileCard() {
     <>
       <h1>Reservations</h1>
 
-      <div className="profile-card">
+      <div
+        className="profile-card"
+        style={{
+          position: "relative",
+        }}
+      >
         {reservation
           .sort((a, b) => Date.parse(a.data.date) - Date.parse(b.data.date))
           .map((res) => {
@@ -18,6 +23,7 @@ function ProfileCard() {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
+                  position: "relative",
                 }}
               >
                 <div
@@ -72,7 +78,7 @@ function ProfileCard() {
                     {dayjs(new Date(res.data.date)).format("DD-MM YYYY HH:mm")}
                   </p>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <img
                     src={`${process.env.PUBLIC_URL}/printdugme.svg`}
                     alt="print-icon"
@@ -84,7 +90,11 @@ function ProfileCard() {
                       src={`${process.env.PUBLIC_URL}/checkedin.svg`}
                       alt="-icon"
                       className="print-icon"
-                      style={{ width: "50px", cursor: "pointer" }}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer",
+                      }}
                     />
                   ) : (
                     ""
@@ -94,12 +104,27 @@ function ProfileCard() {
                       src={`${process.env.PUBLIC_URL}/hasntshown.svg`}
                       alt="-icon"
                       className="print-icon"
-                      style={{ width: "50px", cursor: "pointer" }}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer",
+                      }}
                     />
                   ) : (
                     ""
                   )}
                 </div>
+
+                {(res.data.checkedIn || res.data.hasntShown) &&
+                res.data.receptionist &&
+                window.innerWidth > 700 ? (
+                  <p style={{ position: "absolute", left: "50%", top: "85%" }}>
+                    <span className="profile-span">Receptionist Name:</span>{" "}
+                    {res.data.receptionist}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
             );
           })}
