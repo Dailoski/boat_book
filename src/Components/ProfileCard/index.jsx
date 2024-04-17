@@ -59,11 +59,11 @@ function ProfileCard() {
                     </li>
                     <li>
                       <span className="profile-span">Preteens:</span>{" "}
-                      {res.data.children}
+                      {res.data.preteens}
                     </li>
                     <li>
                       <span className="profile-span">Children:</span>{" "}
-                      {res.data.preteens}
+                      {res.data.children}
                     </li>
                   </ul>
 

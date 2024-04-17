@@ -17,7 +17,7 @@ const App = () => {
   const theme = createTheme({
     palette: {
       success: {
-        main: "#269be3",
+        main: "#003566",
       },
       error: {
         light: "#9C294B",

@@ -67,7 +67,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       children: values.children,
       preteens: values.preteens,
       promoCode: values.promoCode,
-      receptionist: values.receptionist,
+      receptionist: window.innerWidth < 700 ? false : values.receptionist,
       prices: prices,
       ticketPrice:
         values.numberOfPassengers * prices.adults +
