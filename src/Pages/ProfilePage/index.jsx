@@ -10,6 +10,7 @@ import "../ProfilePage/profilepage.css";
 import ProfileFooter from "../../Components/ProfileFooter";
 import Loader from "../../Components/Loader";
 import { getDoc } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 
 function ProfilePage() {
   const { setReservation, reservation, setTotalCoins, user, rides, uid } =
@@ -33,6 +34,11 @@ function ProfilePage() {
       setReservation(data);
       console.log(data);
       console.log(reservation);
+      await updateDoc(doc(db, "users", uid), {
+        coins: data
+          ?.filter((el) => el.data.promoCode === false && el.data.specialPromo)
+          ?.reduce((acc, curr) => acc + curr.data.coins, 0),
+      });
 
       // setTotalCoins(
       //   data

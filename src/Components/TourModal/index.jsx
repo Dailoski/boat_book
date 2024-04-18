@@ -59,6 +59,10 @@ const TourModal = ({ handleClose, clickedTour }) => {
     await updateDoc(doc(db, "tickets2024", id), {
       hasntShown: true,
       checkedIn: false,
+      coins:
+        !docsData2.promoCode && docsData2.specialPromo
+          ? docsData2.coins - docsData2.numberOfPassengers * 500
+          : docsData2.coins,
     });
   };
   return (
