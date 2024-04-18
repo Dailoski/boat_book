@@ -114,9 +114,7 @@ function ProfileCard() {
                   )}
                 </div>
 
-                {(res.data.checkedIn || res.data.hasntShown) &&
-                res.data.receptionist &&
-                window.innerWidth > 700 ? (
+                {res.data.receptionist && window.innerWidth > 700 ? (
                   <p style={{ position: "absolute", left: "50%", top: "85%" }}>
                     <span className="profile-span">Receptionist Name:</span>{" "}
                     {res.data.receptionist}
