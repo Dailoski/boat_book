@@ -32,8 +32,6 @@ function ProfilePage() {
       const docsData2 = docSnap.data();
 
       setReservation(data);
-      console.log(data);
-      console.log(reservation);
       await updateDoc(doc(db, "users", uid), {
         coins: data
           ?.filter((el) => el.data.promoCode === false && el.data.specialPromo)

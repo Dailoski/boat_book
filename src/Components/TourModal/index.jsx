@@ -32,7 +32,6 @@ const TourModal = ({ handleClose, clickedTour }) => {
   //   0
   // );
   const handleCheckIn = async function (res, id) {
-    console.log(id);
     const collectionRef = collection(db, "tickets2024");
     const querySnapshot = await getDocs(collectionRef);
     const docsData = querySnapshot.docs.map((doc) => ({
@@ -40,11 +39,9 @@ const TourModal = ({ handleClose, clickedTour }) => {
       data: doc.data(),
     }));
     const data = docsData.find((el) => el.data.roomNumber === res.roomNumber);
-    console.log(data);
     const docRef = doc(db, "tickets2024", id);
     const docSnap = await getDoc(docRef);
     const docsData2 = docSnap.data();
-    console.log(docsData2);
     await updateDoc(doc(db, "tickets2024", id), {
       checkedIn: true,
       hasntShown: false,
@@ -54,7 +51,6 @@ const TourModal = ({ handleClose, clickedTour }) => {
     const docRef = doc(db, "tickets2024", id);
     const docSnap = await getDoc(docRef);
     const docsData2 = docSnap.data();
-    console.log(docsData2);
 
     await updateDoc(doc(db, "tickets2024", id), {
       hasntShown: true,

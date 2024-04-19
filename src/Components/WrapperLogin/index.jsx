@@ -36,13 +36,11 @@ const WrapperLogin = () => {
         const docRef = doc(db, "users", userCredential.user.uid);
         const docSnap = await getDoc(docRef);
         const docsData = docSnap.data();
-        console.log(userCredential.user.uid);
 
         setUid(userCredential.user.uid);
         if (userCredential.user.uid) {
           localStorage.setItem("uid", JSON.stringify(userCredential.user.uid));
         }
-        // console.log(uid);
         if (userCredential?.user?.accessToken) {
           localStorage.setItem(
             "accessToken",

@@ -57,7 +57,6 @@ const App = () => {
     };
     fetchAllDocs();
 
-    console.log(userData);
   }, [freshData]);
 
   useEffect(() => {

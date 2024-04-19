@@ -8,7 +8,6 @@ const ProfileFooter = () => {
     <div
       className="div-footer"
       onClick={() => {
-        console.log(userData);
       }}
     >
       {userData ? (

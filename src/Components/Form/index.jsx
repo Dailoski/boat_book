@@ -57,7 +57,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
         .join("");
     const cardID = genRanHex(6);
     const docRef = doc(db, "tickets2024", "" + cardID);
-
     setDoc(docRef, {
       ...ticketInfo,
       boat: selectedRide.data.name,
@@ -68,6 +67,18 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       preteens: values.preteens,
       promoCode: values.promoCode,
       specialPromo: ride.data.promoCode ? true : false,
+      userData: {
+        full_name: userData.full_name,
+        hotel_name: userData.full_name
+      },
+      selectedRide,
+      priceWithDiscount: values.promoCode
+      ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+        values.preteens * (prices.preteens - (prices.preteens && 250)) +
+        values.children * (prices.children - (prices.children && 250))
+      : values.numberOfPassengers * prices.adults +
+        values.preteens * prices.preteens +
+        values.children * prices.children,
       coins:
         ride.data.promoCode && !values.promoCode
           ? values.numberOfPassengers * 500
@@ -140,7 +151,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
       const docsData = docSnap.data();
-      console.log(docsData);
       await updateDoc(doc(db, "users", uid), {
         coins: (docsData.coins || 0) + values.numberOfPassengers * 500,
       });
@@ -151,7 +161,7 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
     setSuccess(true);
     setOpenBooking("");
   };
-  const { freshData, setFreshData, uid } = useContext(applicationContext);
+  const { freshData, setFreshData, uid, userData } = useContext(applicationContext);
   const formRef = useRef(null);
   const handleRef = function () {
     const { current } = formRef;
@@ -337,9 +347,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                 <Button
                   size="small"
                   onClick={function () {
-                    console.log(filteredDates);
-                    console.log(selectedTour);
-                    console.log(ride);
                     setFormModal(false);
                   }}
                   style={{
@@ -386,8 +393,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                           variant="contained"
                           onClick={() => {
                             setFreshData(!freshData);
-                            console.log(uid);
-                            console.log(selectedTour);
                           }}
                           size="large"
                           style={{ width: "100%" }}
@@ -655,7 +660,6 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
                             </label>
                           )}
                         </Field>
-                        {console.log(values.promoCode)}
                         <p style={{ fontSize: "1.2em" }}>
                           Total price:{" "}
                           {values.promoCode

@@ -52,11 +52,6 @@ function CardContainer({ ride }) {
       setOpenBooking("");
     }
 
-    // setShowOverlay(true);
-    // console.log(selectedRide?.id);
-    // console.log(openBooking?.id);
-    // console.log(scrollRef);
-    console.log(ride);
   };
   return (
     <>

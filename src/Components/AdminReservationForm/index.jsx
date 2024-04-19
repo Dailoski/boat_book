@@ -42,7 +42,6 @@ const AdminReservationForm = () => {
     const dateRange = getDates(values.date);
     const selectedRide = rides.find((e) => e.id === values.boat);
     dateRange.forEach((singleDate) => {
-      console.log(typeof singleDate);
       const tourID = `${values.boat}-${singleDate.replace(
         " ",
         "-"

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import dayjs from "dayjs";
 import { applicationContext } from "../../context";
+import SuccessModal from "../SuccessModal";
 function ProfileCard() {
   const { reservation } = useContext(applicationContext);
   return (
@@ -78,12 +79,13 @@ function ProfileCard() {
                   </p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
+                  {/* <img
                     src={`${process.env.PUBLIC_URL}/printdugme.svg`}
                     alt="print-icon"
                     className="print-icon"
                     style={{ width: "150px", cursor: "pointer" }}
-                  />
+                  /> */}
+                  <SuccessModal ticketInfo={res.data} buttonMode={true}/>
                   {res.data.checkedIn ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/checkedin.svg`}

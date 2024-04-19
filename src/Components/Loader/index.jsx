@@ -3,7 +3,6 @@ import ReactLoading from "react-loading";
 import { CircularProgress } from "@mui/material";
 import "./loader.css";
 function Loader({ height }) {
-  console.log(height);
   const newHeight = height;
   return (
     // <div style={{ margin: "20vh auto" }}>
