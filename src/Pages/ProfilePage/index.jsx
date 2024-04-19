@@ -30,20 +30,36 @@ function ProfilePage() {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
       const docsData2 = docSnap.data();
-
+      console.log(data);
       setReservation(data);
-      await updateDoc(doc(db, "users", uid), {
-        coins: data
-          ?.filter((el) => el.data.promoCode === false && el.data.specialPromo)
-          ?.reduce((acc, curr) => acc + curr.data.coins, 0),
-      });
-
+      // await updateDoc(doc(db, "users", uid), {
+      //   coins:
+      //     data
+      //       ?.filter(
+      //         (el) =>
+      //           el.data.promoCode === false &&
+      //           el.data.specialPromo &&
+      //           el.data.coins
+      //       )
+      //       ?.reduce((acc, curr) => acc + curr.data.coins, 0) +
+      //       docsData2.freeCoins || 0 + docsData2.freeCoins,
+      // });
+      // console.log(
+      //   data
+      //     ?.filter(
+      //       (el) =>
+      //         el.data.promoCode === false &&
+      //         el.data.specialPromo &&
+      //         el.data.coins
+      //     )
+      //     ?.reduce((acc, curr) => acc + curr.data.coins, 0)
+      // );
       // setTotalCoins(
       //   data
       //     ?.filter((el) => el.data.promoCode === false && el.data.specialPromo)
       //     ?.reduce((acc, curr) => acc + curr.data.numberOfPassengers, 0) * 500
       // );
-      setTotalCoins(docsData2.coins);
+      setTotalCoins(docsData2.coins + docsData2.freeCoins);
     };
 
     fetchAllDocs();

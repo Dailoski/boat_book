@@ -57,7 +57,7 @@ const Header = () => {
             ""
           )}
           <p style={{ fontFamily: "Gagalin", fontSize: "32px" }}>
-            {totalCoins || 1000}
+            {totalCoins}
           </p>
           <img
             src={`${process.env.PUBLIC_URL}/coindugme.svg`}

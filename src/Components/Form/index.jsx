@@ -69,20 +69,21 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       specialPromo: ride.data.promoCode ? true : false,
       userData: {
         full_name: userData.full_name,
-        hotel_name: userData.full_name
+        hotel_name: userData.full_name,
       },
       selectedRide,
       priceWithDiscount: values.promoCode
-      ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
-        values.preteens * (prices.preteens - (prices.preteens && 250)) +
-        values.children * (prices.children - (prices.children && 250))
-      : values.numberOfPassengers * prices.adults +
-        values.preteens * prices.preteens +
-        values.children * prices.children,
-      coins:
-        ride.data.promoCode && !values.promoCode
-          ? values.numberOfPassengers * 500
-          : "",
+        ? values.numberOfPassengers * (prices.adults - (prices.adults && 500)) +
+          values.preteens * (prices.preteens - (prices.preteens && 250)) +
+          values.children * (prices.children - (prices.children && 250))
+        : values.numberOfPassengers * prices.adults +
+          values.preteens * prices.preteens +
+          values.children * prices.children,
+      // coins:
+      //   ride.data.promoCode && !values.promoCode
+      //     ? values.numberOfPassengers * 500
+      //     : "",
+      userID: uid,
       receptionist: window.innerWidth < 700 ? false : values.receptionist,
       prices: prices,
       ticketPrice:
@@ -104,10 +105,11 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
       preteens: values.preteens,
       promoCode: values.promoCode,
       specialPromo: ride.data.promoCode ? true : false,
-      coins:
-        ride.data.promoCode && !values.promoCode
-          ? values.numberOfPassengers * 500
-          : "",
+      // coins:
+      //   ride.data.promoCode && !values.promoCode
+      //     ? values.numberOfPassengers * 500
+      //     : "",
+      userID: uid,
       receptionist: values.receptionist,
       prices: prices,
       ticketPrice:
@@ -147,21 +149,22 @@ const FormCard = forwardRef(({ openBooking, setOpenBooking, ride }, ref) => {
             values.children * prices.children,
       }),
     });
-    if (ride.data.promoCode && !values.promoCode) {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
-      const docsData = docSnap.data();
-      await updateDoc(doc(db, "users", uid), {
-        coins: (docsData.coins || 0) + values.numberOfPassengers * 500,
-      });
-    }
+    // if (ride.data.promoCode && !values.promoCode) {
+    //   const docRef = doc(db, "users", uid);
+    //   const docSnap = await getDoc(docRef);
+    //   const docsData = docSnap.data();
+    //   await updateDoc(doc(db, "users", uid), {
+    //     coins: (docsData.coins || 0) + values.numberOfPassengers * 500,
+    //   });
+    // }
     // setSelectedRide(null);
     setFreshData(!freshData);
     resetForm();
     setSuccess(true);
     setOpenBooking("");
   };
-  const { freshData, setFreshData, uid, userData } = useContext(applicationContext);
+  const { freshData, setFreshData, uid, userData } =
+    useContext(applicationContext);
   const formRef = useRef(null);
   const handleRef = function () {
     const { current } = formRef;

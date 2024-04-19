@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { applicationContext } from "../../context";
 import { db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -7,9 +7,11 @@ import { DeleteButton } from "../DeleteButton";
 import { collection, getDocs } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 import { ModifyButton } from "../ModifyButton";
+import TourB from "../TourB";
 const TourModal = ({ handleClose, clickedTour }) => {
   const { freshData, setFreshData, allDocs, setTotalCoins } =
     useContext(applicationContext);
+
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       handleClose();
@@ -32,19 +34,23 @@ const TourModal = ({ handleClose, clickedTour }) => {
   //   0
   // );
   const handleCheckIn = async function (res, id) {
-    const collectionRef = collection(db, "tickets2024");
-    const querySnapshot = await getDocs(collectionRef);
-    const docsData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }));
-    const data = docsData.find((el) => el.data.roomNumber === res.roomNumber);
     const docRef = doc(db, "tickets2024", id);
     const docSnap = await getDoc(docRef);
     const docsData2 = docSnap.data();
     await updateDoc(doc(db, "tickets2024", id), {
       checkedIn: true,
       hasntShown: false,
+    });
+    const userRef = doc(db, "users", docsData2.userID);
+    const userSnap = await getDoc(userRef);
+    const userDocs = userSnap.data();
+    console.log(userDocs);
+
+    await updateDoc(doc(db, "users", docsData2.userID), {
+      coins:
+        !docsData2.promoCode && docsData2.specialPromo
+          ? userDocs.coins + docsData2.numberOfPassengers * 500
+          : userDocs.coins,
     });
   };
   const handleNotShown = async function (id) {
@@ -55,10 +61,6 @@ const TourModal = ({ handleClose, clickedTour }) => {
     await updateDoc(doc(db, "tickets2024", id), {
       hasntShown: true,
       checkedIn: false,
-      coins:
-        !docsData2.promoCode && docsData2.specialPromo
-          ? docsData2.coins - docsData2.numberOfPassengers * 500
-          : docsData2.coins,
     });
   };
   return (
@@ -108,7 +110,8 @@ const TourModal = ({ handleClose, clickedTour }) => {
                   <h5>Phone number:</h5>
                   <p>{e.phoneNumber}</p>
                 </div>
-                <div
+
+                {/* <div
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -124,19 +127,12 @@ const TourModal = ({ handleClose, clickedTour }) => {
                     handler={() => handleNotShown(e.id)}
                     mod="Hasn't Shown"
                   />
-                  {/* <button
-                    style={{ padding: ".5rem", backgroundColor: "green" }}
-                    onClick={() => handleCheckIn(e, e.id)}
-                  >
-                    Checked in
-                  </button> */}
-                  {/* <button
-                    style={{ padding: ".5rem" }}
-                    onClick={() => handleNotShown(e.id)}
-                  >
-                    Hasn't shown
-                  </button> */}
-                </div>
+                </div> */}
+                <TourB
+                  handleCheckIn={handleCheckIn}
+                  handleNotShown={handleNotShown}
+                  e={e}
+                />
 
                 <DeleteButton
                   deleteHandler={() =>

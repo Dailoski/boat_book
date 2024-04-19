@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const ModifyButton = ({ handler, mod }) => {
+export const ModifyButton = ({ handler, mod, setShowMod }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -19,6 +19,7 @@ export const ModifyButton = ({ handler, mod }) => {
   const handleUpdate = () => {
     handler();
     setOpen(false);
+    setShowMod(false);
   };
 
   return (

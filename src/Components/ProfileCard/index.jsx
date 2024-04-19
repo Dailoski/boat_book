@@ -15,7 +15,7 @@ function ProfileCard() {
         }}
       >
         {reservation
-          .sort((a, b) => Date.parse(a.data.date) - Date.parse(b.data.date))
+          .sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date))
           .map((res) => {
             return (
               <div
@@ -37,7 +37,9 @@ function ProfileCard() {
                     <span className="profile-span">Tour: </span>
                     {res.data.boat}
                   </h2>
-                  {!res.data.promoCode && res.data.specialPromo ? (
+                  {!res.data.promoCode &&
+                  res.data.specialPromo &&
+                  res.data.checkedIn ? (
                     <p
                       style={{
                         color: "white",
@@ -45,7 +47,7 @@ function ProfileCard() {
                       }}
                     >
                       <span style={{ color: "yellow" }}>Coins: </span>
-                      {res.data.numberOfPassengers * 500}
+                      {res.data?.numberOfPassengers * 500}
                     </p>
                   ) : (
                     ""
@@ -85,7 +87,7 @@ function ProfileCard() {
                     className="print-icon"
                     style={{ width: "150px", cursor: "pointer" }}
                   /> */}
-                  <SuccessModal ticketInfo={res.data} buttonMode={true}/>
+                  <SuccessModal ticketInfo={res.data} buttonMode={true} />
                   {res.data.checkedIn ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/checkedin.svg`}

@@ -17,6 +17,8 @@ const CreateAccount = () => {
     hotel_name: "",
     full_name: "",
     phone_number: "",
+    coins: 0,
+    freeCoins: 1000,
   };
   const validationSchema = yup.object().shape({
     email: yup
